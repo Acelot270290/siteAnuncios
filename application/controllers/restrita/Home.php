@@ -11,7 +11,9 @@ class Home extends CI_Controller{
 
 		$this->load->view('restrita/layout/header');
 		$this->load->view('restrita/home/index');
-		$this->load->view('restrita/footer');
+		$this->load->view('restrita/layout/footer');
+
+		
 
 	}
 
