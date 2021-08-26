@@ -15,6 +15,19 @@
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="<?php echo base_url('public/restrita/assets/css/custom.css'); ?>">
   <link rel='shortcut icon' type='image/x-icon' href='<?php echo base_url('public/restrita/assets/img/favicon.ico'); ?>' />
+
+<?php if(isset($styles)){ ?>
+	
+		<?php foreach($styles as $estilo){ ?>
+			
+<!-- Carregando os estilos dinamicamente pelo controller usuarios -->
+			<link rel="stylesheet" href="<?php echo base_url('public/restrita/' . $estilo); ?>">
+
+
+		<?php } ?>
+
+	<?php } ?>
+
 </head>
 
 <body>

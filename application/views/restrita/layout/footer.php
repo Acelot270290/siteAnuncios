@@ -15,6 +15,21 @@
   <script src="<?php echo base_url('public/restrita/assets/js/scripts.js'); ?>"></script>
   <!-- Custom JS File -->
   <script src="<?php echo base_url('public/restrita/assets/js/custom.js'); ?>"></script>
+
+
+	<?php if(isset($scripts)){ ?>
+	
+	<?php foreach($scripts as $script){ ?>
+		
+<!-- Carregando os scripts dinamicamente pelo controller usuarios -->
+
+    <script src="<?php echo base_url('public/restrita/' . $script); ?>"></script>
+
+
+	<?php } ?>
+
+<?php } ?>
+
 </body>
 
 
