@@ -18,17 +18,15 @@
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped" id="table-1">
+                      <table class="table table-striped data-table">
                         <thead>
                           <tr>
-                            <th>
-                              Imagem
-                            </th>
+                            <th class="nosort">Imagem</th>
                             <th>Nome Completo</th>
                             <th>Login</th>
                             <th>Perfil de Acesso</th>
                             <th>Ativo</th>
-                            <th>Acções</th>
+                            <th class="nosort">Acções</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -37,14 +35,14 @@
 
                           <tr>
 													<td><img alt="image" src="<?php echo base_url('uploads/usuarios/' . $usuario->user_foto); ?>" width="35"></td>
-													<td><?php echo $usuario->first_name . '' . $usuario->last_name  ?></td>
+													<td><?php echo $usuario->first_name . ' ' . $usuario->last_name  ?></td>
 													<td><?php echo $usuario->email ?></td>
 													<td><?php echo ($this->ion_auth->is_admin($usuario->id) ? 'Administrador' : 'Anunciante'); ?></td>
 													<td><?php echo ($usuario->active == 1 ? '<div class="badge badge-success badge-shadow">Sim</div>' : '<div class="badge badge-danger badge-shadow">Não</div>'); ?></td>
 													 
 													<td>
-														 <a href="#" class="btn btn-primary">Atualizar</a>
-														 <a href="#" class="btn btn-warning">Excluir</a>
+														 <a data-toggle='tooltip' data-placement='top' title="Editar usuário" href="#" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+														 <a data-toggle='tooltip' data-placement='top' title="Excluir usuário" href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 														
 														</td>
                           </tr>
