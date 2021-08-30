@@ -114,7 +114,39 @@ class Corel_model extends CI_Controller	{
 
 	}
 
-	public function generate_unique_code($tabela = NULL, $data = NULL, $condicoes= NULL ){
+	public function generate_unique_code($tabela = NULL, $tipo_codigo = NULL, $tamanho_codigo = NULL, $campo_procura = NULL ){
+
+		do{
+
+			$codigo = random_string($tipo_codigo, $tamanho_codigo);
+			$this->db->where($campo_procura, $codigo);
+			$this->db->from($tabela);
+
+
+		}while($this->db->count_all_results() >= 1);
+
+		return $codigo;
+
+	}
+
+	public function count_all_results($tabela = NULL, $condicoes = NULL){
+
+		if($tabela && $this->db->table_exists($tabela)){
+
+			if(is_array($condicoes)){
+
+				$this->db->where($condicoes);
+
+			}
+
+			return $this->db->count_all_results($tabela);
+
+
+
+		}else{
+			return false;
+		}
+
 
 	}
 }
