@@ -92,7 +92,7 @@
                   </div>
 				  <?php echo form_error('user_cep', '<div class="text-danger">','</div>'); ?>
                 </div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
                   <label>Endereço</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -116,7 +116,7 @@
                   </div>
 				  <?php echo form_error('user_numero_endereco', '<div class="text-danger">','</div>'); ?>
                 </div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-2">
                   <label>Bairro</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -128,10 +128,7 @@
                   </div>
 				  <?php echo form_error('user_bairro', '<div class="text-danger">','</div>'); ?>
                 </div>
-                
-              </div>
-			  <div class="form-row">
-                <div class="form-group col-md-3">
+				<div class="form-group col-md-2">
                   <label>Cidade</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -143,7 +140,7 @@
                   </div>
 				  <?php echo form_error('user_cidade', '<div class="text-danger">','</div>'); ?>
                 </div>
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-1">
                   <label>Estado</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -154,7 +151,10 @@
                     <input type="text" class="form-control uf" name="user_estado" value="<?php echo (isset($usuario) ? $usuario->user_estado : set_value('user_estado')); ?>">
                   </div>
 				  <?php echo form_error('user_estado', '<div class="text-danger">','</div>'); ?>
-                </div>   
+                </div> 
+                
+              </div>
+			  <div class="form-row">  
 				<div class="form-group col-md-3">
                   <label>Ativo</label>
                   <div class="input-group">
@@ -205,6 +205,38 @@
                   </div>
 				  <?php echo form_error('perfil', '<div class="text-danger">','</div>'); ?>
                 </div>   
+
+				<div class="form-group col-md-3">
+                  <label>Avatar</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-image text-info"></i>
+                      </div>
+                    </div>
+                    <input type="file" class="form-control" name="user_foto_file">
+                  </div>
+				  <?php echo form_error('user_foto_file', '<div class="text-danger">','</div>'); ?>
+                </div> 
+
+				<div class="form-group col-md-3">
+
+				<?php if(isset($usuario)){ ?>
+
+					<div class="box-foto-usuario">
+
+					<input type="hidden" name="user_foto" value="<?php echo $usuario->user_foto; ?>">
+					<img width="100" alt="Usuário imagem" src="<?php echo base_url('uploads/usuarios/' . $usuario->user_foto); ?>" class="rounded-circle">
+
+					</div>
+
+
+					<?php }else{ ?>
+
+
+						<?php } ?>
+                 
+                </div> 
 				
               </div>
           </div>
