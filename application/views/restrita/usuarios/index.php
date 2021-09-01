@@ -41,7 +41,7 @@
 													<td><?php echo ($usuario->active == 1 ? '<div class="badge badge-success badge-shadow">Sim</div>' : '<div class="badge badge-danger badge-shadow">Não</div>'); ?></td>
 													 
 													<td>
-														 <a data-toggle='tooltip' data-placement='top' title="Editar usuário" href="#" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+														 <a data-toggle='tooltip' data-placement='top' title="Editar usuário" href="<?php echo base_url('restrita/' .$this->router->fetch_class()  . '/core/' .$usuario->id ); ?>" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
 														 <a data-toggle='tooltip' data-placement='top' title="Excluir usuário" href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 														
 														</td>
