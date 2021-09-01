@@ -61,20 +61,50 @@ class Usuarios extends CI_Controller {
 
 			}else{
 
-				$data = array(
-					'titulo' => 'Editando Usuário',
-					'usuario' => $usuario,
-				);
+				//Usuario encontrado e agora passamos as validações, exemplos abaixo
 
-		/*echo '<prev>';
-		print_r($data);
-		echo "</pre>";
-		exit();*/
+				$this->form_validation->set_rules('first_name','Nome','trim|required');
+				$this->form_validation->set_rules('last_name','Sobrenome','trim|required');
 
-				$this->load->view('restrita/layout/header',$data);
-				$this->load->view('restrita/usuarios/core');
-				$this->load->view('restrita/layout/footer');
-		
+				if($this->form_validation->run()){
+
+			/*echo '<prev>';
+			print_r($this->input->post);
+			echo "</pre>";
+			exit();*/
+
+				}else{
+					$data = array(
+						'titulo' => 'Editando Usuário',
+
+						'scripts'=>array(
+							'assets/mask/jquery.mask.min.js',
+							'assets/mask/custom.js',
+			
+						),
+
+
+
+						'usuario' => $usuario,
+						'perfil' => $this->ion_auth->get_users_groups($usuario->id)->row(),
+						'grupos' => $this->ion_auth->groups()->result(),
+					);
+
+					
+	
+			/*echo '<prev>';
+			print_r($data);
+			echo "</pre>";
+			exit();*/
+	
+					$this->load->view('restrita/layout/header',$data);
+					$this->load->view('restrita/usuarios/core');
+					$this->load->view('restrita/layout/footer');
+			
+
+				}
+
+				
 
 			}
 
