@@ -118,17 +118,57 @@ class Usuarios extends CI_Controller {
 
 		if(!$this->input->is_ajax_request()){
 
-			exit('Acção não permitida');
+			exit('Ação não permitida');
 
 		}
 
 		$this->form_validation->set_rules('user_cep', 'CEP','trim|required|exact_length[9]');
 
+		/*
+		*Retornarar os dados para o javascript usuarios.js
+		*/
+		$retorno = array();
+
+
 		if($this->form_validation->run()){
 
 			//Cep Validado quanto ao seu formato passamos para  o inicio da requisição
 
+
+			/*
+			*https://viacep.com.br/ws/25615131/json/
+			*/
+
+			// formatando o cep de acordo com a api via CEP exemplo acima
+
+			$cep = str_replace("-", "", $this->input->post('user_cep'));
+
+			$url = "https://viacep.com.br/ws/";
+			$url .= $cep;
+			$url .= "/json/";
+
+
+			$cr = curl_init();
+
+			//definindo a url de busca
+			curl_setopt($cr, CURLOPT_URL, $url);
 			
+
+			//curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+
+			$resultado_requisicao = curl_exec($cr);
+			
+
+			//curl_close($cr);
+
+			//transformando o resultado em um objeto para facilitar o acesso ao seus atributos
+			$resultado_requisicao = json_decode($resultado_requisicao);
+
+
+			echo '<prev>';
+			print_r($resultado_requisicao);
+			exit();
+
 
 		}else{
 			// Erros de Validação

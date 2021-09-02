@@ -9,7 +9,7 @@ var preenche_endereco = function(){
 		$.ajax({
 
 			type: "post",
-			url: BASE_URL + 'restira/usuarios/preenche_endereco',
+			url: BASE_URL + 'restrita/usuarios/preenche_endereco',
 			dataType: 'json',
 			data: {user_cep: user_cep},
 			beforeSend: function(){
@@ -20,7 +20,7 @@ var preenche_endereco = function(){
 
 			success: function (response){
 
-				alert(response.mensagem);
+				alert(response.mensagem)
 
 			},
 
