@@ -80,6 +80,8 @@ class Usuarios extends CI_Controller {
 						'scripts'=>array(
 							'assets/mask/jquery.mask.min.js',
 							'assets/mask/custom.js',
+							'assets/js/usuarios.js',
+							
 			
 						),
 
@@ -108,6 +110,28 @@ class Usuarios extends CI_Controller {
 
 			}
 
+		}
+
+	}
+
+	public function preenche_endereco(){
+
+		if(!$this->input->is_ajax_request()){
+
+			exit('Acção não permitida');
+
+		}
+
+		$this->form_validation->set_rules('user_cep', 'CEP','trim|required|exact_length[9]');
+
+		if($this->form_validation->run()){
+
+			//Cep Validado quanto ao seu formato passamos para  o inicio da requisição
+
+			
+
+		}else{
+			// Erros de Validação
 		}
 
 	}

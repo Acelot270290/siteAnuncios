@@ -155,7 +155,7 @@
                 
               </div>
 			  <div class="form-row">  
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-2">
                   <label>Ativo</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -206,7 +206,7 @@
 				  <?php echo form_error('perfil', '<div class="text-danger">','</div>'); ?>
                 </div>   
 
-				<div class="form-group col-md-3">
+				<div class="form-group col-md-4">
                   <label>Avatar</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -227,11 +227,14 @@
 
 					<input type="hidden" name="user_foto" value="<?php echo $usuario->user_foto; ?>">
 					<img width="100" alt="Usuário imagem" src="<?php echo base_url('uploads/usuarios/' . $usuario->user_foto); ?>" class="rounded-circle">
-
 					</div>
 
 
 					<?php }else{ ?>
+
+						<div class="box-foto-usuario">
+
+						</div>
 
 
 						<?php } ?>
