@@ -154,7 +154,7 @@ class Usuarios extends CI_Controller {
 			curl_setopt($cr, CURLOPT_URL, $url);
 			
 
-			//curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
 
 			$resultado_requisicao = curl_exec($cr);
 			
