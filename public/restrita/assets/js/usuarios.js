@@ -15,16 +15,28 @@ var preenche_endereco = function(){
 			beforeSend: function(){
 				//Definir disables e pagar erros de validação
 
+				$('#user_cep').html('Consultando o CEP');
 
 			},
 
 			success: function (response){
 
-				alert(response.mensagem)
+				if(response.erro ===0){
+
+					$('#user_cep').html('');
+
+					$('[name=user_endereco]').val(response.user_endereco);
+					$('[name=user_bairro]').val(response.user_bairro);
+					$('[name=user_cidade]').val(response.user_cidade);
+					$('[name=user_estado]').val(response.user_estado);
+
+				}
 
 			},
 
 			error: function (response){
+
+				$('#user_cep').html(responder.mensagem);
 
 			}
 

@@ -147,32 +147,49 @@ class Usuarios extends CI_Controller {
 			$url .= $cep;
 			$url .= "/json/";
 
+			$jsonsite = file_get_contents($url);
+			$resultado_requisicao = json_decode($jsonsite);
 
-			$cr = curl_init();
-
-			//definindo a url de busca
-			curl_setopt($cr, CURLOPT_URL, $url);
 			
 
-			curl_setopt($cr, CURLOPT_RETURNTRANSFER, true);
+			if(isset($resultado_requisicao->erro)){
+				
+				$retorno['erro'] = 3;
+				$retorno['user_cep'] = 'Por Favor informe um CEP válido';
+				$retorno['mensagem'] = 'Por Favor informe um CEP válido';
 
-			$resultado_requisicao = curl_exec($cr);
-			
+			}else{
 
-			//curl_close($cr);
-
-			//transformando o resultado em um objeto para facilitar o acesso ao seus atributos
-			$resultado_requisicao = json_decode($resultado_requisicao);
+				//print_r($resultado_requisicao);
 
 
-			echo '<prev>';
-			print_r($resultado_requisicao);
-			exit();
+
+				$retorno['erro'] = 0;
+				$retorno['user_endereco'] = $resultado_requisicao->logradouro;
+				$retorno['user_bairro'] = $resultado_requisicao->bairro;
+				$retorno['user_cidade'] = $resultado_requisicao->localidade;
+				$retorno['user_estado'] = $resultado_requisicao->uf;
+				$retorno['mensagem'] = 'Cep encontrado';
+
+			}
 
 
 		}else{
-			// Erros de Validação
+
+		// Erros de Validação
+
+		$retorno['erro'] = 3;
+		$retorno['user_cep'] = validation_errors();
+		$retorno['mensagem'] = validation_errors();
+
 		}
+
+		/*
+		*Retorno os dados contidos no retorno
+
+		*/
+
+		echo json_encode($retorno);
 
 	}
 

@@ -91,6 +91,7 @@
                     <input type="text" class="form-control cep" name="user_cep" value="<?php echo (isset($usuario) ? $usuario->user_cep : set_value('user_cep')); ?>">
                   </div>
 				  <?php echo form_error('user_cep', '<div class="text-danger">','</div>'); ?>
+					<div id="user_cep"></div>
                 </div>
 				<div class="form-group col-md-3">
                   <label>Endereço</label>
