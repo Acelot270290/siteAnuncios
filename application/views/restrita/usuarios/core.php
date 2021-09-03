@@ -101,7 +101,7 @@
                         <i class="fas fa-road text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="user_endereco" value="<?php echo (isset($usuario) ? $usuario->user_endereco : set_value('user_endereco')); ?>">
+                    <input type="text" class="form-control" name="user_endereco" value="<?php echo (isset($usuario) ? $usuario->user_endereco : set_value('user_endereco')); ?>" readonly=''>
                   </div>
 				  <?php echo form_error('user_endereco', '<div class="text-danger">','</div>'); ?>
                 </div>
@@ -125,7 +125,7 @@
                         <i class="fas fa-directions text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="user_bairro" value="<?php echo (isset($usuario) ? $usuario->user_bairro : set_value('user_bairro')); ?>">
+                    <input type="text" class="form-control" name="user_bairro" value="<?php echo (isset($usuario) ? $usuario->user_bairro : set_value('user_bairro')); ?>" readonly=''>
                   </div>
 				  <?php echo form_error('user_bairro', '<div class="text-danger">','</div>'); ?>
                 </div>
@@ -137,7 +137,7 @@
                         <i class="fas fa-location-arrow text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="user_cidade" value="<?php echo (isset($usuario) ? $usuario->user_cidade : set_value('user_cidade')); ?>">
+                    <input type="text" class="form-control" name="user_cidade" value="<?php echo (isset($usuario) ? $usuario->user_cidade : set_value('user_cidade')); ?>" readonly=''>
                   </div>
 				  <?php echo form_error('user_cidade', '<div class="text-danger">','</div>'); ?>
                 </div>
@@ -149,7 +149,7 @@
                         <i class="fas fa-map text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control uf" name="user_estado" value="<?php echo (isset($usuario) ? $usuario->user_estado : set_value('user_estado')); ?>">
+                    <input type="text" class="form-control uf" name="user_estado" value="<?php echo (isset($usuario) ? $usuario->user_estado : set_value('user_estado')); ?>" readonly=''>
                   </div>
 				  <?php echo form_error('user_estado', '<div class="text-danger">','</div>'); ?>
                 </div> 

@@ -25,6 +25,18 @@ var preenche_endereco = function(){
 
 					$('#user_cep').html('');
 
+					if(!response.user_endereco){
+						$('[name=user_endereco]').addClass('bg-white');
+						$('[name=user_endereco]').prop('readonly', false);
+
+					}
+
+					if(!response.user_bairro){
+						$('[name=user_bairro]').addClass('bg-white');
+						$('[name=user_bairro]').prop('readonly', false);
+
+					}
+
 					$('[name=user_endereco]').val(response.user_endereco);
 					$('[name=user_bairro]').val(response.user_bairro);
 					$('[name=user_cidade]').val(response.user_cidade);
