@@ -193,4 +193,61 @@ class Usuarios extends CI_Controller {
 
 	}
 
+	public function uploud_file(){
+
+		$config['upload_path'] = './uploads/usuarios/';
+		$config['allowed_types'] = 'jpg|png|JPG|PNG|jpeg|JPEG';
+		$config['encrypt_name'] = true;
+		$config['max_size'] = 1048;
+		$config['max_width'] = 500;
+		$config['max_height'] = 500;
+		$config['min_width'] = 350;
+		$config['min_height'] = 340;
+
+		//Carregando  bliblioteca o Uploud
+		$this->load->library('upload', $config);
+
+		if($this->upload->do_upload('user_foto_file')){
+
+			$data = array(
+				'erro' => 0,
+				'foto_enviada' => $this->upload->data(),
+				'user_foto' => $this->upload->data('file_name'),
+				'mensagem'=> 'Foto enviada com sucesso',
+			);
+
+			/*
+			*Criando a copia numa versão meenor para mobile
+			*/
+
+			$config['image_library'] = 'gd2';
+			$config['source_image'] = './uploads/usuarios/' . $this->upload->data('file_name');
+			$config['new_image'] = './uploads/usuarios/small/' . $this->upload->data('file_name');
+			$config['width'] = 300;
+			$config['height'] = 280;
+			$this->load->library('image_lib', $config);
+
+			// Verificamos se houver erro no resize
+
+			if(!$this->image_lib->resize()){
+
+				$data['erro'] = 3;
+				$data['mensagem'] = $this->image_lib->display_errors('<span>', '</span>');
+
+			}
+
+
+		}else{
+			//caso tenha erros no uplouds da imagem
+
+			$data = array(
+
+				'erro'=> 3,
+				'mensagem' => $this->upload->display_errors('<span>', '</span>'),
+			);
+		}
+
+		echo json_encode($data);
+	}
+
 }

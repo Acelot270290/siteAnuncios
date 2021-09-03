@@ -218,6 +218,7 @@
                     <input type="file" class="form-control" name="user_foto_file">
                   </div>
 				  <?php echo form_error('user_foto_file', '<div class="text-danger">','</div>'); ?>
+					<div id="user_foto"></div>
                 </div> 
 
 				<div class="form-group col-md-3">
