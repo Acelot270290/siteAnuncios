@@ -59,9 +59,67 @@ var preenche_endereco = function(){
 
 }
 
+var envia_imagem_usuario = function(){
+
+	$(document).on('change' , '[name="user_foto_file"]' , function (){
+
+		var file_data = $('[name="user_foto_file"]').prop('files')[0];
+
+		var form_data = new FormData();
+
+		form_data.append('user_foto_file', file_data);
+
+		
+		$.ajax({
+
+			type: "post",
+			url: BASE_URL + 'restrita/usuarios/uploud_file',
+			dataType: 'json',
+			cache:false,
+			contentType: false,
+			processData:false,
+			data: form_data,
+
+			
+			beforeSend: function(){
+				//Definir disables e pagar erros de validação
+
+				$('#user_foto').html('');
+
+			},
+
+			success: function (response){
+
+				if(response.erro === 0){
+
+					$('#box-foto-usuario').html("<input type='hidden' name='user_foto' value='"+ response.user_foto +"'> <img width='100' alt='Usuário imagem' src='" + BASE_URL + "/uplouds/usuarios/small" + response.user_foto +"' class='rounded-circle'>");
+ 
+
+				}else{
+
+					$('#user_foto').html(response.mensagem);
+
+				}
+
+			},
+
+			error: function (response){
+
+				$('#user_foto').html(response.mensagem);
+
+			}
+
+
+		});
+		
+	});
+
+}
+
 return{
 	init: function(){
 		preenche_endereco();
+		envia_imagem_usuario();
 	}
 }
 
