@@ -225,7 +225,7 @@
 
 				<?php if(isset($usuario)){ ?>
 
-					<div class="box-foto-usuario">
+					<div id="box-foto-usuario">
 
 					<input type="hidden" name="user_foto" value="<?php echo $usuario->user_foto; ?>">
 					<img width="100" alt="Usuário imagem" src="<?php echo base_url('uploads/usuarios/' . $usuario->user_foto); ?>" class="rounded-circle">
@@ -234,7 +234,7 @@
 
 					<?php }else{ ?>
 
-						<div class="box-foto-usuario">
+						<div id="box-foto-usuario">
 
 						</div>
 

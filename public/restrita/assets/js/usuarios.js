@@ -92,7 +92,7 @@ var envia_imagem_usuario = function(){
 
 				if(response.erro === 0){
 
-					$('#box-foto-usuario').html("<input type='hidden' name='user_foto' value='"+ response.user_foto +"'> <img width='100' alt='Usuário imagem' src='" + BASE_URL + "/uplouds/usuarios/small" + response.user_foto +"' class='rounded-circle'>");
+					$('#box-foto-usuario').html("<input type='hidden' name='user_foto' value='"+ response.user_foto +"'> <img width='100' alt='Usuário imagem' src='" + BASE_URL + "uploads/usuarios/small/" + response.user_foto +"' class='rounded-circle'>");
  
 
 				}else{
