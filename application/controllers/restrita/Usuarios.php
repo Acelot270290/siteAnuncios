@@ -63,15 +63,26 @@ class Usuarios extends CI_Controller {
 
 				//Usuario encontrado e agora passamos as validações, exemplos abaixo
 
-				$this->form_validation->set_rules('first_name','Nome','trim|required');
-				$this->form_validation->set_rules('last_name','Sobrenome','trim|required');
+				$this->form_validation->set_rules('first_name','Nome','trim|required|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('last_name','Sobrenome','trim|required|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('user_cpf','CPF','trim|required|exact_length[14]');
+				$this->form_validation->set_rules('phone','Telefone','trim|required|min_length[14]|max_length[15]');
+				$this->form_validation->set_rules('email','E-mail','trim|required|valid_email|max_length[150]');
+				$this->form_validation->set_rules('user_cep','CEP','trim|required|exact_length[9]');
+				$this->form_validation->set_rules('user_endereco','Endereço','trim|required|min_length[5]|max_length[45]');
+				$this->form_validation->set_rules('user_numero_endereco','Número','trim|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('user_bairro','Bairro','trim|required|min_length[5]|max_length[45]');
+				$this->form_validation->set_rules('user_cidade','Cidade','trim|required|min_length[4]|max_length[45]');
+				$this->form_validation->set_rules('user_estado','Estado','trim|required|exact_length[2]');
+				$this->form_validation->set_rules('user_foto','Foto do Usuário','required');
+
+
+
 
 				if($this->form_validation->run()){
 
-			/*echo '<prev>';
-			print_r($this->input->post);
-			echo "</pre>";
-			exit();*/
+					print_r($this->input->post());
+
 
 				}else{
 					$data = array(
@@ -113,6 +124,48 @@ class Usuarios extends CI_Controller {
 		}
 
 	}
+
+	public function valida_cpf($cpf) {
+
+        if ($this->input->post('usuario_id')) {
+
+			//Editando o usuários
+
+            $usuario_id = $this->input->post('usuario_id');
+
+            if ($this->core_model->get_by_id('users', array('id !=' => $usuario_id, 'user_cpf' => $cpf))) {
+                $this->form_validation->set_message('valida_cpf', 'O campo {field} já existe, ele deve ser único');
+                return FALSE;
+            }
+        }else{
+			//Cadastrando usuário
+
+
+			
+		}
+
+        $cpf = str_pad(preg_replace('/[^0-9]/', '', $cpf), 11, '0', STR_PAD_LEFT);
+        // Verifica se nenhuma das sequências abaixo foi digitada, caso seja, retorna falso
+        if (strlen($cpf) != 11 || $cpf == '00000000000' || $cpf == '11111111111' || $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' || $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' || $cpf == '88888888888' || $cpf == '99999999999') {
+
+            $this->form_validation->set_message('valida_cpf', 'Por favor digite um CPF válido');
+            return FALSE;
+        } else {
+            // Calcula os números para verificar se o CPF é verdadeiro
+            for ($t = 9; $t < 11; $t++) {
+                for ($d = 0, $c = 0; $c < $t; $c++) {
+                    $d += $cpf[$c] * (($t + 1) - $c); //Se PHP version < 7.4, $cpf{$c}
+                }
+                $d = ((10 * $d) % 11) % 10;
+                if ($cpf[$c] != $d) { //Se PHP version < 7.4, $cpf{$c}
+                    $this->form_validation->set_message('valida_cpf', 'Por favor digite um CPF válido');
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+    }
+
 
 	public function preenche_endereco(){
 
@@ -179,7 +232,7 @@ class Usuarios extends CI_Controller {
 		// Erros de Validação
 
 		$retorno['erro'] = 3;
-		$retorno['user_cep'] = validation_errors();
+		$retorno['user_cep'] = form_error('phone', '<div class="text-danger">','</div>');
 		$retorno['mensagem'] = validation_errors();
 
 		}

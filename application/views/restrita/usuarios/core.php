@@ -240,6 +240,15 @@
 
 
 						<?php } ?>
+
+						<?php if(isset($usuario)){ //Validando o id do user ?>
+
+							
+
+					<input type="hidden" name="usuario_id" value="<?php echo $usuario->id; ?>">
+
+
+							<?php } ?>
                  
                 </div> 
 				
