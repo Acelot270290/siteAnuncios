@@ -232,7 +232,7 @@ class Usuarios extends CI_Controller {
 			if(!$this->image_lib->resize()){
 
 				$data['erro'] = 3;
-				$data['mensagem'] = $this->image_lib->display_errors('<span>', '</span>');
+				$data['mensagem'] = $this->image_lib->display_errors('<span class="text-danger">', '</span>');
 
 			}
 
@@ -243,7 +243,7 @@ class Usuarios extends CI_Controller {
 			$data = array(
 
 				'erro'=> 3,
-				'mensagem' => $this->upload->display_errors('<span>', '</span>'),
+				'mensagem' => $this->upload->display_errors('<span class="text-danger">', '</span>'),
 			);
 		}
 
