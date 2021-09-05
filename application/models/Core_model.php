@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('Ação não Permitida');
 
-class Corel_model extends CI_Controller	{
+class Core_model extends CI_Model	{
 
 	public function get_all($tabela = NULL, $condicoes = NULL, $limite = NULL){
 

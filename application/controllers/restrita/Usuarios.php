@@ -65,7 +65,7 @@ class Usuarios extends CI_Controller {
 
 				$this->form_validation->set_rules('first_name','Nome','trim|required|min_length[3]|max_length[45]');
 				$this->form_validation->set_rules('last_name','Sobrenome','trim|required|min_length[3]|max_length[45]');
-				$this->form_validation->set_rules('user_cpf','CPF','trim|required|exact_length[14]');
+				$this->form_validation->set_rules('user_cpf','CPF','trim|required|exact_length[14]|callback_valida_cpf');
 				$this->form_validation->set_rules('phone','Telefone','trim|required|min_length[14]|max_length[15]');
 				$this->form_validation->set_rules('email','E-mail','trim|required|valid_email|max_length[150]');
 				$this->form_validation->set_rules('user_cep','CEP','trim|required|exact_length[9]');
@@ -138,10 +138,13 @@ class Usuarios extends CI_Controller {
                 return FALSE;
             }
         }else{
-			//Cadastrando usuário
+				//Cadastrando usuário
 
-
-			
+			if ($this->core_model->get_by_id('users', array('user_cpf' => $cpf))) {
+                $this->form_validation->set_message('valida_cpf', 'O campo {field} já existe, ele deve ser único');
+                return FALSE;
+            }
+					
 		}
 
         $cpf = str_pad(preg_replace('/[^0-9]/', '', $cpf), 11, '0', STR_PAD_LEFT);
