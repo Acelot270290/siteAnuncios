@@ -50,14 +50,140 @@ class Usuarios extends CI_Controller {
 
 			// Cadatras novo usuarios
 
-			exit('Novo usuário endo cadastrado');
+							//Usuario encontrado e agora passamos as validações, exemplos abaixo
+
+				$this->form_validation->set_rules('first_name','Nome','trim|required|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('last_name','Sobrenome','trim|required|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('user_cpf','CPF','trim|required|exact_length[14]|callback_valida_cpf');
+				$this->form_validation->set_rules('phone','Telefone','trim|required|min_length[14]|max_length[15]|callback_valida_telefone');
+				$this->form_validation->set_rules('email','E-mail','trim|required|valid_email|max_length[150]');
+				$this->form_validation->set_rules('user_cep','CEP','trim|required|exact_length[9]');
+				$this->form_validation->set_rules('user_endereco','Endereço','trim|required|min_length[5]|max_length[45]');
+				$this->form_validation->set_rules('user_numero_endereco','Número','trim|min_length[3]|max_length[45]');
+				$this->form_validation->set_rules('user_bairro','Bairro','trim|required|min_length[5]|max_length[45]');
+				$this->form_validation->set_rules('user_cidade','Cidade','trim|required|min_length[4]|max_length[45]');
+				$this->form_validation->set_rules('user_estado','Estado','trim|required|exact_length[2]');
+				$this->form_validation->set_rules('user_foto','Foto do Usuário','required');
+
+				//Validando as senhas
+
+				$this->form_validation->set_rules('password','Senha','trim|min_length[6]|max_length[200]');
+				$this->form_validation->set_rules('confirma_senha','Confirma Senha','trim|matches[password]');
+
+
+
+
+
+				if($this->form_validation->run()){
+
+
+
+					$data = elements(
+
+						array(
+
+							'first_name',
+							'last_name',
+							'password',
+							'user_cpf',
+							'phone',
+							'email',
+							'user_cep',
+							'user_endereco',
+							'user_numero_endereco',
+							'user_bairro',
+							'user_cidade',
+							'user_estado',
+							'active',
+							'user_foto',
+							'usuario_id',
+
+						), $this->input->post(),
+					);
+
+
+					$username = $this->input->post('first_name'). ' '. $this->input->post('last_name');
+					$password = $this->input->post('password');
+					$email = $this->input->post('email');
+					$additional_data = array(
+								'first_name' => 'Ben',
+								'last_name' => 'Edmunds',
+								);
+					$group = array('1'); // Sets user to admin.
+				
+					$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+
+					// removo do array data o password caso o mesmo nao seja informado, pois não é obrigatorio
+					if(!$data['password']){
+
+						unset($data['password']);
+
+					}
+
+	
+					$id = $usuario->id;
+					
+					if($this->ion_auth->update($id, $data)){
+
+						$perfil = (int) $this->input->post('perfil');
+
+						//Atualizando o grupo (Admin ou Anunciante)
+
+						$this->ion_auth->remove_from_group(NULL, $id);	
+						$this->ion_auth->add_to_group($perfil, $id);
+
+						//mensagem de dados salvo com sucesso
+						$this->session->set_flashdata('sucesso','Usuário atualizado com sucesso');
+					}else{
+						//mensagem de erro de dados não salvo com sucesso
+						$this->session->set_flashdata('erro','Erro ao atualizar Usuário');
+					}
+					// metodo fetch retorna para o controlador principal na view
+					redirect('restrita/' . $this->router->fetch_class());
+
+				}else{
+					$data = array(
+						'titulo' => 'Editando Usuário',
+
+						'scripts'=>array(
+							'assets/mask/jquery.mask.min.js',
+							'assets/mask/custom.js',
+							'assets/js/usuarios.js',
+							
+			
+						),
+
+
+
+						'usuario' => $usuario,
+						'perfil' => $this->ion_auth->get_users_groups($usuario->id)->row(),
+						'grupos' => $this->ion_auth->groups()->result(),
+					);
+
+					
+	
+				/*echo '<prev>';
+				print_r($data);
+				echo "</pre>";
+				exit();*/
+	
+					$this->load->view('restrita/layout/header',$data);
+					$this->load->view('restrita/usuarios/core');
+					$this->load->view('restrita/layout/footer');
+			
+
+				}
+
 
 		}else{
 			// verificamos se o user id existe no banco de dados
 
 			if(!$usuario = $this->ion_auth->user($usuario_id)->row()){
 
-				exit ('Usuários não encontrado');
+				$this->session->set_flashdata('erro','Usuário não encontrao');
+
+				redirect('restrita/' . $this->router->fetch_class());
+				
 
 			}else{
 
@@ -181,10 +307,10 @@ class Usuarios extends CI_Controller {
 
 					
 	
-			/*echo '<prev>';
-			print_r($data);
-			echo "</pre>";
-			exit();*/
+				/*echo '<prev>';
+				print_r($data);
+				echo "</pre>";
+				exit();*/
 	
 					$this->load->view('restrita/layout/header',$data);
 					$this->load->view('restrita/usuarios/core');

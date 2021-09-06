@@ -13,8 +13,10 @@
 					<div class="row">
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
+                  <div class="card-header d-block">
                     <h4><?php echo $titulo; ?></h4>
+										<a data-toggle='tooltip' data-placement='top' title="Cadastrar Usuário" href="<?php echo base_url('restrita/' .$this->router->fetch_class()  . '/core/'); ?>" class="btn btn-primary mr-2 float-right">Cadastrar</a>
+
                   </div>
                   <div class="card-body">
 
