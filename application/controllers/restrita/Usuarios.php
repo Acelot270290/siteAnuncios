@@ -66,7 +66,7 @@ class Usuarios extends CI_Controller {
 				$this->form_validation->set_rules('first_name','Nome','trim|required|min_length[3]|max_length[45]');
 				$this->form_validation->set_rules('last_name','Sobrenome','trim|required|min_length[3]|max_length[45]');
 				$this->form_validation->set_rules('user_cpf','CPF','trim|required|exact_length[14]|callback_valida_cpf');
-				$this->form_validation->set_rules('phone','Telefone','trim|required|min_length[14]|max_length[15]');
+				$this->form_validation->set_rules('phone','Telefone','trim|required|min_length[14]|max_length[15]|callback_valida_telefone');
 				$this->form_validation->set_rules('email','E-mail','trim|required|valid_email|max_length[150]');
 				$this->form_validation->set_rules('user_cep','CEP','trim|required|exact_length[9]');
 				$this->form_validation->set_rules('user_endereco','Endereço','trim|required|min_length[5]|max_length[45]');
@@ -168,6 +168,46 @@ class Usuarios extends CI_Controller {
             return TRUE;
         }
     }
+
+	public function valida_telefone($phone){
+
+		$usuario_id = $this->input->post('usuario_id');
+
+		if(!$usuario_id){
+
+			//Caso o user nao venha, vamos casdastrar
+
+			if($this->core_model->get_by_id('users', array('phone'=>$phone))){
+
+				$this->form_validation->set_message('valida_telefone','Este telefone j[a existe');
+
+				return false;
+
+			}else{
+
+				
+				return true;
+			}
+
+			if($this->core_model->get_by_id('users', array('phone'=>$phone, 'id!=' =>$usuario_id))){
+
+				$this->form_validation->set_message('valida_telefone','Este telefone j[a existe');
+
+				return false;
+
+			}else{
+
+				
+				return true;
+			}
+
+
+		}else{
+
+			//Estou editano o user
+		}
+
+	}
 
 
 	public function preenche_endereco(){
