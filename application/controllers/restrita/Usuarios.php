@@ -48,7 +48,7 @@ class Usuarios extends CI_Controller {
 
 		if(!$usuario_id){
 
-			// Cadatras novo usuarios
+			// Cadatrar novo usuarios
 
 							//Usuario encontrado e agora passamos as validações, exemplos abaixo
 
@@ -67,7 +67,7 @@ class Usuarios extends CI_Controller {
 
 				//Validando as senhas
 
-				$this->form_validation->set_rules('password','Senha','trim|min_length[6]|max_length[200]');
+				$this->form_validation->set_rules('password','Senha','trim|required|min_length[6]|max_length[200]');
 				$this->form_validation->set_rules('confirma_senha','Confirma Senha','trim|matches[password]');
 
 
@@ -76,18 +76,20 @@ class Usuarios extends CI_Controller {
 
 				if($this->form_validation->run()){
 
+					
 
-
-					$data = elements(
+					$username = $this->input->post('first_name'). ' '. $this->input->post('last_name');
+					$password = $this->input->post('password');
+					$email = $this->input->post('email');
+					
+					$additional_data = elements(
 
 						array(
 
 							'first_name',
 							'last_name',
-							'password',
 							'user_cpf',
 							'phone',
-							'email',
 							'user_cep',
 							'user_endereco',
 							'user_numero_endereco',
@@ -101,51 +103,29 @@ class Usuarios extends CI_Controller {
 						), $this->input->post(),
 					);
 
+					$group = array($this->input->post('perfil')); // admin ou anunciante
 
-					$username = $this->input->post('first_name'). ' '. $this->input->post('last_name');
-					$password = $this->input->post('password');
-					$email = $this->input->post('email');
-					$additional_data = array(
-								'first_name' => 'Ben',
-								'last_name' => 'Edmunds',
-								);
-					$group = array('1'); // Sets user to admin.
-				
-					$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+					if($this->ion_auth->register($username, $password, $email, $additional_data, $group)){
 
-					// removo do array data o password caso o mesmo nao seja informado, pois não é obrigatorio
-					if(!$data['password']){
+						$this->session->set_flashdata('sucesso','Usuário cadastrado com sucesso');
 
-						unset($data['password']);
-
-					}
-
-	
-					$id = $usuario->id;
-					
-					if($this->ion_auth->update($id, $data)){
-
-						$perfil = (int) $this->input->post('perfil');
-
-						//Atualizando o grupo (Admin ou Anunciante)
-
-						$this->ion_auth->remove_from_group(NULL, $id);	
-						$this->ion_auth->add_to_group($perfil, $id);
-
-						//mensagem de dados salvo com sucesso
-						$this->session->set_flashdata('sucesso','Usuário atualizado com sucesso');
 					}else{
-						//mensagem de erro de dados não salvo com sucesso
-						$this->session->set_flashdata('erro','Erro ao atualizar Usuário');
+
+
+						$this->session->set_flashdata('erro','Erro ao cadastrar o Usuário');
+
+
 					}
+
 					// metodo fetch retorna para o controlador principal na view
 					redirect('restrita/' . $this->router->fetch_class());
 
 				}else{
 					$data = array(
-						'titulo' => 'Editando Usuário',
+						'titulo' => 'Cadastrar Usuário',
 
 						'scripts'=>array(
+
 							'assets/mask/jquery.mask.min.js',
 							'assets/mask/custom.js',
 							'assets/js/usuarios.js',
@@ -153,10 +133,6 @@ class Usuarios extends CI_Controller {
 			
 						),
 
-
-
-						'usuario' => $usuario,
-						'perfil' => $this->ion_auth->get_users_groups($usuario->id)->row(),
 						'grupos' => $this->ion_auth->groups()->result(),
 					);
 
