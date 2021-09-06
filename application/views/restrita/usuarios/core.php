@@ -24,7 +24,7 @@
                     </div>
                     <input type="text" class="form-control" name="first_name" value="<?php echo (isset($usuario) ? $usuario->first_name : set_value('fisrt_name')); ?>">
                   </div>
-				  <?php echo form_error('first_name', '<div class="text-danger">','</div>'); ?>
+				  						<?php echo form_error('first_name', '<div class="text-danger">','</div>'); ?>
                 </div>
 				<div class="form-group col-md-6">
                   <label>Sobrenome</label>
@@ -205,9 +205,40 @@
 					</select>
                   </div>
 				  <?php echo form_error('perfil', '<div class="text-danger">','</div>'); ?>
-                </div>   
+        </div>   
 
-				<div class="form-group col-md-4">
+			
+                <div class="form-group col-md-3">
+                  <label>Senha</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-lock text-info"></i>
+                      </div>
+                    </div>
+                    <input type="password" class="form-control" name="password" value="">
+                  </div>
+				  						<?php echo form_error('password', '<div class="text-danger">','</div>'); ?>
+                </div>
+
+								
+								<div class="form-group col-md-3">
+                  <label>Confirma Senha</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-lock text-info"></i>
+                      </div>
+                    </div>
+                    <input type="password" class="form-control" name="confirma_senha" value="">
+                  </div>
+				  						<?php echo form_error('confirma_senha', '<div class="text-danger">','</div>'); ?>
+                </div>
+
+         </div>
+				 <div class="form-row"> 
+
+				 <div class="form-group col-md-4">
                   <label>Avatar</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -219,7 +250,7 @@
                   </div>
 				  <?php echo form_error('user_foto_file', '<div class="text-danger">','</div>'); ?>
 					<div id="user_foto"></div>
-                </div> 
+        </div> 
 
 				<div class="form-group col-md-3">
 
@@ -250,9 +281,10 @@
 
 							<?php } ?>
                  
-                </div> 
-				
-              </div>
+        </div> 
+
+							
+				 </div>
           </div>
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>

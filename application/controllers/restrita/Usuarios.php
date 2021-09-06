@@ -76,6 +76,12 @@ class Usuarios extends CI_Controller {
 				$this->form_validation->set_rules('user_estado','Estado','trim|required|exact_length[2]');
 				$this->form_validation->set_rules('user_foto','Foto do Usuário','required');
 
+				//Validando as senhas
+
+				$this->form_validation->set_rules('password','Senha','trim|min_length[6]|max_length[200]');
+				$this->form_validation->set_rules('confirma_senha','Confirma Senha','trim|matches[password]');
+
+
 
 
 
@@ -109,6 +115,7 @@ class Usuarios extends CI_Controller {
 
 							'first_name',
 							'last_name',
+							'password',
 							'user_cpf',
 							'phone',
 							'email',
@@ -125,9 +132,25 @@ class Usuarios extends CI_Controller {
 						), $this->input->post(),
 					);
 
+					// removo do array data o password caso o mesmo nao seja informado, pois não é obrigatorio
+					if(!$data['password']){
+
+						unset($data['password']);
+
+					}
+
+	
 					$id = $usuario->id;
 					
 					if($this->ion_auth->update($id, $data)){
+
+						$perfil = (int) $this->input->post('perfil');
+
+						//Atualizando o grupo (Admin ou Anunciante)
+
+						$this->ion_auth->remove_from_group(NULL, $id);	
+						$this->ion_auth->add_to_group($perfil, $id);
+
 						//mensagem de dados salvo com sucesso
 						$this->session->set_flashdata('sucesso','Usuário atualizado com sucesso');
 					}else{
