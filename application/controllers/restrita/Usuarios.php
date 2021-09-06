@@ -81,8 +81,61 @@ class Usuarios extends CI_Controller {
 
 				if($this->form_validation->run()){
 
-					print_r($this->input->post());
+					//print_r($this->input->post());
 
+					/*
+					* Entualizando os dados no banco
+
+					first_name: "Alan",
+					last_name: "Diniz",
+					user_cpf: "142.061.837-75",
+					phone: "(24) 99232-3522",
+					email: "contato@adsites.org",
+					user_cep: "25615-131",
+					user_endereco: "Rua Dr. Bojean",
+					user_numero_endereco: "1042",
+					user_bairro: "Esperança",
+					user_cidade: "Petrópolis",
+					user_estado: "RJ",
+					active: "1",
+					perfil: "1",
+					user_foto: "user-5.jpg",
+					usuario_id: "1"
+					*/
+
+					$data = elements(
+
+						array(
+
+							'first_name',
+							'last_name',
+							'user_cpf',
+							'phone',
+							'email',
+							'user_cep',
+							'user_endereco',
+							'user_numero_endereco',
+							'user_bairro',
+							'user_cidade',
+							'user_estado',
+							'active',
+							'user_foto',
+							'usuario_id',
+
+						), $this->input->post(),
+					);
+
+					$id = $usuario->id;
+					
+					if($this->ion_auth->update($id, $data)){
+						//mensagem de dados salvo com sucesso
+						$this->session->set_flashdata('sucesso','Usuário atualizado com sucesso');
+					}else{
+						//mensagem de erro de dados não salvo com sucesso
+						$this->session->set_flashdata('erro','Erro ao atualizar Usuário');
+					}
+					// metodo fetch retorna para o controlador principal na view
+					redirect('restrita/' . $this->router->fetch_class());
 
 				}else{
 					$data = array(

@@ -17,6 +17,33 @@
                     <h4><?php echo $titulo; ?></h4>
                   </div>
                   <div class="card-body">
+
+									<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
+
+									<div class="alert alert-success text-white alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?php echo $mensagem ?>
+                      </div>
+                    </div>
+
+										<?php } ?>
+
+										<?php if($mensagem = $this->session->flashdata('erro')){ ?>
+
+										<div class="alert alert-danger text-white alert-dismissible show fade">
+                      <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                        </button>
+                        <?php echo $mensagem ?>
+                      </div>
+                    </div>
+
+										<?php } ?>
+
                     <div class="table-responsive">
                       <table class="table table-striped data-table">
                         <thead>
