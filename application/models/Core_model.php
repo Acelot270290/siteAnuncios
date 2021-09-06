@@ -85,7 +85,8 @@ class Core_model extends CI_Model	{
 				$this->session->set_flashdata('erro', 'Erro ao Salvar os dados');
 
 			}
-		}	else{
+		}else{
+			
 			return false;
 		}
 

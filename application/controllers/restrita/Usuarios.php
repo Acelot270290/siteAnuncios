@@ -179,7 +179,7 @@ class Usuarios extends CI_Controller {
 
 			if($this->core_model->get_by_id('users', array('phone'=>$phone))){
 
-				$this->form_validation->set_message('valida_telefone','Este telefone j[a existe');
+				$this->form_validation->set_message('valida_telefone','Este telefone já existe');
 
 				return false;
 
@@ -188,23 +188,57 @@ class Usuarios extends CI_Controller {
 				
 				return true;
 			}
-
-			if($this->core_model->get_by_id('users', array('phone'=>$phone, 'id!=' =>$usuario_id))){
-
-				$this->form_validation->set_message('valida_telefone','Este telefone j[a existe');
-
-				return false;
-
-			}else{
-
-				
-				return true;
-			}
-
 
 		}else{
 
 			//Estou editano o user
+
+			if($this->core_model->get_by_id('users', array('phone'=>$phone, 'id!=' =>$usuario_id))){
+
+				$this->form_validation->set_message('valida_telefone','Este telefone já existe');
+
+				return false;
+
+			}else{
+
+				
+				return true;
+			}
+
+		}
+
+	}
+
+	public function valida_email($email){
+
+		$usuario_id = $this->input->post('usuario_id');
+
+		if(!$usuario_id){
+
+			//Caso o user nao venha, vamos casdastrar
+
+			if($this->core_model->get_by_id('users', array('email'=>$email))){
+
+				$this->form_validation->set_message('valida_email','Este e-mail já existe');
+
+				return false;
+
+			}else{
+				return true;
+			}
+
+		}else{
+
+			//Estou editano o user
+
+			if($this->core_model->get_by_id('users', array('email'=>$email, 'id!=' =>$usuario_id))){
+
+				$this->form_validation->set_message('valida_email','Este e-mail já existe');
+
+				return false;
+			}else{
+				return true;
+			}
 		}
 
 	}
