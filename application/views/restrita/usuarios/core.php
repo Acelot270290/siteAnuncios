@@ -22,7 +22,7 @@
                         <i class="fas fa-user text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="first_name" value="<?php echo (isset($usuario) ? $usuario->first_name : set_value('fisrt_name')); ?>">
+                    <input type="text" class="form-control" name="first_name" value="<?php echo (isset($usuario) ? $usuario->first_name : set_value('first_name')); ?>">
                   </div>
 				  						<?php echo form_error('first_name', '<div class="text-danger">','</div>'); ?>
                 </div>
@@ -248,7 +248,7 @@
                     </div>
                     <input type="file" class="form-control" name="user_foto_file">
                   </div>
-				  <?php echo form_error('user_foto_file', '<div class="text-danger">','</div>'); ?>
+				  <?php echo form_error('user_foto', '<div class="text-danger">','</div>'); ?>
 					<div id="user_foto"></div>
         </div> 
 
