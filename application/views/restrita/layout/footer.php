@@ -16,6 +16,8 @@
   <!-- Custom JS File -->
   <script src="<?php echo base_url('public/restrita/assets/js/custom.js'); ?>"></script>
   <script src="<?php echo base_url('public/restrita/assets/js/util.js'); ?>"></script>
+  <script src="<?php echo base_url('public/restrita/assets/bootbox/bootbox.min.js'); ?>"></script>
+
 
 
 	<?php if(isset($scripts)){ ?>
@@ -30,6 +32,41 @@
 	<?php } ?>
 
 <?php } ?>
+
+<script>
+
+	$('.delete').on('click', function(event){
+
+		event.preventDefault();
+
+		var redirect = $(this).attr('href');
+
+		bootbox.confirm({
+		
+		title: $(this).attr('data-confirm'),
+		centerVertical:true,
+    message: "<p class='text-danger'>Está ação não poderá ser desfeita</p>",
+    buttons: {
+        confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+        },
+        cancel: {
+            label: 'Não, cancelar',
+            className: 'btn-danger'
+        }
+    },
+    callback: function (result) {
+        if(result){
+					window.location.href = redirect;
+				}
+    }
+});
+
+	});
+
+
+</script>
 
 </body>
 
