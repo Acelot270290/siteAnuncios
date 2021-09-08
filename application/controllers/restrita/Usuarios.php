@@ -70,13 +70,7 @@ class Usuarios extends CI_Controller {
 				$this->form_validation->set_rules('password','Senha','trim|required|min_length[6]|max_length[200]');
 				$this->form_validation->set_rules('confirma_senha','Confirma Senha','trim|matches[password]');
 
-
-
-
-
 				if($this->form_validation->run()){
-
-					
 
 					$username = $this->input->post('first_name'). ' '. $this->input->post('last_name');
 					$password = $this->input->post('password');
@@ -554,6 +548,58 @@ class Usuarios extends CI_Controller {
 		}
 
 		echo json_encode($data);
+	}
+
+	public function delete($usuario_id = NULL){
+
+		$usuario = (int) $usuario_id;
+
+		if(!$usuario_id || !$usuario = $this->ion_auth->user($usuario_id)->row()){
+
+			$this->session->set_flashdata('erro','Usuário não foi encontrado');
+			redirect('restrita/' . $this->router->fetch_class());
+
+		}
+
+		if($this->ion_auth->is_admin($usuario->id)){
+
+			$this->session->set_flashdata('erro','Não é permitido excluir Administradores');
+			redirect('restrita/' . $this->router->fetch_class());
+
+		}
+
+		if($this->ion_auth->delete_user($usuario->id)){
+
+			//Excluimos o usuario e depois vamos excluir as imagens no direotirio uploud e o small
+
+			//recuperamos o nome da imagem
+			$user_foto = $usuario->user_foto;
+
+			$imagem_grande = FCPATH . 'uploads/usuarios/' . $user_foto;
+			$imagem_pequena = FCPATH . 'uploads/usuarios/small' . $user_foto;
+			
+
+			if(file_exists($imagem_grande)){
+				unlink($imagem_grande);
+			}
+
+			//verifica  o porque a foto pequena não está sendo excluida
+
+			if(file_exists($imagem_pequena)){
+				unlink($$imagem_pequena);
+			}
+
+			$this->session->set_flashdata('sucesso','Usuário excluido com Sucesso');
+
+
+		}else{
+
+			$this->session->set_flashdata('erro','Erro ao exluir o usuário');
+		}
+
+		redirect('restrita/' . $this->router->fetch_class());
+
+
 	}
 
 }
