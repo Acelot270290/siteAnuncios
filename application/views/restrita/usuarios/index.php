@@ -71,7 +71,7 @@
 													 
 													<td>
 														 <a data-toggle='tooltip' data-placement='top' title="Editar usuário" href="<?php echo base_url('restrita/' .$this->router->fetch_class()  . '/core/' .$usuario->id ); ?>" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
-														 <a data-toggle='tooltip' data-placement='top' title="Excluir usuário" href="<?php echo base_url('restrita/' .$this->router->fetch_class()  . '/delete/' .$usuario->id ); ?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+														 <a data-toggle='tooltip' data-placement='top' title="Excluir usuário" href="<?php echo base_url('restrita/' .$this->router->fetch_class()  . '/delete/' .$usuario->id ); ?>" class="btn btn-danger delete" data-confirm="Tem certeza que deseja excluir?"><i class="fas fa-trash-alt"></i></a>
 														
 														</td>
                           </tr>
