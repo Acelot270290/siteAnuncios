@@ -219,7 +219,7 @@ class Master extends CI_Controller {
 		}
 	}
 
-	public function delete($categoria_pai_id = NULL){
+	public function delete($categoria_pai_id = null){
 
 		$categoria_pai_id = (int) $categoria_pai_id;
 
@@ -237,6 +237,7 @@ class Master extends CI_Controller {
 		}
 
 		$this->core_model->delete('categorias_pai', array('catagoria_pai_id' => $categoria->categoria_pai_id));
+
 		redirect('restrita/' . $this->router->fetch_class());
 
 	}
