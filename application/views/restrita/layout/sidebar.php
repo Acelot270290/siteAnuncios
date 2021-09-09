@@ -7,15 +7,18 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
-            <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            <li class="dropdown <?php echo $this->router->fetch_class() == 'home' ? 'active' : '' ?>">
+              <a href="<?php echo base_url('restrita') ?>" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            </li>
+						<li class="dropdown <?php echo $this->router->fetch_class() == 'usuarios' ? 'active' : '' ?>">
+              <a href="<?php echo base_url('restrita/usuarios') ?>" class="nav-link"><i data-feather="users"></i><span>Usuários</span></a>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>Widgets</span></a>
+                  data-feather="briefcase"></i><span>Categorias</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="widget-chart.html">Chart Widgets</a></li>
-                <li><a class="nav-link" href="widget-data.html">Data Widgets</a></li>
+                <li><a class="nav-link" href="<?php echo base_url('restrita/master') ?>">Categorias pai</a></li>
+                <li><a class="nav-link" href="<?php echo base_url('restrita/categorias') ?>">Categorias filhas</a></li>
               </ul>
             </li>
             <li class="dropdown">

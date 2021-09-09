@@ -9,6 +9,8 @@
       <div class="main-content">
         <section class="section">
           <div class="section-body">
+
+					<h1>Teste</h1>
             <!-- Home da área restrita -->
           </div>
         </section>
