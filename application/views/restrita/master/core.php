@@ -25,7 +25,7 @@
                                     <i class="fas fa-link text-info"></i>
                                  </div>
                               </div>
-                              <input type="text" class="form-control"  value="<?php echo $categoria->categoria_pai_meta_link; ?>">
+                              <input type="text" class="form-control"  value="<?php echo $categoria->categoria_pai_meta_link; ?>" readonly="">
                            </div>
 										</div>
 										</div>

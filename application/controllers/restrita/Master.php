@@ -76,11 +76,33 @@ class Master extends CI_Controller {
 
 					//Formulário validado... salvamos no banco de dados
 
-					echo '<prev>';
-					print_r($this->input->post());
-					echo "</pre>";
-					exit();
+					/*
+					*
+						categoria_pai_nome: "Games",
+						categoria_pai_classe_icone: "ini-game",
+						categoria_pai_ativa: "1",
+						categoria_pai_id: "1"
+					*/
 
+					$data = elements(
+						array(
+							'categoria_pai_nome',
+							'categoria_pai_classe_icone',
+							'categoria_pai_ativa',
+						), $this->input->post()
+					);
+
+					//definindo o meta link da categoria
+
+					$data['categoria_pai_meta_link'] = url_amigavel($data['categoria_pai_nome']);
+
+					$data = html_escape($data);
+
+
+					$this->core_model->update('categorias_pai', $data, array('categoria_pai_id'=> $categoria->categoria_pai_id));
+					
+					redirect('restrita/' . $this->router->fetch_class());
+			
 				}else{
 					//erros de validação
 
