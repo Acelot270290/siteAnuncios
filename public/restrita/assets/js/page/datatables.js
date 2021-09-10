@@ -29,6 +29,8 @@ $("[data-checkboxes]").each(function () {
 });
 
 $(".data-table").dataTable({
+
+	"order":[], // Remover a ordenção do pluguin
   "columnDefs": [
     { "sortable": false, "targets": ['nosort'] } // criando a classe sem ordenação
   ]

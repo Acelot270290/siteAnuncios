@@ -8,6 +8,8 @@ class Categorias extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
+
+		$this->load->model('categorias_model');
 	}
 
 	public function index(){
@@ -27,7 +29,7 @@ class Categorias extends CI_Controller {
 				'assets/js/page/datatables.js',
 
 			),
-			'categorias'=> $this->core_model->get_all('categorias'),
+			'categorias'=> $this->categorias_model->get_all_categorias(),
 		);
 
 		/*echo '<prev>';
@@ -41,18 +43,18 @@ class Categorias extends CI_Controller {
 
 	}
 
-	public function core($categoria_pai_id = NULL){
+	public function core($categoria_id = NULL){
 
-		$categoria_pai_id = (int) $categoria_pai_id;
+		$categoria_id = (int) $categoria_id;
 
-		if(!$categoria_pai_id){
+		if(!$categoria_id){
 
 			/*
 			*Cadastrando a Categoria
 			*/
 
-			$this->form_validation->set_rules('categoria_pai_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
-			$this->form_validation->set_rules('categoria_pai_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
+			$this->form_validation->set_rules('categoria_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
+			$this->form_validation->set_rules('categoria_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
 
 
 			if($this->form_validation->run()){
@@ -61,28 +63,28 @@ class Categorias extends CI_Controller {
 
 				/*
 				*
-					categoria_pai_nome: "Games",
-					categoria_pai_classe_icone: "ini-game",
-					categoria_pai_ativa: "1",
-					categoria_pai_id: "1"
+					categoria_nome: "Games",
+					categoria_classe_icone: "ini-game",
+					categoria_ativa: "1",
+					categoria_id: "1"
 				*/
 
 				$data = elements(
 					array(
-						'categoria_pai_nome',
-						'categoria_pai_classe_icone',
-						'categoria_pai_ativa',
+						'categoria_nome',
+						'categoria_classe_icone',
+						'categoria_ativa',
 					), $this->input->post()
 				);
 
 				//definindo o meta link da categoria
 
-				$data['categoria_pai_meta_link'] = url_amigavel($data['categoria_pai_nome']);
+				$data['categoria_meta_link'] = url_amigavel($data['categoria_nome']);
 
 				$data = html_escape($data);
 
 
-				$this->core_model->insert('categorias_pai', $data);
+				$this->core_model->insert('categorias', $data);
 				
 				redirect('restrita/' . $this->router->fetch_class());
 		
@@ -110,7 +112,7 @@ class Categorias extends CI_Controller {
 			*Verificamos se a categoria foi informa, ms devemos garantir sua existencia no banco de dados
 			*/
 
-			If(!$categoria = $this->core_model->get_by_id('categorias_pai', array('categoria_pai_id' => $categoria_pai_id))){
+			If(!$categoria = $this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id))){
 
 				$this->session->set_flashdata('erro','Categoria não foi encontrada');
 				redirect('restrita/' . $this->router->fetch_class());
@@ -121,8 +123,8 @@ class Categorias extends CI_Controller {
 				*Categoria encontrada e passamos para as validações
 				*/
 
-				$this->form_validation->set_rules('categoria_pai_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
-				$this->form_validation->set_rules('categoria_pai_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
+				$this->form_validation->set_rules('categoria_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
+				$this->form_validation->set_rules('categoria_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
 
 
 				if($this->form_validation->run()){
@@ -131,28 +133,28 @@ class Categorias extends CI_Controller {
 
 					/*
 					*
-						categoria_pai_nome: "Games",
-						categoria_pai_classe_icone: "ini-game",
-						categoria_pai_ativa: "1",
-						categoria_pai_id: "1"
+						categoria_nome: "Games",
+						categoria_classe_icone: "ini-game",
+						categoria_ativa: "1",
+						categoria_id: "1"
 					*/
 
 					$data = elements(
 						array(
-							'categoria_pai_nome',
-							'categoria_pai_classe_icone',
-							'categoria_pai_ativa',
+							'categoria_nome',
+							'categoria_classe_icone',
+							'categoria_ativa',
 						), $this->input->post()
 					);
 
 					//definindo o meta link da categoria
 
-					$data['categoria_pai_meta_link'] = url_amigavel($data['categoria_pai_nome']);
+					$data['categoria_meta_link'] = url_amigavel($data['categoria_nome']);
 
 					$data = html_escape($data);
 
 
-					$this->core_model->update('categorias_pai', $data, array('categoria_pai_id'=> $categoria->categoria_pai_id));
+					$this->core_model->update('categorias', $data, array('categoria_id'=> $categoria->categoria_id));
 					
 					redirect('restrita/' . $this->router->fetch_class());
 			
@@ -183,15 +185,15 @@ class Categorias extends CI_Controller {
 
 	}
 
-	public function valida_nome_categoria($categoria_pai_nome){
+	public function valida_nome_categoria($categoria_nome){
 
-		$categoria_pai_id = $this->input->post('categoria_pai_id');
+		$categoria_id = $this->input->post('categoria_id');
 
-		if(!$categoria_pai_id){
+		if(!$categoria_id){
 
 			//Cadastrando
 
-			if($this->core_model->get_by_id('categorias_pai', array('categoria_pai_nome' => $categoria_pai_nome))){
+			if($this->core_model->get_by_id('categorias', array('categoria_nome' => $categoria_nome))){
 
 				$this->form_validation->set_message('valida_nome_categoria','Essa categoria já existe');
 
@@ -207,7 +209,7 @@ class Categorias extends CI_Controller {
 
 				//Editando
 
-				if($this->core_model->get_by_id('categorias_pai', array('categoria_pai_nome' => $categoria_pai_nome, 'categoria_pai_id !='=> $categoria_pai_id))){
+				if($this->core_model->get_by_id('categorias', array('categoria_nome' => $categoria_nome, 'categoria_id !='=> $categoria_id))){
 
 					$this->form_validation->set_message('valida_nome_categoria','Essa categoria já existe');
 
@@ -219,16 +221,16 @@ class Categorias extends CI_Controller {
 		}
 	}
 
-	public function delete($categoria_pai_id = null){
+	public function delete($categoria_id = null){
 
-		$categoria_pai_id = (int) $categoria_pai_id;
+		$categoria_id = (int) $categoria_id;
 
-		If(!$categoria_pai_id || !$categoria = $this->core_model->get_by_id('categorias_pai', array('categoria_pai_id' => $categoria_pai_id))){
+		If(!$categoria_id || !$categoria = $this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id))){
 			$this->session->set_flashdata('erro','Categoria não foi encontrada');
 			redirect('restrita/' . $this->router->fetch_class());
 		}
 
-		If($categoria->categoria_pai_ativa == 1){
+		If($categoria->categoria_ativa == 1){
 			$this->session->set_flashdata('erro','Não é permitido excluir uma Categoria Pai que esteja Ativa');
 			redirect('restrita/' . $this->router->fetch_class());
 
@@ -238,8 +240,8 @@ class Categorias extends CI_Controller {
 		print_r($categoria);
 		exit;*/
 
-		$this->core_model->delete('categorias_pai', array(
-			'categoria_pai_id' => $categoria->categoria_pai_id
+		$this->core_model->delete('categorias', array(
+			'categoria_id' => $categoria->categoria_id
 		
 		));
 

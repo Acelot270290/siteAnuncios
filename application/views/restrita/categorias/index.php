@@ -52,6 +52,7 @@
                           <tr>
                             <th>#</th>
                             <th>Nome categoria</th>
+                            <th>Nome categoria pai</th>
                             <th>Meta link da categoria</th>
                             <th>Ativo</th>
                             <th class="nosort">Ações</th>
@@ -64,6 +65,7 @@
                           <tr>
 													<td><?php echo $categoria->categoria_id ?></td>
 													<td><?php echo $categoria->categoria_nome ?></td>
+													<td><?php echo $categoria->categoria_pai_nome ?></td>
 													<td><?php echo $categoria->categoria_meta_link ?></td>
 
 													<td><?php echo ($categoria->categoria_ativa == 1 ? '<div class="badge badge-success badge-shadow">Sim</div>' : '<div class="badge badge-danger badge-shadow">Não</div>'); ?></td>
