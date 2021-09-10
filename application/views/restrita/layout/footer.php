@@ -1,10 +1,16 @@
-<footer class="main-footer">
+
+
+			<?php if($this->router->fetch_class() != 'login') { ?>
+
+				<footer class="main-footer">
         <div class="footer-left">
-          <a href="templateshub.net">Templateshub</a></a>
+          <a href="adsites.org">Adsites.org</a></a>
         </div>
         <div class="footer-right">
         </div>
       </footer>
+
+			<?php } ?>
     </div>
   </div>
   <!-- General JS Scripts -->
