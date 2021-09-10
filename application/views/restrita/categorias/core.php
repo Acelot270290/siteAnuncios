@@ -25,7 +25,7 @@
                                     <i class="fas fa-link text-info"></i>
                                  </div>
                               </div>
-                              <input type="text" class="form-control"  value="<?php echo $categoria->categoria_pai_meta_link; ?>" readonly="">
+                              <input type="text" class="form-control"  value="<?php echo $categoria->categoria_meta_link; ?>" readonly="">
                            </div>
 										</div>
 										</div>
@@ -40,22 +40,12 @@
                                     <i class="fas fa-audio-description text-info"></i>
                                  </div>
                               </div>
-                              <input type="text" class="form-control" name="categoria_pai_nome" value="<?php echo (isset($categoria) ? $categoria->categoria_pai_nome : set_value('categoria_pai_nome')); ?>">
+                              <input type="text" class="form-control" name="categoria_nome" value="<?php echo (isset($categoria) ? $categoria->categoria_nome : set_value('categoria_nome')); ?>">
                            </div>
-                           <?php echo form_error('categoria_pai_nome', '<div class="text-danger">','</div>'); ?>
+                           <?php echo form_error('categoria_nome', '<div class="text-danger">','</div>'); ?>
                         </div>
-                        <div class="form-group col-md-4">
-                           <label>Ícone da categoria</label>
-                           <div class="input-group">
-                              <div class="input-group-prepend">
-                                 <div class="input-group-text">
-                                    <i class="fas fa-cube text-info"></i>
-                                 </div>
-                              </div>
-                              <input type="text" class="form-control" name="categoria_pai_classe_icone" value="<?php echo (isset($categoria) ? $categoria->categoria_pai_classe_icone : set_value('categoria_pai_classe_icone')); ?>">
-                           </div>
-                           <?php echo form_error('categoria_pai_classe_icone', '<div class="text-danger">','</div>'); ?>
-                        </div>
+
+
                         <div class="form-group col-md-4">
                            <label>Ativa</label>
                            <div class="input-group">
@@ -64,20 +54,45 @@
                                     <i class="fas fa-check-circle text-info"></i>
                                  </div>
                               </div>
-                              <select class="custom-select" name="categoria_pai_ativa">
+                              <select class="custom-select" name="categoria_ativa">
                                  <?php if(isset($categoria)){ ?>
-                                 <option value="0" <?php echo($categoria->categoria_pai_ativa == 0 ? 'selected' : ''); ?>>Não</option>
-                                 <option value="1" <?php echo($categoria->categoria_pai_ativa == 1 ? 'selected' : ''); ?>>sim</option>
+                                 <option value="0" <?php echo($categoria->categoria_ativa == 0 ? 'selected' : ''); ?>>Não</option>
+                                 <option value="1" <?php echo($categoria->categoria_ativa == 1 ? 'selected' : ''); ?>>sim</option>
                                  <?php }else{ ?>
                                  <option value="0">Não</option>
                                  <option value="1">sim</option>
                                  <?php } ?>
                               </select>
                            </div>
-                           <?php echo form_error('categoria_pai_ativa', '<div class="text-danger">','</div>'); ?>
+                           <?php echo form_error('categoria_ativa', '<div class="text-danger">','</div>'); ?>
+                        </div>
+								<div class="form-group col-md-4">
+                           <label>Categoria pai</label>
+                           <div class="input-group">
+                              <div class="input-group-prepend">
+                                 <div class="input-group-text">
+                                    <i class="fas fa-check-circle text-info"></i>
+                                 </div>
+                              </div>
+                              <select class="custom-select select2" name="categoria_pai_id">
+
+												
+
+												<?php foreach($masters as $master){ ?>
+
+
+                                 <?php if(isset($categoria)){ ?>
+                                 <option value="<?php echo $master->categoria_pai_id; ?>" <?php echo($categoria->categoria_pai_id == $master->categoria_pai_id ? 'selected' : ''); ?>><?php echo $master->categoria_pai_nome; ?></option>
+                                 <?php }else{ ?>
+											<option value="<?php echo $master->categoria_pai_id; ?>"><?php echo $master->categoria_pai_nome; ?></option>
+                                 <?php } ?>
+											<?php } ?>
+                              </select>
+                           </div>
+                           <?php echo form_error('categoria_pai_id', '<div class="text-danger">','</div>'); ?>
                         </div>
                         <?php if(isset($categoria)){ //Validando o id do user ?>
-                        <input type="hidden" name="categoria_pai_id" value="<?php echo $categoria->categoria_pai_id; ?>">
+                        <input type="hidden" name="categoria_id" value="<?php echo $categoria->categoria_id; ?>">
                         <?php } ?>
                      </div>
                   </div>

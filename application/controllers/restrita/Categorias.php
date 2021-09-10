@@ -53,8 +53,8 @@ class Categorias extends CI_Controller {
 			*Cadastrando a Categoria
 			*/
 
-			$this->form_validation->set_rules('categoria_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
-			$this->form_validation->set_rules('categoria_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
+			$this->form_validation->set_rules('categoria_nome', 'Categoria' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
+			$this->form_validation->set_rules('categoria_pai_id', 'Categoria Pai' ,'trim|required');
 
 
 			if($this->form_validation->run()){
@@ -72,7 +72,7 @@ class Categorias extends CI_Controller {
 				$data = elements(
 					array(
 						'categoria_nome',
-						'categoria_classe_icone',
+						'categoria_pai_id',
 						'categoria_ativa',
 					), $this->input->post()
 				);
@@ -92,7 +92,19 @@ class Categorias extends CI_Controller {
 				//erros de validação
 
 				$data = array(
-					'titulo'=>'Adicionando Categoria Pai',
+					'titulo'=>'Adicionando Categoria',
+
+					'styles'=>array(
+						'assets/bundles/select2/dist/css/select2.min.css',
+					),
+		
+					'scripts'=>array(
+						'assets/bundles/select2/dist/js/select2.full.min.js',
+		
+					),
+
+
+					'masters' => $this->core_model->get_all('categorias_pai', array('categoria_pai_ativa' => 1))
 					
 				);
 		
@@ -102,7 +114,7 @@ class Categorias extends CI_Controller {
 				exit();*/
 		
 				$this->load->view('restrita/layout/header',$data);
-				$this->load->view('restrita/master/core');
+				$this->load->view('restrita/categorias/core');
 				$this->load->view('restrita/layout/footer');
 			}
 
@@ -113,7 +125,6 @@ class Categorias extends CI_Controller {
 			*/
 
 			If(!$categoria = $this->core_model->get_by_id('categorias', array('categoria_id' => $categoria_id))){
-
 				$this->session->set_flashdata('erro','Categoria não foi encontrada');
 				redirect('restrita/' . $this->router->fetch_class());
 
@@ -124,7 +135,7 @@ class Categorias extends CI_Controller {
 				*/
 
 				$this->form_validation->set_rules('categoria_nome', 'Categoria Pai' ,'trim|required|min_length[4]|max_length[40]|callback_valida_nome_categoria');
-				$this->form_validation->set_rules('categoria_classe_icone', 'Icone da categoria' ,'trim|required|min_length[3]|max_length[20]');
+				$this->form_validation->set_rules('categoria_pai_id', 'Categoria Pai' ,'trim|required');
 
 
 				if($this->form_validation->run()){
@@ -142,7 +153,7 @@ class Categorias extends CI_Controller {
 					$data = elements(
 						array(
 							'categoria_nome',
-							'categoria_classe_icone',
+							'categoria_pai_id',
 							'categoria_ativa',
 						), $this->input->post()
 					);
@@ -162,8 +173,19 @@ class Categorias extends CI_Controller {
 					//erros de validação
 
 					$data = array(
-						'titulo'=>'Editar Categoria Pai',
+						'titulo'=>'Editar Categoria',
 						'categoria' =>$categoria,
+
+						'styles'=>array(
+							'assets/bundles/select2/dist/css/select2.min.css',
+						),
+			
+						'scripts'=>array(
+							'assets/bundles/select2/dist/js/select2.full.min.js',
+			
+						),
+	
+						'masters' => $this->core_model->get_all('categorias_pai', array('categoria_pai_ativa' => 1))
 					);
 			
 					/*echo '<prev>';
@@ -172,7 +194,7 @@ class Categorias extends CI_Controller {
 					exit();*/
 			
 					$this->load->view('restrita/layout/header',$data);
-					$this->load->view('restrita/master/core');
+					$this->load->view('restrita/categorias/core');
 					$this->load->view('restrita/layout/footer');
 				}
 
@@ -231,7 +253,7 @@ class Categorias extends CI_Controller {
 		}
 
 		If($categoria->categoria_ativa == 1){
-			$this->session->set_flashdata('erro','Não é permitido excluir uma Categoria Pai que esteja Ativa');
+			$this->session->set_flashdata('erro','Não é permitido excluir uma Categoria que esteja Ativa');
 			redirect('restrita/' . $this->router->fetch_class());
 
 		}
