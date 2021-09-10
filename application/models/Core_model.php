@@ -99,7 +99,7 @@ class Core_model extends CI_Model	{
 		if($tabela && $this->db->table_exists($tabela) && is_array($condicoes)){
 			
 
-			if($this->db->delete($tabela = NULL, $condicoes= NULL)){
+			if($this->db->delete($tabela, $condicoes)){
 
 				$this->session->set_flashdata('sucesso','Registro deletado com Sucesso');
 
@@ -108,6 +108,7 @@ class Core_model extends CI_Model	{
 
 			}
 		}	else{
+			
 			return false;
 		}
 

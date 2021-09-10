@@ -4,7 +4,7 @@
 
 defined('BASEPATH') OR exit('Ação não permitida');
 
-class Master extends CI_Controller {
+class Categorias extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
@@ -13,7 +13,7 @@ class Master extends CI_Controller {
 	public function index(){
 
 		$data = array(
-			'titulo'=>'Categorias Pai',
+			'titulo'=>'Categorias Cadastradas',
 
 			'styles'=>array(
 				'assets/bundles/datatables/datatables.min.css',
@@ -27,7 +27,7 @@ class Master extends CI_Controller {
 				'assets/js/page/datatables.js',
 
 			),
-			'masters'=> $this->core_model->get_all('categorias_pai'),
+			'categorias'=> $this->core_model->get_all('categorias'),
 		);
 
 		/*echo '<prev>';
@@ -36,7 +36,7 @@ class Master extends CI_Controller {
 		exit();*/
 
 		$this->load->view('restrita/layout/header',$data);
-		$this->load->view('restrita/master/index');
+		$this->load->view('restrita/categorias/index');
 		$this->load->view('restrita/layout/footer');
 
 	}
