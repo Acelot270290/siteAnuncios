@@ -73,3 +73,13 @@ function formata_data_banco_sem_hora($string) {
 
     return $dia . '/' . $mes_num . '/' . $ano;
 }
+
+//Função recupera as informações do website para ser usado no header ou footer
+function info_header_footer(){
+
+	$CI = &get_instance();
+
+	$sistema = $CI->core_model->get_by_id('sistema', array('sistema_id'=>1));
+
+	return $sistema;
+}

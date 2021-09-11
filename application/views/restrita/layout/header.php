@@ -6,7 +6,11 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
- <?php echo (isset($titulo) ? '<title>Anúncios | ' . $titulo . '</title>':  '<title>Anúncios | não deixe de anunciar/title>'); ?>
+
+	<?php $sistema = info_header_footer(); ?>
+
+	<title><?php echo $sistema->sistema_site_titulo. '&nbsp|&nbsp' . (isset($titulo) ? $titulo : 'Não deixe de anunciar'); ?></title>
+
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?php echo base_url('public/restrita/assets/css/app.min.css'); ?>">
   <!-- Template CSS -->

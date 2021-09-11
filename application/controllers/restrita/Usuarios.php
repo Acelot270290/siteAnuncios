@@ -137,8 +137,6 @@ class Usuarios extends CI_Controller {
 							'assets/mask/jquery.mask.min.js',
 							'assets/mask/custom.js',
 							'assets/js/usuarios.js',
-							
-			
 						),
 
 						'grupos' => $this->ion_auth->groups()->result(),

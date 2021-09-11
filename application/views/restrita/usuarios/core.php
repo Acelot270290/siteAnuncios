@@ -73,7 +73,7 @@
                         <i class="fas fa-envelope text-info"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="email" value="<?php echo (isset($usuario) ? $usuario->email : set_value('email')); ?>">
+                    <input type="email" class="form-control" name="email" value="<?php echo (isset($usuario) ? $usuario->email : set_value('email')); ?>">
                   </div>
 				  <?php echo form_error('email', '<div class="text-danger">','</div>'); ?>
                 </div>
