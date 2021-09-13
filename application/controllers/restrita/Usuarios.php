@@ -529,7 +529,7 @@ class Usuarios extends CI_Controller {
 			);
 
 			/*
-			*Criando a copia numa versão meenor para mobile
+			*Criando a copia numa versão menor para mobile
 			*/
 
 			$config['image_library'] = 'gd2';
