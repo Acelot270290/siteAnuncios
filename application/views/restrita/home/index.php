@@ -12,6 +12,15 @@
 
 					<h1>Teste</h1>
             <!-- Home da área restrita -->
+
+						<?php 
+						
+						echo '<prev>';
+						echo print_r($this->session->userdata()); 
+						echo '<prev>';
+						
+						?>
+
           </div>
         </section>
         <div class="settingSidebar">

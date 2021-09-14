@@ -48,7 +48,7 @@
                       <table class="table table-striped data-table">
                         <thead>
                           <tr>
-                            <!--<th>Imagem</th>-->
+                            <th>Imagem</th>
                             <th>Título</th>
                             <th>Preço</th>
                             <th>anuncio Pai</th>
@@ -62,11 +62,11 @@
 												<?php foreach($anuncios as $anuncio){ ?>
 
                           <tr>
-													<?php //echo $anuncio->categoria_id ?></td>
+													<td><img alt="image" src="<?php echo base_url('uploads/anuncios/small' . $anuncio->foto_nome); ?>" width="35"></td>
 													<td><?php echo $anuncio->anuncio_titulo ?></td>
 													<td><?php echo 'R$' .number_format($anuncio->anuncio_preco, 2) ?></td>
-													<td><?php echo $anuncio->anuncio_categoria_pai_id ?></td>
-													<td><?php echo $anuncio->anuncio_categoria_id ?></td>
+													<td><?php echo $anuncio->categoria_pai_nome ?></td>
+													<td><?php echo $anuncio->categoria_nome ?></td>
 
 													<td><?php echo ($anuncio->anuncio_publicado == 1 ? '<div class="badge badge-success badge-shadow">Sim</div>' : '<div class="badge badge-danger badge-shadow">Não</div>'); ?></td>
 													 
