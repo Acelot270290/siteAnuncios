@@ -67,6 +67,37 @@ class Anuncios extends CI_Controller {
 
 	}
 
+	public function get_categorias_filhas(){
+		//recupera todas as categorias filhas de acordo com as categorias pai iformada no ajax request
+
+		if(!$this->input->is_ajax_request()){
+			exit('Ação não permitida');
+		}
+
+		$categorias = array();
+		$anuncio_categoria_pai_id = $this->input->post('anuncio_categoria_pai_id');
+
+		if('anuncio_categoria_pai_id'){
+
+			$categorias = $this->core_model->get_all('categorias', array('categoria_pai_id' =>$anuncio_categoria_pai_id, 'categoria_ativa'=> 1));
+
+		}
+
+		echo json_encode($categorias);
+
+	}
+
+	//  Função que valida o cep informado é válido, caso sim setamos o objeto com todos os enereços
+	public function valida_anuncio_localizacao_cep(){
+
+		if(!$this->input->is_ajax_request()){
+			exit('Ação não permitida');
+		}
+
+
+
+	}
+
 	public function upload(){
 
 		$config['upload_path'] = './uploads/anuncios/';
@@ -179,9 +210,11 @@ class Anuncios extends CI_Controller {
 
 				$data = array(
 					'titulo'=>' Editar Anúncio',
+					
 		
 					'styles'=>array(
 						'assets/jquery-upload-file/css/uploadfile.css',
+						'assets/bundles/select2/dist/css/select2.min.css',
 					),
 		
 					'scripts'=>array(
@@ -190,6 +223,7 @@ class Anuncios extends CI_Controller {
 						'assets/jquery-upload-file/js/anuncios.js',
 						'assets/mask/jquery.mask.min.js',
 						'assets/mask/custom.js',
+						'assets/bundles/select2/dist/js/select2.full.min.js',
 
 		
 					),
@@ -200,10 +234,10 @@ class Anuncios extends CI_Controller {
 				);
 		
 		
-				echo '<prev>';
+				/*echo '<prev>';
 				print_r($data);
 				echo "</pre>";
-				exit();
+				exit();*/
 		
 				$this->load->view('restrita/layout/header',$data);
 				$this->load->view('restrita/anuncios/core');

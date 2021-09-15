@@ -51,7 +51,7 @@
                   </div>
                   <?php echo form_error('anuncio_preco', '<div class="text-danger">','</div>'); ?>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-4">
                   <label class="mr-3">anuncio Principal</label>
                   <span class="text-info small">Atual:<?php echo $anuncio->categoria_pai_nome; ?></span>
                   <div class="input-group">
@@ -60,7 +60,7 @@
                         <i class="fas fa-check-circle text-info"></i>
                       </div>
                     </div>
-                    <select id="master" class="custom-select" name="anuncio_categoria_pai_id">
+                    <select id="master" class="form-control select2" name="anuncio_categoria_pai_id">
                       <option value="">Escolha uma categoria principal...</option>
                       <?php foreach($categorias_pai as $cat_pai){ ?>
                       <option value="<?php echo $cat_pai->categoria_pai_id; ?>"><?php echo $cat_pai->categoria_pai_nome; ?></option>
@@ -78,7 +78,7 @@
                         <i class="fas fa-check-circle text-info"></i>
                       </div>
                     </div>
-                    <select id ="anuncio_anuncio" class="custom-select" name="anuncio_anuncio_id">
+                    <select id ="anuncio_anuncio" class="form-control select2" name="anuncio_anuncio_id">
 										<option value="">Escolha uma categoria...</option>
                     <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
                     </select>
