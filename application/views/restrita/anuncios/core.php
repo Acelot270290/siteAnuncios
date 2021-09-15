@@ -39,8 +39,7 @@
                 </div>
               </div>
               <div class="form-row">
-
-				  <div class="form-group col-md-2">
+                <div class="form-group col-md-2">
                   <label>Preço</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -51,11 +50,10 @@
                     <input type="text" class="form-control money2" name="anuncio_preco" value="<?php echo (isset($anuncio) ? $anuncio->anuncio_preco : set_value('anuncio_preco')); ?>">
                   </div>
                   <?php echo form_error('anuncio_preco', '<div class="text-danger">','</div>'); ?>
-               </div>
-
+                </div>
                 <div class="form-group col-md-5">
                   <label class="mr-3">anuncio Principal</label>
-						<span class="text-info small">Atual:<?php echo $anuncio->categoria_pai_nome; ?></span>
+                  <span class="text-info small">Atual:<?php echo $anuncio->categoria_pai_nome; ?></span>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
@@ -63,22 +61,17 @@
                       </div>
                     </div>
                     <select id="master" class="custom-select" name="anuncio_categoria_pai_id">
-
-						  <option value="">Escola uma anúncio principal...</option>
-
-						  <?php foreach($categorias_pai as $cat_pai){ ?>
-
-							<option value="<?php echo $cat_pai->$categoria_pai_id; ?>"><?php echo $cat_pai->$categoria_pai_nome; ?></option>
-
-							<?php } ?>
-                      
+                      <option value="">Escola uma anúncio principal...</option>
+                      <?php foreach($categorias_pai as $cat_pai){ ?>
+                      <option value="<?php echo $cat_pai->categoria_pai_id; ?>"><?php echo $cat_pai->categoria_pai_nome; ?></option>
+                      <?php } ?>
                     </select>
                   </div>
                   <?php echo form_error('anuncio_ativa', '<div class="text-danger">','</div>'); ?>
                 </div>
-					 <div class="form-group col-md-5">
+                <div class="form-group col-md-5">
                   <label class="mr-3">Subcategoria</label>
-						<span class="text-info small">Atual:<?php echo $anuncio->categoria_nome; ?></span>
+                  <span class="text-info small">Atual:<?php echo $anuncio->categoria_nome; ?></span>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
@@ -86,20 +79,14 @@
                       </div>
                     </div>
                     <select id ="anuncio_anuncio" class="custom-select" name="anuncio_anuncio_id">
-
-						  <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
-
-
+                    <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
                     </select>
                   </div>
                   <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
                 </div>
-
-            </div>
-
-				<div class="form-row">
-						
-					<div class="form-group col-md-2">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-2">
                   <label>Anúncio Publicado</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -108,17 +95,13 @@
                       </div>
                     </div>
                     <select class="custom-select" name="anuncio_publicado">
-
-						  
-								<option value="0" <?php echo($anuncio->anuncio_publicado == 0 ? 'selected' : ''); ?>>Não</option>
-								<option value="1" <?php echo($anuncio->anuncio_publicado == 1 ? 'selected' : ''); ?>>sim</option>
-								
-				
+                      <option value="0" <?php echo($anuncio->anuncio_publicado == 0 ? 'selected' : ''); ?>>Não</option>
+                      <option value="1" <?php echo($anuncio->anuncio_publicado == 1 ? 'selected' : ''); ?>>sim</option>
                     </select>
                   </div>
                   <?php echo form_error('anuncio_publicado', '<div class="text-danger">','</div>'); ?>
-            	</div>
-					<div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
                   <label>Situação do Item</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -127,17 +110,13 @@
                       </div>
                     </div>
                     <select class="custom-select" name="anuncio_situacao">
-
-						  
-								<option value="0" <?php echo($anuncio->anuncio_situacao == 1 ? 'selected' : ''); ?>>Novo</option>
-								<option value="1" <?php echo($anuncio->anuncio_situacao == 0 ? 'selected' : ''); ?>>Usado</option>
-								
-				
+                      <option value="0" <?php echo($anuncio->anuncio_situacao == 1 ? 'selected' : ''); ?>>Novo</option>
+                      <option value="1" <?php echo($anuncio->anuncio_situacao == 0 ? 'selected' : ''); ?>>Usado</option>
                     </select>
                   </div>
                   <?php echo form_error('anuncio_situacao', '<div class="text-danger">','</div>'); ?>
-            	</div>
-					<div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
                   <label>Localização do anúncio</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -148,77 +127,46 @@
                     <input type="text" class="form-control cep" name="anuncio_localizacao_cep" value="<?php echo (isset($anuncio) ? $anuncio->anuncio_localizacao_cep : set_value('anuncio_localizacao_cep')); ?>">
                   </div>
                   <?php echo form_error('anuncio_localizacao_cep', '<div class="text-danger">','</div>'); ?>
-               </div>
-
-				</div>
-
-				<div class="form-row">
-
-				<div class="form-group col-md-12">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
                   <label>Descrição do Anúncio</label>
                   <textarea class="form-control" name="anuncio_descricao" style="min-height: 200px;"><?php echo $anuncio->anuncio_descricao; ?></textarea>
                   <?php echo form_error('anuncio_descricao', '<div class="text-danger">','</div>'); ?>
-               </div>
-
-
-
-				</div>
-
-				<div class="form_row">
-
-				<div class="form-group col-md-8">
+                </div>
+              </div>
+              <div class="form_row">
+                <div class="form-group col-md-8">
                   <label>Imagens do anúncio</label>
-
-						<div id="fileuploader">
-
-						</div>
-						<div id="erro_uploaded" class="text-danger">
-							
-							</div>
-							<?php echo form_error('fotos_produtos', '<div class="text-danger">','</div>'); ?>
-
-
-                
-               </div>
-
-				</div>
-				<div class="form_row">
-
-				<div class="form-group col-md-12">
-
-				<div id="uploaded_image">
-
-				<?php foreach($fotos_anuncio as $foto){ ?>
-
-					<ul style="list-style: none; display: inline-block;">
-
-						<li>
-							<img src="<?php echo base_url('uploads/anuncios/small/' .$foto->foto_nome);  ?>" width="80" class="img-thumbnail mr-1 mb-2">
-							<input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_nome; ?>"></input>
-							<button class="btn btn-sm btn-danger btn-icon btn-remove"><i class="fas fa-times"></i></button>
-						</li>
-				
-				
-					</ul>
-
-					<?php } ?>
-
-				</div>
-
-					</div>
-
-				</div>
-
-				<div class="form-row">
-					
-				<?php if(isset($anuncio)){ //Validando o id do user ?>
+                  <div id="fileuploader">
+                  </div>
+                  <div id="erro_uploaded" class="text-danger">
+                  </div>
+                  <?php echo form_error('fotos_produtos', '<div class="text-danger">','</div>'); ?>
+                </div>
+              </div>
+              <div class="form_row">
+                <div class="form-group col-md-12">
+                  <div id="uploaded_image">
+                    <?php foreach($fotos_anuncio as $foto){ ?>
+                    <ul style="list-style: none; display: inline-block;">
+                      <li>
+                        <img src="<?php echo base_url('uploads/anuncios/small/' .$foto->foto_nome);  ?>" width="80" class="img-thumbnail mr-1 mb-2">
+                        <input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_nome; ?>"></input>
+                        <button class="btn btn-sm btn-danger btn-icon btn-remove"><i class="fas fa-times"></i></button>
+                      </li>
+                    </ul>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <?php if(isset($anuncio)){ //Validando o id do user ?>
                 <input type="hidden" name="anuncio_id" value="<?php echo $anuncio->anuncio_id; ?>">
                 <?php } ?>
-				</div>
-
+              </div>
             </div>
-
-				
             <div class="card-footer">
               <button id="btn-save-anuncio" type="submit" class="btn btn-primary">Salvar</button>
               <a href="<?php echo base_url('restrita/' . $this->router->fetch_class()); ?>" class=" btn btn-dark">voltar</a>
