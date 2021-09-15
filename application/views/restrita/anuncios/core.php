@@ -61,7 +61,7 @@
                       </div>
                     </div>
                     <select id="master" class="custom-select" name="anuncio_categoria_pai_id">
-                      <option value="">Escola uma anúncio principal...</option>
+                      <option value="">Escolha uma categoria principal...</option>
                       <?php foreach($categorias_pai as $cat_pai){ ?>
                       <option value="<?php echo $cat_pai->categoria_pai_id; ?>"><?php echo $cat_pai->categoria_pai_nome; ?></option>
                       <?php } ?>
@@ -79,6 +79,7 @@
                       </div>
                     </div>
                     <select id ="anuncio_anuncio" class="custom-select" name="anuncio_anuncio_id">
+										<option value="">Escolha uma categoria...</option>
                     <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
                     </select>
                   </div>
@@ -154,7 +155,7 @@
                       <li>
                         <img src="<?php echo base_url('uploads/anuncios/small/' .$foto->foto_nome);  ?>" width="80" class="img-thumbnail mr-1 mb-2">
                         <input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_nome; ?>"></input>
-                        <button class="btn btn-sm btn-danger btn-icon btn-remove"><i class="fas fa-times"></i></button>
+                        <button class="btn btn-sm btn-danger btn-block btn-icon  btn-remove"><i class="fas fa-times"></i></button>
                       </li>
                     </ul>
                     <?php } ?>

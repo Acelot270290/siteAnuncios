@@ -67,6 +67,61 @@ class Anuncios extends CI_Controller {
 
 	}
 
+	public function upload(){
+
+		$config['upload_path'] = './uploads/anuncios/';
+		$config['allowed_types'] = 'jpg|png|JPG|PNG|jpeg|JPEG';
+		$config['encrypt_name'] = true;
+		$config['max_size'] = 2048;
+		$config['max_width'] = 1000;
+		$config['max_height'] = 1000;
+
+		//Carregando  bliblioteca o Uploud
+		$this->load->library('upload', $config);
+
+		if($this->upload->do_upload('foto_produto')){
+
+			$data = array(
+				'erro' => 0,
+				'uploaded_data' => $this->upload->data(),
+				'foto_nome' => $this->upload->data('file_name'),
+				'mensagem'=> 'Foto enviada com sucesso',
+			);
+
+			/*
+			*Criando a copia numa versão menor para mobile
+			*/
+
+			$config['image_library'] = 'gd2';
+			$config['source_image'] = './uploads/anuncios/' . $this->upload->data('file_name');
+			$config['new_image'] = './uploads/anuncios/small/' . $this->upload->data('file_name');
+			$config['width'] = 300;
+			$config['height'] = 280;
+			$this->load->library('image_lib', $config);
+
+			// Verificamos se houver erro no resize
+
+			if(!$this->image_lib->resize()){
+
+				$data['erro'] = 3;
+				$data['mensagem'] = $this->image_lib->display_errors('<span class="text-danger">', '</span>');
+
+			}
+
+
+		}else{
+			//caso tenha erros no uplouds da imagem
+
+			$data = array(
+
+				'erro'=> 3,
+				'mensagem' => $this->upload->display_errors('<span class="text-danger">', '</span>'),
+			);
+		}
+
+		echo json_encode($data);
+	}
+
 	public function core($anuncio_id=NULL){
 
 		//Função só será utilizada para editar um anuncio
@@ -88,21 +143,30 @@ class Anuncios extends CI_Controller {
 			//Anuncio existe e passamos para as validações
 
 			$this->form_validation->set_rules('anuncio_titulo','Título do anúncio','trim|required|min_length[4]|max_length[240]');
-			$this->form_validation->set_rules('anuncio_preco','Preço'. 'trim|required');
-			$this->form_validation->set_rules('anuncio_situacao','Situação do produto'. 'trim|required');
+			$this->form_validation->set_rules('anuncio_preco','Preço', 'trim|required');
+			$this->form_validation->set_rules('anuncio_situacao','Situação do produto', 'trim|required');
 
 			//Verificamos se a categoria Pai veio no post
 			$anuncio_categoria_pai_id = $this->input->post('anuncio_categoria_pai_id');
 
 			if($anuncio_categoria_pai_id){
 
-			$this->form_validation->set_rules('anuncio_categoria_pai_id','Sub categoria'. 'trim|required');
+			$this->form_validation->set_rules('anuncio_categoria_id','Subcategoria', 'trim|required');
 
 			}
 
 			$this->form_validation->set_rules('anuncio_localizacao_cep','Localização do Anúncio','trim|required|exact_length[9]');
 			$this->form_validation->set_rules('anuncio_descricao','Título do anúncio','trim|required|min_length[10]|max_length[5000]');
-			$this->form_validation->set_rules('fotos_produtos','Imagens do item','trim|required');
+			
+			
+			$fotos_produtos = $this->input->post('fotos_produtos');
+
+			//Para validarmos as fotos tipo array, temos que fazer desta forma
+			if(!$fotos_produtos){
+
+				$this->form_validation->set_rules('fotos_produtos','Imagens do item','trim|required');
+
+			}
 
 			if($this->form_validation->run()){
 
@@ -136,10 +200,10 @@ class Anuncios extends CI_Controller {
 				);
 		
 		
-				/*echo '<prev>';
+				echo '<prev>';
 				print_r($data);
 				echo "</pre>";
-				exit();*/
+				exit();
 		
 				$this->load->view('restrita/layout/header',$data);
 				$this->load->view('restrita/anuncios/core');
