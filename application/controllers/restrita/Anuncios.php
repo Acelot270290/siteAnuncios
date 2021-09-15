@@ -102,7 +102,7 @@ class Anuncios extends CI_Controller {
 
 			$this->form_validation->set_rules('anuncio_localizacao_cep','Localização do Anúncio','trim|required|exact_length[9]');
 			$this->form_validation->set_rules('anuncio_descricao','Título do anúncio','trim|required|min_length[10]|max_length[5000]');
-			$this->form_validation->set_rules('fotos_anuncios','Imagens do item','trim|required');
+			$this->form_validation->set_rules('fotos_produtos','Imagens do item','trim|required');
 
 			if($this->form_validation->run()){
 
@@ -124,6 +124,8 @@ class Anuncios extends CI_Controller {
 						'assets/sweetalert2/sweetalert2.all.min.js',// para confirma a exclusão da imagem do formulário
 						'assets/jquery-upload-file/js/jquery.uploadfile.js',
 						'assets/jquery-upload-file/js/anuncios.js',
+						'assets/mask/jquery.mask.min.js',
+						'assets/mask/custom.js',
 
 		
 					),
@@ -134,13 +136,13 @@ class Anuncios extends CI_Controller {
 				);
 		
 		
-				echo '<prev>';
+				/*echo '<prev>';
 				print_r($data);
 				echo "</pre>";
-				exit();
+				exit();*/
 		
 				$this->load->view('restrita/layout/header',$data);
-				$this->load->view('restrita/anuncios/index');
+				$this->load->view('restrita/anuncios/core');
 				$this->load->view('restrita/layout/footer');
 
 
