@@ -111,8 +111,8 @@
                       </div>
                     </div>
                     <select class="custom-select" name="anuncio_situacao">
-                      <option value="0" <?php echo($anuncio->anuncio_situacao == 1 ? 'selected' : ''); ?>>Novo</option>
-                      <option value="1" <?php echo($anuncio->anuncio_situacao == 0 ? 'selected' : ''); ?>>Usado</option>
+                      <option value="0" <?php echo($anuncio->anuncio_situacao == 0 ? 'selected' : ''); ?>>Novo</option>
+                      <option value="1" <?php echo($anuncio->anuncio_situacao == 1 ? 'selected' : ''); ?>>Usado</option>
                     </select>
                   </div>
                   <?php echo form_error('anuncio_situacao', '<div class="text-danger">','</div>'); ?>

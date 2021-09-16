@@ -62,7 +62,7 @@
 												<?php foreach($anuncios as $anuncio){ ?>
 
                           <tr>
-													<td><img alt="image" src="<?php echo base_url('uploads/anuncios/small' . $anuncio->foto_nome); ?>" width="35"></td>
+													<td><img alt="image" src="<?php echo base_url('uploads/anuncios/small/' . $anuncio->foto_nome); ?>" width="35"></td>
 													<td><?php echo $anuncio->anuncio_titulo ?></td>
 													<td><?php echo 'R$' .number_format($anuncio->anuncio_preco, 2) ?></td>
 													<td><?php echo $anuncio->categoria_pai_nome ?></td>

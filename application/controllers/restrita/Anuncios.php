@@ -264,6 +264,9 @@ class Anuncios extends CI_Controller {
 			}
 
 			if($this->form_validation->run()){
+			
+				
+
 
 						/*
 						*{
@@ -279,6 +282,7 @@ class Anuncios extends CI_Controller {
 					0: "597d24848ccf854c89ed3e82724211df.jpg",
 					1: "4814109dfe7f2775ea1353a8c1bcfb7e.jpg"
 					},
+			
 						*/
 						
 						$data = elements(
@@ -299,20 +303,74 @@ class Anuncios extends CI_Controller {
 
 						/*
 						*Compondo o endereço completo do anúncio a partir dos dados do objeto 'anuncio_endereco_sessao'
+						só fazemos isso se o cep informado no post for diferente na base de dados
 						*/
 
+						if($anuncio->anuncio_localizacao_cep != $data['anuncio_localizacao_cep']){
 
-						$anuncio_endereco_sessao = $this->session->userdata('anuncio_endereco_sessao');
-						$data['anuncio_logradouro'] = $anuncio_endereco_sessao->logradouro;
-						$data['anuncio_bairro'] = $anuncio_endereco_sessao->bairro;
-						$data['anuncio_cidade'] = $anuncio_endereco_sessao->localidade;
-						$data['anuncio_estado'] = $anuncio_endereco_sessao->uf;
+							
+							$anuncio_endereco_sessao = $this->session->userdata('anuncio_endereco_sessao');
+							$data['anuncio_logradouro'] = $anuncio_endereco_sessao->logradouro;
+							$data['anuncio_bairro'] = $anuncio_endereco_sessao->bairro;
+							$data['anuncio_cidade'] = $anuncio_endereco_sessao->localidade;
+							$data['anuncio_estado'] = $anuncio_endereco_sessao->uf;
+	
+							/*
+							*motando os meta-link endereço para pesquisa na hora publica
+							*/
+	
+							$data['anuncio_bairro_metalink'] = url_amigavel($data['anuncio_bairro']);
+							$data['anuncio_cidade_metalink'] = url_amigavel($data['anuncio_cidade']);
+	
+							/*
+							*Removemos da sessão anuncio_endereco_sessao, não precisamos mais dele
+							*/
+	
+							$this->session->unset('anuncio_endereco_sessao');
+
+
+
+						}
+
+						if(!$data['anuncio_categoria_pai_id']){
+							unset($data['anuncio_categoria_pai_id']);
+
+						}
+
+						if(!$data['anuncio_categoria_id']){
+							unset($data['anuncio_categoria_id']);
+
+						}
+
+						//removendo a virgula do preço para inserir no banco
+						$data['anuncio_preco'] = str_replace(',', '',$data['anuncio_preco']);
+
+						//Atualizando o anuncio no banco de dados
+						$this->core_model->update('anuncios', $data, array('anuncio_id'=>$anuncio->anuncio_id));
 
 						/*
-						*motando os meta-link endereço para pesquisa na hora publica
+						*removendo as imagens antigas e inserir as imagens novas
 						*/
 
-						$data['anuncio_bairro_metalink'] = url_amigavel();
+						$this->core_model->delete('anuncios_fotos', array('foto_anuncio_id'=>$anuncio->anuncio_id));
+
+
+						$fotos_produtos = $this->input->post('fotos_produtos');
+
+						//Contamos quantas imagens vieram no input
+						$total_fotos = count($fotos_produtos);
+
+						for($i = 0; $i < $total_fotos; $i++){
+							$data = array(
+								'foto_anuncio_id' => $anuncio->anuncio_id,
+								'foto_nome' => $fotos_produtos[$i],
+							);
+
+								$this->core_model->insert('anuncios_fotos', $data);
+
+						}
+
+						redirect('restrita/' . $this->router->fetch_class());
 
 
 
