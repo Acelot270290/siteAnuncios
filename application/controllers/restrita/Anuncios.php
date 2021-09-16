@@ -370,12 +370,56 @@ class Anuncios extends CI_Controller {
 
 						}
 
-						//Chegamos no trecho  que enviamos o email para o anunciante que o seu email fpo enviado
+						//Chegamos no trecho  que enviamos o email para o anunciante que o seu email foi enviado
 
+						//só enviamos um email se o anúncio for publicado
+						if($this->input->post('anuncio_publicado') == 1){
+
+							/*
+							*montamos um objeto com todos os dados anunciante
+							*/
+
+							$anunciante = $this->ion_auth->user($anuncio->anuncio_user_id)->row();
+
+
+						/*
+							*montamos um objeto com todos os dados site
+							*/
+							$sistema = info_header_footer();
+							$this->email->set_mailtype("html");
+							$this->email->set_newline("\r\n");
+							$from_email = $sistema->sistema_email;
+							$to_email = $anunciante->email;
+
+							$this->email->from($from_email, $sistema->sistema_nome_fantasia);
+							$this->email->to($to_email);
+							$this->email->subject('Boa noticia! Seu anúncio foi publicado');
+							$this->email->message('Olá ' . $anunciante->first_name . ' ' . $anunciante->last_name . ' seu anúncio foi publicado<br><br>'. '<strong>Título do anúncio: </strong>&nbsp;' . $this->input->post('anuncio_titulo'));
+
+							$this->load->library('encryption'); //evita o envio de span
+
+							if($this->email->send(FALSE)){
+
+								/*
+								* O email foi enviado
+								*/
+
+
+							}else{
+
+								/*
+								* erro de enviar o email e jogamos no flashdata para verificar os erros
+								*/
+
+								$this->session->set_flashdata("erro", $this->email->print_debugger('header'));
+
+
+							}
+
+						}		
+
+								
 						redirect('restrita/' . $this->router->fetch_class());
-
-
-
 			}else{
 
 				//Erros de Validação
