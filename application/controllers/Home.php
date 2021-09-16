@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 		);
 			
 		
-		$this->load->view('web/layout/header');
+		$this->load->view('web/layout/header',$data);
 		$this->load->view('web/home/index');
 		$this->load->view('web/layout/footer');
 	}
