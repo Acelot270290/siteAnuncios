@@ -94,6 +94,70 @@ class Anuncios extends CI_Controller {
 			exit('Ação não permitida');
 		}
 
+		$this->form_validation->set_rules('anuncio_localizacao_cep', 'Localização do Anúncio','trim|required|exact_length[9]');
+
+		/*
+		*Retornarar os dados para o javascript anuncios.js
+		*/
+		$retorno = array();
+
+
+		if($this->form_validation->run()){
+
+			//Cep Validado quanto ao seu formato passamos para  o inicio da requisição
+
+
+			/*
+			*https://viacep.com.br/ws/25615131/json/
+			*/
+
+			// formatando o cep de acordo com a api via CEP exemplo acima
+
+			$cep = str_replace("-", "", $this->input->post('anuncio_localizacao_cep'));
+
+			$url = "https://viacep.com.br/ws/";
+			$url .= $cep;
+			$url .= "/json/";
+
+			$jsonsite = file_get_contents($url);
+			$resultado_requisicao = json_decode($jsonsite);
+
+			
+
+			if(isset($resultado_requisicao->erro)){
+				
+				$retorno['erro'] = 3;
+				$retorno['anuncio_localizacao_cep'] = '<span class="text-danger"> Por Favor informe um CEP válido</span>';
+
+			}else{
+
+				//print_r($resultado_requisicao);
+				//Agora cetamos na sessão do objeto em anuncios para recuperar no método core
+
+
+				$this->session->set_userdata('anuncio_endereco_sessao', $resultado_requisicao);
+
+
+				$retorno['erro'] = 0;
+				$retorno['anuncio_localizacao_cep'] = '<span class="text-info"> Seu CEP  foi validado</span>';
+			}
+
+
+		}else{
+
+		// Erros de Validação
+
+		$retorno['erro'] = 3;
+		$retorno['anuncio_localizacao_cep'] = form_error('anuncio_localizacao_cep', '<div class="text-danger">','</div>');
+
+		}
+
+		/*
+		*Retorno os dados contidos no retorno
+
+		*/
+
+		echo json_encode($retorno);
 
 
 	}
@@ -203,6 +267,8 @@ class Anuncios extends CI_Controller {
 
 				print_r($this->input->post());
 				exit();
+
+
 
 			}else{
 
