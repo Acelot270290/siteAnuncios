@@ -127,7 +127,7 @@ class Anuncios extends CI_Controller {
 			if(isset($resultado_requisicao->erro)){
 				
 				$retorno['erro'] = 3;
-				$retorno['anuncio_localizacao_cep'] = '<span class="text-danger"> Por Favor informe um CEP válido</span>';
+				$retorno['anuncio_localizacao_cep'] = '<span class="text-danger"> Por favor informe um CEP válido</span>';
 
 			}else{
 
@@ -265,8 +265,54 @@ class Anuncios extends CI_Controller {
 
 			if($this->form_validation->run()){
 
-				print_r($this->input->post());
-				exit();
+						/*
+						*{
+					anuncio_titulo: "Controle Ps4",
+					anuncio_preco: "100.00",
+					anuncio_categoria_pai_id: "",
+					anuncio_categoria_id: "",
+					anuncio_publicado: "0",
+					anuncio_situacao: "0",
+					anuncio_localizacao_cep: "25615-131",
+					anuncio_descricao: "Controle Ps4",
+					fotos_produtos: {
+					0: "597d24848ccf854c89ed3e82724211df.jpg",
+					1: "4814109dfe7f2775ea1353a8c1bcfb7e.jpg"
+					},
+						*/
+						
+						$data = elements(
+
+							array(
+
+								'anuncio_titulo',
+								'anuncio_preco',
+								'anuncio_categoria_pai_id',
+								'anuncio_categoria_id',
+								'anuncio_publicado',
+								'anuncio_situacao',
+								'anuncio_localizacao_cep',
+								'anuncio_descricao',
+
+							), $this->input->post()
+						);
+
+						/*
+						*Compondo o endereço completo do anúncio a partir dos dados do objeto 'anuncio_endereco_sessao'
+						*/
+
+
+						$anuncio_endereco_sessao = $this->session->userdata('anuncio_endereco_sessao');
+						$data['anuncio_logradouro'] = $anuncio_endereco_sessao->logradouro;
+						$data['anuncio_bairro'] = $anuncio_endereco_sessao->bairro;
+						$data['anuncio_cidade'] = $anuncio_endereco_sessao->localidade;
+						$data['anuncio_estado'] = $anuncio_endereco_sessao->uf;
+
+						/*
+						*motando os meta-link endereço para pesquisa na hora publica
+						*/
+
+						$data['anuncio_bairro_metalink'] = url_amigavel();
 
 
 
@@ -290,6 +336,7 @@ class Anuncios extends CI_Controller {
 						'assets/mask/jquery.mask.min.js',
 						'assets/mask/custom.js',
 						'assets/bundles/select2/dist/js/select2.full.min.js',
+						'assets/js/anuncios.js',
 
 		
 					),

@@ -78,7 +78,7 @@
                         <i class="fas fa-check-circle text-info"></i>
                       </div>
                     </div>
-                    <select id ="anuncio_anuncio" class="form-control select2" name="anuncio_anuncio_id">
+                    <select id ="anuncio_categoria" class="form-control select2" name="anuncio_categoria_id">
 										<option value="">Escolha uma categoria...</option>
                     <?php echo form_error('anuncio_anuncio_id', '<div class="text-danger">','</div>'); ?>
                     </select>
@@ -128,6 +128,7 @@
                     <input type="text" class="form-control cep" name="anuncio_localizacao_cep" value="<?php echo (isset($anuncio) ? $anuncio->anuncio_localizacao_cep : set_value('anuncio_localizacao_cep')); ?>">
                   </div>
                   <?php echo form_error('anuncio_localizacao_cep', '<div class="text-danger">','</div>'); ?>
+									<div id="anuncio_localizacao_cep"></div>
                 </div>
               </div>
               <div class="form-row">
