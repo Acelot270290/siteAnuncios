@@ -370,6 +370,8 @@ class Anuncios extends CI_Controller {
 
 						}
 
+						//Chegamos no trecho  que enviamos o email para o anunciante que o seu email fpo enviado
+
 						redirect('restrita/' . $this->router->fetch_class());
 
 
