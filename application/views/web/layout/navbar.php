@@ -13,16 +13,24 @@
             </div>
             <div class="col-lg-5 col-md-7 col-xs-12">
 
-              <div class="roof-social float-right">
-                <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
-                <a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a>
-                <a class="google" href="#"><i class="lni-google-plus"></i></a>
-              </div>
+   
               <div class="header-top-right float-right">
-                <a href="<?php echo base_url('login'); ?>" class="header-top-button"><i class="lni-lock"></i> Log In</a> |
-                <a href="register.html" class="header-top-button"><i class="lni-pencil"></i> Register</a>
+
+							<?php $logado = $this->ion_auth->logged_in(); ?>
+
+							<?php if(!$logado){ ?>
+
+                <a href="<?php echo base_url('login'); ?>" class="header-top-button"><i class="lni-lock"></i> Login</a> |
+								<a href="register.html" class="header-top-button"><i class="lni-pencil"></i> Registro</a>
+								<?php }else{?>
+
+									<?php $anunciante = $this->ion_auth->user()->row(); ?>
+
+									<a href="<?php echo base_url('login/logout'); ?>" class="header-top-button"><i class="lni-shift-left"></i> sair</a> |
+									<a title="Olá <?php echo $anunciante->first_name; ?> gerencie sua conta" href="<?php echo base_url('conta'); ?>" class="header-top-button"><img class="rounded-circle" width="30" src="<?php echo base_url('uploads/usuarios/small/'.$anunciante->user_foto); ?>"> Minha conta</a>
+
+									<?php } ?>
+                
               </div>
             </div>
           </div>
@@ -37,7 +45,7 @@
             <span class="lni-menu"></span>
             <span class="lni-menu"></span>
             </button>
-            <a href="index-2.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+            <a href="<?php echo base_url('/'); ?> " class="navbar-brand"><img src="<?php echo base_url('public/web/assets/img/logo.png'); ?>" alt=""></a>
           </div>
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto w-100 justify-content-center">

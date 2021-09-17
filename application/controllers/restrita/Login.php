@@ -26,6 +26,7 @@ class Login extends CI_Controller{
 
 	public function auth(){
 
+
 		/*email: "alan.diniz@ucp.br",
 		password: "Acelot.270290",
 		remember: "on"*/
