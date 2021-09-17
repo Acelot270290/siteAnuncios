@@ -4,15 +4,13 @@
           <div class="row">
             <div class="col-lg-4 col-md-4 col-xs-6 col-mb-12">
               <div class="widget">
-                <div class="footer-logo"><img src="assets/img/logo.png" alt=""></div>
+                <div class="footer-logo"><img src="<?php echo base_url(); ?> " alt=""></div>
                 <div class="textwidget">
                   <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt consectetur, adipisci velit.</p>
                 </div>
                 <ul class="mt-3 footer-social">
                   <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
-                  <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
-                  <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
-                  <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+                  <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>                  <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -85,5 +83,56 @@
     <script src="<?php echo base_url('public/web/'); ?>assets/js/form-validator.min.js"></script>
     <script src="<?php echo base_url('public/web/'); ?>assets/js/contact-form-script.min.js"></script>
     <script src="<?php echo base_url('public/web/'); ?>assets/js/summernote.js"></script>
+	<script src="<?php echo base_url('public/restrita/assets/js/util.js'); ?>"></script>
+  	<script src="<?php echo base_url('public/restrita/assets/bootbox/bootbox.min.js'); ?>"></script>
+
+
+	<?php if(isset($scripts)){ ?>
+	
+	<?php foreach($scripts as $script){ ?>
+		
+<!-- Carregando os scripts dinamicamente pelo controller usuarios -->
+
+    <script src="<?php echo base_url('public/restrita/' . $script); ?>"></script>
+
+
+	<?php } ?>
+
+<?php } ?>
+
+<script>
+
+	$('.delete').on('click', function(event){
+
+		event.preventDefault();
+
+		var redirect = $(this).attr('href');
+
+		bootbox.confirm({
+		
+		title: $(this).attr('data-confirm'),
+		centerVertical:true,
+    message: "<p class='text-danger'>Está ação não poderá ser desfeita</p>",
+    buttons: {
+        confirm: {
+            label: 'Sim',
+            className: 'btn-success'
+        },
+        cancel: {
+            label: 'Não, cancelar',
+            className: 'btn-danger'
+        }
+    },
+    callback: function (result) {
+        if(result){
+					window.location.href = redirect;
+				}
+    }
+});
+
+	});
+
+
+</script>
   </body>
 </html>
