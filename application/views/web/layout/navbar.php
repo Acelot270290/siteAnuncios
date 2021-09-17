@@ -4,12 +4,15 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-7 col-md-5 col-xs-12">
+						<?php $sistema = info_header_footer();?>
+
               <ul class="list-inline">
-                <li><i class="lni-phone"></i> +0123 456 789</li>
-                <li><i class="lni-envelope"></i> <a href="http://preview.uideck.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d4e484d4d524f497d5a505c5451135e5250">[email&#160;protected]</a></li>
+                <li><i class="lni-phone"></i> <?php echo $sistema->sistema_telefone_fixo; ?></li>
+                <li><i class="lni-envelope"></i><?php echo $sistema->sistema_email; ?> </li>
               </ul>
             </div>
             <div class="col-lg-5 col-md-7 col-xs-12">
+
               <div class="roof-social float-right">
                 <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
                 <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
@@ -18,7 +21,7 @@
                 <a class="google" href="#"><i class="lni-google-plus"></i></a>
               </div>
               <div class="header-top-right float-right">
-                <a href="login.html" class="header-top-button"><i class="lni-lock"></i> Log In</a> |
+                <a href="<?php echo base_url('login'); ?>" class="header-top-button"><i class="lni-lock"></i> Log In</a> |
                 <a href="register.html" class="header-top-button"><i class="lni-pencil"></i> Register</a>
               </div>
             </div>
