@@ -9,7 +9,10 @@ class Home extends CI_Controller {
 
 		$data = array(
 			'titulo' => 'Seja bem Vindo(a)',
+			
 		);
+
+
 			
 		
 		$this->load->view('web/layout/header',$data);
