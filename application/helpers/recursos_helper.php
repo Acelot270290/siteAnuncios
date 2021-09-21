@@ -83,3 +83,15 @@ function info_header_footer(){
 
 	return $sistema;
 }
+
+/*
+*Recupera as informações do anunciante do sidebar
+*/
+function get_info_anunciante(){
+
+	$CI = &get_instance();
+
+	$anunciante = $CI->ion_auth->user()->row();
+
+	return $anunciante;
+}

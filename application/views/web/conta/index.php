@@ -3,75 +3,12 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
-        <aside>
-          <div class="sidebar-box">
-            <div class="user">
-              <figure>
-                <img width="80" src="<?php echo base_url('uploads/usuarios/small/'. $anunciante->user_foto); ?>"alt="">
-              </figure>
-              <div class="usercontent">
-                <h3>Olá <?php echo $anunciante->first_name; ?></h3>
-                <h4>Anunciante</h4>
-              </div>
-            </div>
-            <nav class="navdashboard">
-              <ul>
-                <li>
-                  <a href="<?php echo base_url('conta'); ?>">
-                  <i class="lni-dashboard"></i>
-                  <span>Dashboard</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="account-profile-setting.html">
-                  <i class="lni-cog"></i>
-                  <span>Profile Settings</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="account-myads.html">
-                  <i class="lni-layers"></i>
-                  <span>My Ads</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                  <i class="lni-envelope"></i>
-                  <span>Offers/Messages</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="payments.html">
-                  <i class="lni-wallet"></i>
-                  <span>Payments</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="account-favourite-ads.html">
-                  <i class="lni-heart"></i>
-                  <span>My Favourites</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="account-profile-setting.html">
-                  <i class="lni-star"></i>
-                  <span>Privacy Settings</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                  <i class="lni-enter"></i>
-                  <span>Logout</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </aside>
+
+			<?php $this->load->view('web/conta/sidebar'); ?>
       </div>
       <div class="col-sm-12 col-md-8 col-lg-9">
         <div class="row page-content">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
             <div class="inner-box">
               <div class="dashboard-box">
                 <h2 class="dashbord-title">Meus Dados</h2>
