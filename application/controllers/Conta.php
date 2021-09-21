@@ -184,15 +184,34 @@ class Conta extends CI_Controller {
 		$anunciante = get_info_anunciante();
 
 		$data = array(
-			'titulo' => 'Gerenciar minha conta',
-			'anunciante' => $anunciante,
-			'total_anuncios_cadastrados'=>$this->core_model->count_all_results('anuncios', array('anuncio_user_id'=> $anunciante->id)),
+			'titulo' => 'Meus Anúncios',
 
+			'styles'=>array(
+				'assets/bundles/datatables/datatables.min.css',
+				'assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css',
+			),
+
+			'scripts'=>array(
+				'assets/bundles/datatables/datatables.min.js',
+				'assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js',
+				'assets/bundles/jquery-ui/jquery-ui.min.js',
+				'assets/js/page/datatables.js',
+
+			),
 		);
-	
+
+		//só enviamos para a view se existir pelo menos um anuncio cadastrado do anunciante logado
+		if($anuncios = $this->anuncios_model->get_all($anunciante->id)){
+			$data['anuncios'] = $anuncios;
+		}
+		
+
+
+		
+
 		
 		$this->load->view('web/layout/header',$data);
-		$this->load->view('web/conta/index');
+		$this->load->view('web/conta/anuncios');
 		$this->load->view('web/layout/footer');
 	}
 
