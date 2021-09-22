@@ -9,6 +9,26 @@
 				 <?php if(isset($anuncios)){ ?>
 
 					<div class="col-sm-12 col-md-8 col-lg-9">
+					<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
+                      <div class="alert alert-success bg-success text-white alert-dismissible show fade">
+                        <div class="alert-body">
+                          <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                          </button>
+                          <?php echo $mensagem ?>
+                        </div>
+                      </div>
+                      <?php } ?>
+                      <?php if($mensagem = $this->session->flashdata('erro')){ ?>
+                      <div class="alert alert-danger bg-danger text-white alert-dismissible show fade">
+                        <div class="alert-body">
+                          <button class="close" data-dismiss="alert">
+                          <span>&times;</span>
+                          </button>
+                          <?php echo $mensagem ?>
+                        </div>
+                      </div>
+                      <?php } ?>
             <div class="page-content">
                <div class="inner-box">
                   <div class="dashboard-box">

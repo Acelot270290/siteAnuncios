@@ -222,8 +222,10 @@ class Conta extends CI_Controller {
 		$anuncio_id = (int) $anuncio_id;
 
 		if(!$anuncio_id){
+
 			//Cadastrando
 		}else{
+
 			//editando...
 
 
@@ -239,6 +241,18 @@ class Conta extends CI_Controller {
 
 
 		}else{
+
+			/*
+			*Garantimos que o anunciante só pode editar o seu
+			*/
+
+			if($anuncio->anuncio_user_id != $this->session->userdata('user_id')){
+
+	
+				$this->session->flashdata('erro','Este Anúncio não está atribuido a sua conta de anunciante.');
+	
+				redirect($this->router->fetch_class().'/anuncios');
+			}
 
 			//Anuncio existe e passamos para as validações
 
@@ -270,9 +284,7 @@ class Conta extends CI_Controller {
 
 			if($this->form_validation->run()){
 
-				print_r($this->input->post());
-				exit();
-			
+		
 				
 						
 						$data = elements(
@@ -380,7 +392,7 @@ class Conta extends CI_Controller {
 							$this->email->from($from_email, $sistema->sistema_nome_fantasia);
 							$this->email->to($to_email);
 							$this->email->subject('Falta muito pouco para o seu anúncio ser publicado!');
-							$this->email->message('Olá ' . $anunciante->first_name . ' ' . $anunciante->last_name . ' seu anúncio está em análise e embre será publicado<br><br>'
+							$this->email->message('Olá ' . $anunciante->first_name . ' ' . $anunciante->last_name . ' seu anúncio está em análise e em breve será publicado<br><br>'
 							.'Assim que isso ocorrer enviaremos um e-mail informando você<br>'
 							.'<strong>Título do anúncio: </strong>&nbsp;' . $this->input->post('anuncio_titulo'));
 
@@ -416,7 +428,7 @@ class Conta extends CI_Controller {
 		
 					'styles'=>array(
 						'assets/jquery-upload-file/css/uploadfile.css',
-						'assets/bundles/select2/dist/css/select2.min.css',
+						'assets//select2/select2.min.css',
 					),
 		
 					'scripts'=>array(
@@ -425,7 +437,7 @@ class Conta extends CI_Controller {
 						'assets/jquery-upload-file/js/anuncios.js',
 						'assets/mask/jquery.mask.min.js',
 						'assets/mask/custom.js',
-						'assets/bundles/select2/dist/js/select2.full.min.js',
+						'assets/select2/select2.min.js',
 						'assets/js/anuncios.js',
 
 		

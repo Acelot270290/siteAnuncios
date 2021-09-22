@@ -153,10 +153,10 @@
                   <div id="uploaded_image">
                     <?php foreach($fotos_anuncio as $foto){ ?>
                     <ul style="list-style: none; display: inline-block;">
-                      <li>
+										<li class="text-center">
                         <img src="<?php echo base_url('uploads/anuncios/small/' .$foto->foto_nome);  ?>" width="80" class="img-thumbnail mr-1 mb-2">
-                        <input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_nome; ?>"></input>
-                        <button class="btn btn-sm btn-danger btn-block btn-icon  btn-remove"><i class="fas fa-times"></i></button>
+                        <input type="hidden" name="fotos_produtos[]" value="<?php echo $foto->foto_nome; ?>"></input><br>
+                        <button class="btn btn-danger btn-remove" style="width: 45px;">X</button>
                       </li>
                     </ul>
                     <?php } ?>

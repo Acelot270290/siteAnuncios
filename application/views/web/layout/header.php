@@ -36,6 +36,25 @@
 				padding: 0;
 				padding-left: 10px;
 			}
+
+			.select2-container--default .select2-selection--single {
+				border: 1px solid #e5e5e5;
+				border-radius: 4px;
+				font-weight: 400;
+			}
+
+			.select2-container .select2-selection--single{
+				height: 30px;
+			}
+
+			.select2-container--default .select2-selection--single .select2-selection__rendered{
+				line-height: 30px;
+			}
+
+			.select2-container--default .select2-selection--single .select2-selection__arrow{
+				top: 5px;
+			}
+
 		</style>
 
 

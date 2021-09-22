@@ -83,7 +83,7 @@
     <script src="<?php echo base_url('public/web/'); ?>assets/js/form-validator.min.js"></script>
     <script src="<?php echo base_url('public/web/'); ?>assets/js/contact-form-script.min.js"></script>
     <script src="<?php echo base_url('public/web/'); ?>assets/js/summernote.js"></script>
-	<script src="<?php echo base_url('public/restrita/assets/js/util.js'); ?>"></script>
+  	<script src="<?php echo base_url('public/restrita/assets/js/util.js'); ?>"></script>
   	<script src="<?php echo base_url('public/restrita/assets/bootbox/bootbox.min.js'); ?>"></script>
 
 
@@ -101,6 +101,11 @@
 <?php } ?>
 
 <script>
+
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+
 
 	$('.delete').on('click', function(event){
 

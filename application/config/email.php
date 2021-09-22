@@ -15,9 +15,9 @@ defined('BASEPATH') OR exit('Ação não permitida');
 
 $config = array();
 $config['protocol'] = 'smtp';
-$config['smtp_host'] = 'ssl://smtp.hostinger.com';
+$config['smtp_host'] = 'ssl://smtp.gmail.com';
 $config['smtp_port'] = 465;
-$config['smtp_user'] = 'contato@infoanuncios.com.br';
-$config['smtp_pass'] = 'Acelot.270290';
+$config['smtp_user'] = 'alan.diniz@ucp.br';
+$config['smtp_pass'] = '14206183775';
 $config['mailtype'] = 'text';
 $config['newline'] = '\r\n'; //sem está linha não funcionar bizarro rs
