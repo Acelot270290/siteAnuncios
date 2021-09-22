@@ -215,6 +215,249 @@ class Conta extends CI_Controller {
 		$this->load->view('web/layout/footer');
 	}
 
+	public function core($anuncio_id=NULL){
+
+		//Função só será utilizada para cadastrar ou editar um anuncio
+
+		$anuncio_id = (int) $anuncio_id;
+
+		if(!$anuncio_id){
+			//Cadastrando
+		}else{
+			//editando...
+
+
+					//Verificamos se  anuncio id na base de dados
+
+		if(!$anuncio = $this->anuncios_model->get_by_id(array('anuncio_id'=> $anuncio_id))){
+
+			//Cadastrando
+
+			$this->session->flashdata('erro','Anúncio não encontrado');
+
+			redirect($this->router->fetch_class().'/anuncios');
+
+
+		}else{
+
+			//Anuncio existe e passamos para as validações
+
+			$this->form_validation->set_rules('anuncio_titulo','Título do anúncio','trim|required|min_length[4]|max_length[240]');
+			$this->form_validation->set_rules('anuncio_preco','Preço', 'trim|required');
+			$this->form_validation->set_rules('anuncio_situacao','Situação do produto', 'trim|required');
+
+			//Verificamos se a categoria Pai veio no post
+			$anuncio_categoria_pai_id = $this->input->post('anuncio_categoria_pai_id');
+
+			if($anuncio_categoria_pai_id){
+
+			$this->form_validation->set_rules('anuncio_categoria_id','Subcategoria', 'trim|required');
+
+			}
+
+			$this->form_validation->set_rules('anuncio_localizacao_cep','Localização do Anúncio','trim|required|exact_length[9]');
+			$this->form_validation->set_rules('anuncio_descricao','Título do anúncio','trim|required|min_length[10]|max_length[5000]');
+			
+			
+			$fotos_produtos = $this->input->post('fotos_produtos');
+
+			//Para validarmos as fotos tipo array, temos que fazer desta forma
+			if(!$fotos_produtos){
+
+				$this->form_validation->set_rules('fotos_produtos','Imagens do item','trim|required');
+
+			}
+
+			if($this->form_validation->run()){
+
+				print_r($this->input->post());
+				exit();
+			
+				
+						
+						$data = elements(
+
+							array(
+
+								'anuncio_titulo',
+								'anuncio_preco',
+								'anuncio_categoria_pai_id',
+								'anuncio_categoria_id',
+								'anuncio_publicado',
+								'anuncio_situacao',
+								'anuncio_localizacao_cep',
+								'anuncio_descricao',
+
+							), $this->input->post()
+						);
+
+						/*
+						*Precisamos validar novamente o anuncio portando deixamos o mesmo não publicado até aprovação
+						*/
+
+						$data['anuncio_publicado'] = 0;
+
+						/*
+						*Compondo o endereço completo do anúncio a partir dos dados do objeto 'anuncio_endereco_sessao'
+						só fazemos isso se o cep informado no post for diferente na base de dados
+						*/
+
+						if($anuncio->anuncio_localizacao_cep != $data['anuncio_localizacao_cep']){
+
+							
+							$anuncio_endereco_sessao = $this->session->userdata('anuncio_endereco_sessao');
+							$data['anuncio_logradouro'] = $anuncio_endereco_sessao->logradouro;
+							$data['anuncio_bairro'] = $anuncio_endereco_sessao->bairro;
+							$data['anuncio_cidade'] = $anuncio_endereco_sessao->localidade;
+							$data['anuncio_estado'] = $anuncio_endereco_sessao->uf;
+	
+							/*
+							*motando os meta-link endereço para pesquisa na hora publica
+							*/
+	
+							$data['anuncio_bairro_metalink'] = url_amigavel($data['anuncio_bairro']);
+							$data['anuncio_cidade_metalink'] = url_amigavel($data['anuncio_cidade']);
+	
+							/*
+							*Removemos da sessão anuncio_endereco_sessao, não precisamos mais dele
+							*/
+	
+							$this->session->unset('anuncio_endereco_sessao');
+
+
+
+						}
+
+						if(!$data['anuncio_categoria_pai_id']){
+							unset($data['anuncio_categoria_pai_id']);
+
+						}
+
+						if(!$data['anuncio_categoria_id']){
+							unset($data['anuncio_categoria_id']);
+
+						}
+
+						//removendo a virgula do preço para inserir no banco
+						$data['anuncio_preco'] = str_replace(',', '',$data['anuncio_preco']);
+
+						//Atualizando o anuncio no banco de dados
+						$this->core_model->update('anuncios', $data, array('anuncio_id'=>$anuncio->anuncio_id));
+
+						/*
+						*removendo as imagens antigas e inserir as imagens novas
+						*/
+
+						$this->core_model->delete('anuncios_fotos', array('foto_anuncio_id'=>$anuncio->anuncio_id));
+
+
+						$fotos_produtos = $this->input->post('fotos_produtos');
+
+						//Contamos quantas imagens vieram no input
+						$total_fotos = count($fotos_produtos);
+
+						for($i = 0; $i < $total_fotos; $i++){
+							$data = array(
+								'foto_anuncio_id' => $anuncio->anuncio_id,
+								'foto_nome' => $fotos_produtos[$i],
+							);
+
+								$this->core_model->insert('anuncios_fotos', $data);
+
+						}
+
+						$anunciante = $this->ion_auth->user($anuncio->anuncio_user_id)->row();
+
+							/*
+							*montamos um objeto com todos os dados site
+							*/
+							$sistema = info_header_footer();
+							$this->email->set_mailtype("html");
+							$this->email->set_newline("\r\n");
+							$from_email = $sistema->sistema_email;
+							$to_email = $anunciante->email;
+
+							$this->email->from($from_email, $sistema->sistema_nome_fantasia);
+							$this->email->to($to_email);
+							$this->email->subject('Falta muito pouco para o seu anúncio ser publicado!');
+							$this->email->message('Olá ' . $anunciante->first_name . ' ' . $anunciante->last_name . ' seu anúncio está em análise e embre será publicado<br><br>'
+							.'Assim que isso ocorrer enviaremos um e-mail informando você<br>'
+							.'<strong>Título do anúncio: </strong>&nbsp;' . $this->input->post('anuncio_titulo'));
+
+							$this->load->library('encryption'); //evita o envio de span
+
+							if($this->email->send(FALSE)){
+
+								/*
+								* O email foi enviado
+								*/
+
+
+							}else{
+
+								/*
+								* erro de enviar o email e jogamos no flashdata para verificar os erros
+								*/
+
+								$this->session->set_flashdata("erro", $this->email->print_debugger('header'));
+
+
+							}
+
+								
+						redirect($this->router->fetch_class().'/anuncios');
+			}else{
+
+				//Erros de Validação
+
+				$data = array(
+					'titulo'=>' Editar Anúncio',
+					
+		
+					'styles'=>array(
+						'assets/jquery-upload-file/css/uploadfile.css',
+						'assets/bundles/select2/dist/css/select2.min.css',
+					),
+		
+					'scripts'=>array(
+						'assets/sweetalert2/sweetalert2.all.min.js',// para confirma a exclusão da imagem do formulário
+						'assets/jquery-upload-file/js/jquery.uploadfile.js',
+						'assets/jquery-upload-file/js/anuncios.js',
+						'assets/mask/jquery.mask.min.js',
+						'assets/mask/custom.js',
+						'assets/bundles/select2/dist/js/select2.full.min.js',
+						'assets/js/anuncios.js',
+
+		
+					),
+					'anuncio'=> $anuncio,
+					'fotos_anuncio' => $this->core_model->get_all('anuncios_fotos', array('foto_anuncio_id'=>$anuncio_id)),
+					'categorias_pai'=>$this->anuncios_model->get_all_categorias_pai(),
+
+				);
+		
+		
+				/*echo '<prev>';
+				print_r($data);
+				echo "</pre>";
+				exit();*/
+		
+				$this->load->view('web/layout/header',$data);
+				$this->load->view('web/conta/core');
+				$this->load->view('web/layout/footer');
+
+
+			}
+
+
+
+
+		}
+
+		}
+
+	}
+
 	public function valida_cpf($cpf) {
 
         if ($this->input->post('usuario_id')) {
