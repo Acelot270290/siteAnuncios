@@ -21,7 +21,7 @@
 							<?php if(!$logado){ ?>
 
                 <a href="<?php echo base_url('login'); ?>" class="header-top-button"><i class="lni-lock"></i> Login</a> |
-								<a href="register.html" class="header-top-button"><i class="lni-pencil"></i> Registro</a>
+								<a href="<?php echo base_url('registrar'); ?>" class="header-top-button"><i class="lni-pencil"></i> Registro</a>
 								<?php }else{?>
 
 									<?php $anunciante = $this->ion_auth->user()->row(); ?>

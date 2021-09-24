@@ -10,6 +10,18 @@
                   Faça o Login
                </h3>
                <form role="form" class="login-form" action="<?php echo base_url('login/auth') ?>" method="POST">
+					<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
+
+							<div class="alert alert-success bg-success text-white alert-dismissible show fade">
+									<div class="alert-body">
+										<button class="close" data-dismiss="alert">
+											<span>&times;</span>
+										</button>
+										<?php echo $mensagem ?>
+									</div>
+								</div>
+
+								<?php } ?>
 					<?php if($mensagem = $this->session->flashdata('erro')){ ?>
 						
 						<div class="alert alert-danger bg-danger text-white alert-dismissible show fade">

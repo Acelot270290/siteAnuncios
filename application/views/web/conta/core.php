@@ -27,7 +27,27 @@
 									?>
 
                     <form role="form" class="login-form" method="POST" action="<?php echo base_url('conta/core/'.$anuncio_id); ?>">
-                      <?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
+
+										<?php if(isset($anuncio)){ ?>
+
+											<?php if($anuncio->anuncio_publicado == 0){ ?>
+
+												<div class="alert alert-info alert-dismissible fade show" role="alert">
+											<strong>Importante!</strong> Seu anúncio não está publicado no momento, pois está em análise com a equipe responsável e em breve será aprovado!
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+												</div>
+
+											
+
+												<?php }?>
+										<?php }?>
+                     
+										
+										
+										
+										<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
                       <div class="alert alert-success bg-success text-white alert-dismissible show fade">
                         <div class="alert-body">
                           <button class="close" data-dismiss="alert">
@@ -48,7 +68,7 @@
                       </div>
                       <?php } ?>
                       <div class="form-row">
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                           <label>Código Anúncio</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -59,7 +79,7 @@
                             <input type="text" class="form-control" name="anuncio_codigo" value="<?php echo (isset($anuncio) ? $anuncio->anuncio_codigo : $codigo_gerado); ?>"readonly="">
                           </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-5">
                           <label>Título do Anúncio</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -87,8 +107,11 @@
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label class="mr-3">Anúncio Principal</label>
-                          <span class="text-info small">Atual:<?php echo $anuncio->categoria_pai_nome; ?></span>
-                          <div class="input-group">
+											<?php if(isset($anuncio)){  ?>
+												<span class="text-info small">Atual:<?php echo $anuncio->categoria_pai_nome; ?></span>
+
+												<?php } ?>
+													<div class="input-group">
                             <div class="input-group-prepend">
                             
                             </div>
@@ -103,7 +126,11 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label class="mr-3">Subcategoria</label>
-                          <span class="text-info small">Atual:<?php echo $anuncio->categoria_nome; ?></span>
+													<?php if(isset($anuncio)){  ?>
+														<span class="text-info small">Atual:<?php echo $anuncio->categoria_nome; ?></span>
+
+
+												<?php } ?>
                           <div class="input-group">
                             <div class="input-group-prepend">
                             </div>
@@ -155,7 +182,7 @@
 											<div class="form-row">
 											<div class="form-group col-md-12">
 												<label>Descrição do Anúncio</label>
-												<textarea class="form-control" name="anuncio_descricao" style="min-height: 200px;"><?php echo $anuncio->anuncio_descricao; ?></textarea>
+												<textarea class="form-control" name="anuncio_descricao" style="min-height: 200px;"><?php echo (isset($anuncio) ? $anuncio->anuncio_descricao : set_value('anuncio_descricao') ); ?></textarea>
 												<?php echo form_error('anuncio_descricao', '<div class="text-danger">','</div>'); ?>
                 			</div>
 											</div>
@@ -170,8 +197,9 @@
                 </div>
               </div>
               <div class="form_row">
+								
                 <div class="form-group col-md-12">
-                  <div id="uploaded_image">
+								<?php if(isset($anuncio)){ ?>
                     <?php foreach($fotos_anuncio as $foto){ ?>
                     <ul style="list-style: none; display: inline-block;">
                       <li class="text-center">
@@ -181,8 +209,15 @@
                       </li>
                     </ul>
                     <?php } ?>
-                  </div>
+											
+											<?php }else{ ?>
+
+												<div id="uploaded_image">
+											</div>
+                  
+									<?php } ?>
                 </div>
+								
               </div>
               <div class="form-row">
                 <?php if(isset($anuncio)){ //Validando o id do user ?>

@@ -33,6 +33,8 @@
                <div class="inner-box">
                   <div class="dashboard-box">
                      <h2 class="dashbord-title"><?php echo $titulo; ?></h2>
+							<a class="btn btn-common log-btn float-right" href="<?php echo base_url($this->router->fetch_class().'/core/'); ?>">Novo Anúncio</a>
+
                   </div>
                   <div class="dashboard-wrapper">
                      
@@ -70,7 +72,7 @@
                                  <div class="btns-actions">
                                     <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
                                     <a class="btn-action btn-edit" href="<?php echo base_url($this->router->fetch_class().'/core/'.$anuncio->anuncio_id); ?>"><i class="lni-pencil"></i></a>
-                                    <a class="btn-action btn-delete" href="<?php echo base_url($this->router->fetch_class().'/conta/'.$anuncio->anuncio_id); ?>"><i class="lni-trash"></i></a>
+                                    <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$anuncio->anuncio_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -86,9 +88,32 @@
 
 					<?php }else{ ?>
 
-						<h1>Você não tem anúncios cadastrados</h1>
+						<div class="col-md-9">
 
-						<?php } ?>
+						
+					
+					<div class="container text-center">
+
+										<h1 class="mb-5">Você não tem anúncios cadastrados</h1>
+
+										<img width="300" src="<?php echo base_url('public/web/assets/img/sem_anuncios.svg'); ?>"
+
+
+
+					</div>
+
+					<div class="container text-center mt-5">
+
+						
+					<a class="btn btn-common log-btn" href="<?php echo base_url($this->router->fetch_class().'/core/'); ?>">Novo Anúncio</a>
+
+
+						</div>
+					
+
+						
+					</div>
+					<?php } ?>
       </div>
    </div>
 </div>
