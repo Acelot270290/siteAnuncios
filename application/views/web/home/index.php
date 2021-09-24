@@ -4,6 +4,7 @@
     <div class="main-container section-padding">
       <div class="container">
         <div class="row">
+
           <div class="col-lg-3 col-md-12 col-xs-12 page-sidebar">
             <aside>
               <div class="widget_search">
@@ -68,339 +69,82 @@
             </aside>
           </div>
           <div class="col-lg-9 col-md-12 col-xs-12 page-content">
-            <div class="product-filter">
-              <div class="short-name">
-                <span>Showing (1 - 12 products of 7371 products)</span>
-              </div>
-              <div class="Show-item">
-                <span>Show Items</span>
-                <form class="woocommerce-ordering" method="post">
-                  <label>
-                    <select name="order" class="orderby">
-                      <option selected="selected" value="menu-order">49 items</option>
-                      <option value="popularity">popularity</option>
-                      <option value="popularity">Average ration</option>
-                      <option value="popularity">newness</option>
-                      <option value="popularity">price</option>
-                    </select>
-                  </label>
-                </form>
-              </div>
-              <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#grid-view"><i class="lni-grid"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#list-view"><i class="lni-list"></i></a>
-                </li>
-              </ul>
-            </div>
+
+
             <div class="adds-wrapper">
               <div class="tab-content">
-                <div id="grid-view" class="tab-pane fade">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                      <div class="featured-box">
-                        <figure>
-                          <span class="price-save">
-                          30% Save
-                          </span>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$249.00</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                      <div class="featured-box">
-                        <figure>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-2.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Apple Macbook Pro ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$289.00</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                      <div class="featured-box">
-                        <figure>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-3.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Mercedes Benz E200 ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$199.80</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                      <div class="featured-box">
-                        <figure>
-                          <span class="price-save">
-                          25% Save
-                          </span>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-4.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Brown Leather Bag ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$206.90</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+ 
+
                 <div id="list-view" class="tab-pane fade active show">
                   <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div class="featured-box">
-                        <figure>
-                          <span class="price-save">
-                          10% Save
-                          </span>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-1.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Canon SX Powershot ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$249.00</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div class="featured-box">
-                        <figure>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-2.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Apple Macbook Pro ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$289.00</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div class="featured-box">
-                        <figure>
-                          <span class="price-save">
-                          30% Save
-                          </span>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-3.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Mercedes Benz E200 ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$199.80</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div class="featured-box">
-                        <figure>
-                          <div class="icon">
-                            <span class="bg-green"><i class="lni-heart"></i></span>
-                            <span><i class="lni-bookmark"></i></span>
-                          </div>
-                          <a href="#"><img class="img-fluid" src="assets/img/featured/img-4.jpg" alt=""></a>
-                        </figure>
-                        <div class="feature-content">
-                          <div class="product">
-                            <a href="#">Electronic > </a>
-                            <a href="#">Apple</a>
-                          </div>
-                          <h4><a href="ads-details.html">Brown Leather Bag ...</a></h4>
-                          <div class="meta-tag">
-                            <span>
-                            <a href="#"><i class="lni-user"></i> John Smith</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-map-marker"></i> New York, US</a>
-                            </span>
-                            <span>
-                            <a href="#"><i class="lni-tag"></i> Apple</a>
-                            </span>
-                          </div>
-                          <p class="dsc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                          <div class="listing-bottom">
-                            <h3 class="price float-left">$206.90</h3>
-                            <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
+									<table class="anuncios-home">
+
+									<thead>
+
+									<tr>
+										<th class="nosort">
+
+
+
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+
+                  <?php foreach($anuncios as $anuncio){ ?>
+
+										<tr>
+											<td>
+												
+											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+													<div class="featured-box">
+														<figure>
+															<span class="<?php echo ($anuncio->anuncio_situacao == 1 ? 'price-save' : ' price-save bg-primary'); ?>">
+															<?php echo ($anuncio->anuncio_situacao == 1 ? 'Novo' : 'Usado'); ?>
+															</span>
+				
+															<a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><img style="max-width: 360px; max-height: 300px;" class="img-fluid" src="<?php echo base_url('uploads/anuncios/'.$anuncio->foto_nome); ?>" alt="<?php echo $anuncio->anuncio_titulo; ?>"></a>
+														</figure>
+														<div class="feature-content">
+															<div class="product">
+																<a href="<?php echo base_url('master/'.$anuncio->categoria_pai_meta_link); ?>"><?php echo $anuncio->categoria_pai_nome; ?> > </a>
+																<a href="<?php echo base_url('categorias/'.$anuncio->categoria_meta_link); ?>"><?php echo $anuncio->categoria_nome; ?></a>
+															</div>
+															<h4><a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><?php echo word_limiter($anuncio->anuncio_titulo,5);  ?></a></h4>
+															<div class="meta-tag">
+																<span>
+																<a href="<?php echo base_url('anunciante/'.$anuncio->anuncio_user_id); ?>"><i class="lni-user"></i> <?php echo $anuncio->first_name. ' '.$anuncio->last_name; ?></a>
+																</span>
+																<span>
+																<a href="#"><i class="lni-map-marker"></i> <?php echo $anuncio->anuncio_bairro. ' , '. $anuncio->anuncio_cidade. ' - '.$anuncio->anuncio_estado; ?></a>
+																</span>
+															</div>
+															<p class="dsc"><?php echo word_limiter($anuncio->anuncio_descricao,18); ?></p>
+															<div class="listing-bottom">
+																<h3 class="price float-left"> <?php echo ($anuncio->anuncio_preco> 0 ? 'R$ ' .  number_format($anuncio->anuncio_preco, 2) : ''); ?></h3>
+																<a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>" class="btn btn-common float-right">Ver mais</a>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</td>
+
+										</tr>
+
+										<?php } ?>
+
                   </div>
+
+									</tbody>
+
+									</table>
+
                 </div>
               </div>
             </div>
-            <div class="pagination-bar">
-              <nav>
-                <ul class="pagination justify-content-center">
-                  <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-              </nav>
-            </div>
+
           </div>
         </div>
       </div>
