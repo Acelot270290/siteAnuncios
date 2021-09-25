@@ -15,6 +15,7 @@ class Anuncios_model extends CI_Model{
 			'categorias_pai.categoria_pai_nome',
 			'users.id',
 			'users.first_name',
+			'users.last_name',
 			'anuncios_fotos.foto_nome',
 
 		]);
@@ -83,6 +84,7 @@ class Anuncios_model extends CI_Model{
 			'CONCAT(users.first_name, " ", users.last_name) as nome_anunciante',
 			'users.phone as telefone_anunciante',
 			'users.created_on as anunciante_desde',
+			'users.user_foto',
 
 
 		]);
@@ -116,6 +118,31 @@ class Anuncios_model extends CI_Model{
 		$this->db->group_by('categorias_pai.categoria_pai_id');
 
 		return $this->db->get('categorias_pai')->result();
+
+	}
+
+	/*
+	*Recuperamos todas as Categorias pai atrelhada publicados 
+	*/
+
+	public function get_all_categorias_pai_home(){
+
+		$this->db->select([
+			'categorias_pai.*',
+			'COUNT(categoria_pai_id) as quantidade_anuncios'
+
+
+		]);
+
+		$this->db->where('categoria_pai_ativa',1);
+		$this->db->where('anuncios.anuncio_publicado',1);
+
+		$this->db->join('anuncios', 'anuncios.anuncio_categoria_pai_id = categorias_pai.categoria_pai_id');
+
+		$this->db->group_by('categoria_pai_nome', 'ASC');
+
+		return $this->db->get('categorias_pai')->result();
+
 
 	}
 

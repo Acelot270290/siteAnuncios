@@ -7,68 +7,38 @@
 
           <div class="col-lg-3 col-md-12 col-xs-12 page-sidebar">
             <aside>
-              <div class="widget_search">
-                <form role="search" id="search-form">
-                  <input type="search" class="form-control" autocomplete="off" name="s" placeholder="Search..." id="search-input" value="">
-                  <button type="submit" id="search-submit" class="search-btn"><i class="lni-search"></i></button>
-                </form>
-              </div>
+
               <div class="widget categories">
-                <h4 class="widget-title">All Categories</h4>
+                <h4 class="widget-title">Todas as Categorias</h4>
                 <ul class="categories-list">
+									<?php foreach($categorias_pai_sidebar as $cat_pai){ ?>
                   <li>
-                    <a href="#">
-                    <i class="lni-dinner"></i>
-                    Hotel & Travels <span class="category-counter">(5)</span>
+                    <a href="<?php echo base_url('master/'. $cat_pai->categoria_pai_meta_link); ?>">
+                    <i class="lni <?php echo $cat_pai->categoria_pai_classe_icone; ?>"></i>
+                    <?php echo word_limiter($cat_pai->categoria_pai_nome,4);  ?> <span class="category-counter">(<?php echo $cat_pai->quantidade_anuncios; ?>)</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-control-panel"></i>
-                    Services <span class="category-counter">(8)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-github"></i>
-                    Pets <span class="category-counter">(2)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-coffee-cup"></i>
-                    Restaurants <span class="category-counter">(3)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-home"></i>
-                    Real Estate <span class="category-counter">(4)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-pencil"></i>
-                    Jobs <span class="category-counter">(5)</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <i class="lni-display"></i>
-                    Electronics <span class="category-counter">(9)</span>
-                    </a>
-                  </li>
+
+									<?php } ?>
+
                 </ul>
               </div>
-              <div class="widget">
-                <h4 class="widget-title">Advertisement</h4>
-                <div class="add-box">
-                  <img class="img-fluid" src="assets/img/img1.jpg" alt="">
-                </div>
-              </div>
+
             </aside>
           </div>
           <div class="col-lg-9 col-md-12 col-xs-12 page-content">
+
+		  <div class="row">
+         <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+               <ol class="breadcrumb bg-white">
+                  <li><a href="<?php echo base_url('/') ?>">Home&nbsp;/&nbsp;</a></li>
+
+                  <li class="current">Todos os Anúncios</li>
+               </ol>
+            </div>
+         </div>
+      </div>
 
 
             <div class="adds-wrapper">
@@ -114,7 +84,7 @@
 															<h4><a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><?php echo word_limiter($anuncio->anuncio_titulo,5);  ?></a></h4>
 															<div class="meta-tag">
 																<span>
-																<a href="<?php echo base_url('anunciante/'.$anuncio->anuncio_user_id); ?>"><i class="lni-user"></i> <?php echo $anuncio->first_name. ' '.$anuncio->last_name; ?></a>
+																<i class="lni-user"></i> <?php echo $anuncio->first_name. ' '.$anuncio->last_name; ?>
 																</span>
 																<span>
 																<a href="#"><i class="lni-map-marker"></i> <?php echo $anuncio->anuncio_bairro. ' , '. $anuncio->anuncio_cidade. ' - '.$anuncio->anuncio_estado; ?></a>

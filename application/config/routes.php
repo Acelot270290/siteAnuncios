@@ -54,3 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['restrita'] = 'restrita/home/index';
+
+$route['detalhes/(:any)'] = 'detalhes/index/$1';

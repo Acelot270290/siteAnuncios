@@ -32,6 +32,9 @@
 <?php } ?>
 
 		<style>
+			#DataTables_Table_0_length {
+				margin-left: 17px;
+			}
 			#DataTables_Table_0_length .form-control{
 				padding: 0;
 				padding-left: 10px;
