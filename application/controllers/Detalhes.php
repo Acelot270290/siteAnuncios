@@ -16,7 +16,7 @@ class Detalhes extends CI_Controller {
 
 
 			$data = array(
-				'titulo' => 'Detalhes dp Anúncio'. $anuncio->anuncio_titulo,
+				'titulo' => 'Detalhes do Anúncio '. $anuncio->anuncio_titulo,
 				'anuncio'=> $anuncio,
 				'anuncios_fotos'=> $this->core_model->get_all('anuncios_fotos', array('foto_anuncio_id' => $anuncio->anuncio_id)),
 				'todos_anuncios_anunciante'=> $this->anuncios_model->get_all($anuncio->anuncio_user_id),//recuperando todos os anuncios do dono do anuncios que está sendo detalhado

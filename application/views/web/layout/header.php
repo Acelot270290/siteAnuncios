@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/web/'); ?>assets/css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/web/'); ?>assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/web/'); ?>assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/web/'); ?>assets/autocomplete/jquery-ui.css">
 
 	
 <?php if(isset($styles)){ ?>

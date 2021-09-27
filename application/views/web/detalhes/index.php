@@ -8,8 +8,8 @@
                   <li><a href="<?php echo base_url('/') ?>">Home&nbsp;/&nbsp;</a></li>
                   <li><a href="<?php echo base_url('busca/estado/'.$anuncio->anuncio_estado); ?>">&nbsp;<?php echo $anuncio->anuncio_estado; ?>&nbsp;/&nbsp; </a></li>
                   <li><a href="<?php echo base_url('busca/cidade/'.$anuncio->anuncio_cidade_metalink); ?>">&nbsp;<?php echo $anuncio->anuncio_cidade; ?>&nbsp;/&nbsp; </a></li>
-                  <li><a href="<?php echo base_url('busca/cidade/'.$anuncio->anuncio_bairro_metalink); ?>">&nbsp;<?php echo $anuncio->anuncio_bairro; ?>&nbsp;/&nbsp; </a></li>
-                  <li><a href="<?php echo base_url('busca/master/'.$anuncio->categoria_pai_meta_link); ?>">&nbsp;<?php echo $anuncio->categoria_pai_nome; ?> </a></li>
+                  <li><a href="<?php echo base_url('busca/bairro/'.$anuncio->anuncio_bairro_metalink); ?>">&nbsp;<?php echo $anuncio->anuncio_bairro; ?>&nbsp;/&nbsp; </a></li>
+                  <li><a href="<?php echo base_url('busca/master/'.$anuncio->categoria_pai_meta_link); ?>">&nbsp;<?php echo $anuncio->categoria_pai_nome; ?>&nbsp;/&nbsp; </a></li>
                   <li class="current"><a href="<?php echo base_url('busca/categoria/'.$anuncio->categoria_meta_link); ?>">&nbsp;<?php echo $anuncio->categoria_nome; ?>&nbsp;/&nbsp; </a></li>
                   <li class="current">Details</li>
                </ol>

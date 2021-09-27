@@ -85,6 +85,8 @@
     <script src="<?php echo base_url('public/web/'); ?>assets/js/summernote.js"></script>
   	<script src="<?php echo base_url('public/restrita/assets/js/util.js'); ?>"></script>
   	<script src="<?php echo base_url('public/restrita/assets/bootbox/bootbox.min.js'); ?>"></script>
+  	<script src="<?php echo base_url('public/web/assets/autocomplete/jquery-ui.min.js'); ?>"></script>
+  	<script src="<?php echo base_url('public/web/assets/autocomplete/pesquisa-ajax.js'); ?>"></script>
 
 
 	<?php if(isset($scripts)){ ?>

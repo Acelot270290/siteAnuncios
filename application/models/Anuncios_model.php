@@ -182,6 +182,37 @@ class Anuncios_model extends CI_Model{
 
 	}
 
+	//Recuperamos os anuncios de acordo com o temo digitado no input busca na navbar
+	public function get_all_by_busca($busca = null){
+		$this->db->select([
+			'anuncios.*',
+			'categorias.categoria_nome',
+			'categorias.categoria_meta_link',
+			'categorias_pai.categoria_pai_nome',
+			'categorias_pai.categoria_pai_meta_link',
+			'users.id',
+			'users.first_name',
+			'users.last_name',
+			'anuncios_fotos.foto_nome',
+
+		]);
+
+
+		$this->db->like('anuncios.anuncio_titulo', $busca, 'BOTH');
+		$this->db->where('anuncios.anuncio_publicado', 1);
+
+		//Criação dos joins
+
+		$this->db->join('categorias', 'categorias.categoria_id = anuncios.anuncio_categoria_id','LEFT');
+		$this->db->join('categorias_pai', 'categorias_pai.categoria_pai_id = categorias.categoria_pai_id','LEFT');
+		$this->db->join('anuncios_fotos', 'anuncios_fotos.foto_anuncio_id = anuncios.anuncio_id','LEFT');
+		$this->db->join('users', 'users.id = anuncios.anuncio_user_id','LEFT');
+
+		$this->db->group_by('anuncios.anuncio_id');
+		return $this->db->get('anuncios')->result();
+	}
+
+
 
 
 }
