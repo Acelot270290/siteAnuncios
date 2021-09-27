@@ -11,6 +11,10 @@ class Detalhes extends CI_Controller {
 			redirect('/');
 		}else{
 
+			//Jogamos na seção alguns atributos na sesção para podermos implementar a pesquisa persolanizada
+			$this->session->set_userdata('anuncio_detalhado', $anuncio);
+
+
 			$data = array(
 				'titulo' => 'Detalhes dp Anúncio'. $anuncio->anuncio_titulo,
 				'anuncio'=> $anuncio,
@@ -23,6 +27,9 @@ class Detalhes extends CI_Controller {
 	
 			/*print_r($data['anuncios']);
 			exit();*/
+
+
+			
 	
 	
 				

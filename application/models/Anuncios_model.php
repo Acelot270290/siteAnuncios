@@ -147,5 +147,41 @@ class Anuncios_model extends CI_Model{
 	}
 
 
+	//metodo que retorna os anuncios por estados, cidades, bairros e cidades e catgorias
+	public function get_all_by($condicoes = null){
+
+		if(is_array($condicoes)){
+
+			$this->db->select([
+				'anuncios.*',
+				'categorias.categoria_id',
+				'categorias.categoria_nome',
+				'categorias.categoria_meta_link',
+				'categorias_pai.categoria_pai_nome',
+				'categorias_pai.categoria_pai_meta_link',
+				'anuncios_fotos.foto_nome',
+				'users.first_name',
+				'users.last_name',
+	
+			]);
+
+			$this->db->where('anuncios.anuncio_publicado',1);
+			$this->db->where($condicoes);
+
+			$this->db->group_by('anuncios.anuncio_id');
+
+		$this->db->join('categorias', 'categorias.categoria_id = anuncios.anuncio_categoria_id','LEFT');
+		$this->db->join('categorias_pai', 'categorias_pai.categoria_pai_id = categorias.categoria_pai_id','LEFT');
+		$this->db->join('anuncios_fotos', 'anuncios_fotos.foto_anuncio_id = anuncios.anuncio_id','LEFT');
+		$this->db->join('users', 'users.id = anuncios.anuncio_user_id','LEFT');
+
+		return $this->db->get('anuncios')->result();
+	
+
+		}
+
+	}
+
+
 
 }

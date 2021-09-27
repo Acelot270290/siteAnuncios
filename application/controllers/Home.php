@@ -21,7 +21,6 @@ class Home extends CI_Controller {
 				'assets/js/page/datatables.js',
 
 			),
-			'categorias_pai_sidebar'=>$this->anuncios_model->get_all_categorias_pai_home(),
 			
 		);
 

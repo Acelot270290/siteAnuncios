@@ -11,6 +11,8 @@
               <div class="widget categories">
                 <h4 class="widget-title">Todas as Categorias</h4>
                 <ul class="categories-list">
+
+				<?php $categorias_pai_sidebar = categorias_pai_sidebar(); ?>
 									<?php foreach($categorias_pai_sidebar as $cat_pai){ ?>
                   <li>
                     <a href="<?php echo base_url('master/'. $cat_pai->categoria_pai_meta_link); ?>">
@@ -34,7 +36,19 @@
                <ol class="breadcrumb bg-white">
                   <li><a href="<?php echo base_url('/') ?>">Home&nbsp;/&nbsp;</a></li>
 
-                  <li class="current">Todos os Anúncios</li>
+
+				  <?php if($this->router->fetch_class() == 'busca'){ ?>
+					<li><a href="<?php echo base_url('/') ?>"><?php echo $categoria_pai_nome; ?>&nbsp;/&nbsp;</a></li>
+					<li><a href="<?php echo base_url('/') ?>"><?php echo $categoria_nome; ?></a>&nbsp;/&nbsp;</li>
+					<li class="current"><?php echo $informacao_busca;?></li>
+				  <?php } ?>
+				  <?php if($this->router->fetch_class() == 'home'){ ?>
+
+					<li class="current">Todos os Anúncios</li>
+				
+				  <?php } ?>
+
+                  
                </ol>
             </div>
          </div>

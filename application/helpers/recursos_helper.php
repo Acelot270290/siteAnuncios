@@ -95,3 +95,14 @@ function get_info_anunciante(){
 
 	return $anunciante;
 }
+
+//recuperamos as categorias pai para ser exibida na area publica
+function categorias_pai_sidebar(){
+
+
+	$CI = &get_instance();
+
+	$categorias_pai = $CI->anuncios_model->get_all_categorias_pai_home();
+
+	return $categorias_pai;
+}
