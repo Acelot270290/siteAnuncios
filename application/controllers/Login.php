@@ -43,6 +43,12 @@ class Login extends CI_Controller{
 				redirect('restrita');
 
 			}else{
+
+				//redirecionamos o anunciante para a div pergunta
+				if($this->session->userdata('url_anterior')){
+					redirect($this->session->userdata('url_anterior').'#pergunta');
+
+				}
 				redirect('/');
 
 

@@ -212,6 +212,36 @@ class Anuncios_model extends CI_Model{
 		return $this->db->get('anuncios')->result();
 	}
 
+	//recuperamos da tabela de historico todas as perguntas do anuncio que está sendo detalhado do controle
+	public function get_perguntas_anuncio_historico($condicoes = null){
+
+
+		if(is_array($condicoes)){
+			$this->db->select([
+			'anuncios_perguntas_historico.*',
+			'anuncios.anuncio_titulo',
+			'anuncios_fotos.foto_nome',
+			'users.user_foto',
+			'users.id as anunciante_id',
+			'users.first_name as nome_anunciante_pergunta'
+			]);
+
+			$this->db->where($condicoes);
+
+			$this->db->join('anuncios', 'anuncios.anuncio_id = anuncios_perguntas_historico.anuncio_id');
+			$this->db->join('anuncios_fotos', 'anuncios_fotos.foto_anuncio_id = anuncios.anuncio_id');
+			$this->db->join('users', 'users.id = anuncios_perguntas_historico.anunciante_pergunta_id');
+
+			$this->db->order_by('anuncios_perguntas_historico.data_pergunta','DESC');
+
+			$this->db->group_by('anuncios_perguntas_historico.pergunta');
+
+			return $this->db->get('anuncios_perguntas_historico')->result();
+		}else{
+			return false;
+		}
+	}
+
 
 
 

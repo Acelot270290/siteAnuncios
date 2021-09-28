@@ -6,7 +6,7 @@ $(document).ready(function (){
 
 			$.ajax({
 
-				URL: BASE_URL + 'busca/busca_ajax',
+				url: BASE_URL + 'busca/busca_ajax',
 				type: 'post',
 				dataType: 'json',
 				data:'busca='+ request.term,
