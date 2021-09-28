@@ -56,21 +56,21 @@ class Detalhes extends CI_Controller {
 
 			//recupreamos o que veio no post no name pergunta antes de ser feito o login e setamos na seção para quando o visitante realizar o login e redirecionarmos para o Login
 			$pergunta = $this->input->post('pergunta');
-			$this->session->set_userdata('pergunta',$pergunta);
+			$this->session->set_userdata('pergunta', $pergunta);
 			redirect('login');
 		}
 
-	//Visitante logado
+		//Visitante logado
 
-	if(!$anuncio_id || $anuncio = $this->anuncios_model->get_by_id(array('anuncio_id'=> $anuncio_id))){
+		if(!$anuncio_id || $anuncio = $this->anuncios_model->get_by_id(array('anuncio_id' => $anuncio_id))){
 
 		redirect($this->session->userdata('url_anterior'));
 
-	}else{
+		}else{
 		//Anuncio existe
 
 
-// Não pertiremos o anunciante fazer perguntas no seu anuncio
+			// Não pertiremos o anunciante fazer perguntas no seu anuncio
 		if($anuncio->anuncio_user_id == $this->session->userdata('user_id')){
 
 			$this->session->set_flashdata('erro_pergunta','Você não pode fazer uma pergunta para o seu anúncio');
@@ -80,17 +80,23 @@ class Detalhes extends CI_Controller {
 
 			//validando o form
 
-			$this->form_validation->set_rules('pergunta','pergunta','trim|required|min_length[4]|max_length[200]');
+			$this->form_validation->set_rules('pergunta','Pergunta');
 
 			if($this->form_validation->run()){
 
+				echo '<prev';
 				print_r($this->input->post());
+				exit();
 
 
 			}else{
 				//erros de validação
 
-				$this->index('anuncio_id');
+				$this->session->set_flashdata('erro_pergunta',validation_errors());
+
+				redirect($this->session->userdata('url_anterior').'#pergunta');
+				
+				
 			}
 
 		}

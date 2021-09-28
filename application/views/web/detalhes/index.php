@@ -123,11 +123,11 @@
         <div id="comments">
           <div class="comment-box">
             <div id="respond" class="mb-3">
-              <form method="POST" action="<?php echo base_url('detalhes/perguntar/'.$anuncio_user->anuncio_id); ?>">
+              <form method="POST" action="<?php echo base_url('/detalhes/perguntar/'.$anuncio_user->anuncio_id); ?>">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="form-group" >
-                      <textarea id="comment" style="resize: none;" class="form-control" name="pergunta"  rows="4" placeholder="Digite sua pergunta..."required=""<?php echo ($this->session->has_userdata('pergunta')? $this->session->userdata('pergunta'): set_value('pergunta')); ?>></textarea>
+                      <textarea id="comment" style="resize: none;" class="form-control" name="pergunta" rows="4" placeholder="Digite sua pergunta..."required=""><?php echo ($this->session->has_userdata('pergunta') ? $this->session->userdata('pergunta') : set_value('pergunta')); ?></textarea>
 							 <?php echo form_error('pergunta', '<div class="text-danger">','</div>'); ?>
                     </div>
                     <button type="submit" id="submit" class="btn btn-common">Perguntar</button>
