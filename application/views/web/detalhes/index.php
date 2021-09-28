@@ -100,6 +100,26 @@
         </div>
       </div>
       <div class="col-md-8" id="pergunta">
+        <?php if($mensagem = $this->session->flashdata('sucesso_pergunta')){ ?>
+        <div class="alert alert-success text-white alert-dismissible show fade">
+          <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+            </button>
+            <?php echo $mensagem ?>
+          </div>
+        </div>
+        <?php } ?>
+        <?php if($mensagem = $this->session->flashdata('erro_pergunta')){ ?>
+        <div class="alert alert-danger text-white alert-dismissible show fade">
+          <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+            </button>
+            <?php echo $mensagem ?>
+          </div>
+        </div>
+        <?php } ?>
         <div id="comments">
           <div class="comment-box">
             <div id="respond" class="mb-3">
@@ -107,7 +127,8 @@
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="form-group" >
-                      <textarea id="comment" style="resize: none;" class="form-control" name="pergunta"  rows="4" placeholder="Digite sua pergunta..."></textarea>
+                      <textarea id="comment" style="resize: none;" class="form-control" name="pergunta"  rows="4" placeholder="Digite sua pergunta..."required=""<?php echo ($this->session->has_userdata('pergunta')? $this->session->userdata('pergunta'): set_value('pergunta')); ?>></textarea>
+							 <?php echo form_error('pergunta', '<div class="text-danger">','</div>'); ?>
                     </div>
                     <button type="submit" id="submit" class="btn btn-common">Perguntar</button>
                   </div>

@@ -69,13 +69,31 @@ class Detalhes extends CI_Controller {
 	}else{
 		//Anuncio existe
 
+
+// Não pertiremos o anunciante fazer perguntas no seu anuncio
 		if($anuncio->anuncio_user_id == $this->session->userdata('user_id')){
 
 			$this->session->set_flashdata('erro_pergunta','Você não pode fazer uma pergunta para o seu anúncio');
 			redirect($this->session->userdata('url_anterior').'#pergunta');
-		}
+			}
 
-	}
+
+			//validando o form
+
+			$this->form_validation->set_rules('pergunta','pergunta','trim|required|min_length[4]|max_length[200]');
+
+			if($this->form_validation->run()){
+
+				print_r($this->input->post());
+
+
+			}else{
+				//erros de validação
+
+				$this->index('anuncio_id');
+			}
+
+		}
 
 	}
 }
