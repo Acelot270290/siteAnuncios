@@ -151,7 +151,7 @@ class Conta extends CI_Controller {
 					//erros de validação
 						
 			$data = array(
-				'titulo' => 'Gerenciar o meu perful',
+				'titulo' => 'Gerenciar o meu perfil',
 
 				'scripts'=>array(
 					'assets/mask/jquery.mask.min.js',
@@ -212,6 +212,47 @@ class Conta extends CI_Controller {
 		
 		$this->load->view('web/layout/header',$data);
 		$this->load->view('web/conta/anuncios');
+		$this->load->view('web/layout/footer');
+	}
+
+	public function perguntas(){
+
+		//motando os dados do anunciante e mostrando o total de anuncios cadastrado por ele
+
+		$anunciante = get_info_anunciante();
+
+		$data = array(
+			'titulo' => 'Perguntas Realizadas',
+
+			'styles'=>array(
+				'assets/bundles/datatables/datatables.min.css',
+				'assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css',
+			),
+
+			'scripts'=>array(
+				'assets/bundles/datatables/datatables.min.js',
+				'assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js',
+				'assets/bundles/jquery-ui/jquery-ui.min.js',
+				'assets/js/page/datatables.js',
+
+			),
+		);
+
+		//só enviamos para a view se existir pelo menos uma pergunta realizada
+		if($perguntas = $this->core_model->get_all('anuncios_perguntas', array('anuncio_user_id' =>$this->session->userdata('user_id')))){
+			$data['perguntas'] = $perguntas;
+		}
+
+		/*print_r($perguntas);
+		exit();*/
+		
+
+
+		
+
+		
+		$this->load->view('web/layout/header',$data);
+		$this->load->view('web/conta/perguntas');
 		$this->load->view('web/layout/footer');
 	}
 
@@ -648,6 +689,47 @@ class Conta extends CI_Controller {
 
 		}
 
+		}
+
+	}
+
+	public function responder($pergunta_id = null){
+
+		$pergunta_id = (int) $pergunta_id;
+
+		if(!$pergunta_id || !$pergunta = $this->core_model->get_by_id('anuncios_perguntas', array('pergunta_id'=>$pergunta_id, 'anuncio_user_id'=>$this->session->userdata('user_id')))){
+
+			$this->session->set_flashdata('erro', 'Não encontramos a pergunta ou ela não está associada ao seu anúncio');
+			redirect($this->router->fetch_class().'/perguntas');
+
+		}else{
+
+			/*
+			* Perguntada encontrada e passamos para a validação do formulario
+			*/
+
+			$this->form_validation->set_rules('resposta', 'Sua reposta', 'trim|min_length[4]|max_length[200]');
+
+			if($this->form_validation->run()){
+
+				print($this->input->post());
+				exit();
+
+			}else{
+
+
+				$data = array(
+					'titulo' => 'Responder Perguntas',
+					'pergunta'=> $pergunta
+
+				);
+			
+				
+				$this->load->view('web/layout/header',$data);
+				$this->load->view('web/conta/responder');
+				$this->load->view('web/layout/footer');
+
+			}
 		}
 
 	}

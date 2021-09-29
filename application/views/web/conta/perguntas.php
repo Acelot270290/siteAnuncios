@@ -6,7 +6,7 @@
             <?php $this->load->view('web/conta/sidebar'); ?>
          </div>
 
-				 <?php if(isset($anuncios)){ ?>
+				 <?php if(isset($perguntas)){ ?>
 
 					<div class="col-sm-12 col-md-8 col-lg-9">
 					<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
@@ -33,46 +33,38 @@
                <div class="inner-box">
                   <div class="dashboard-box">
                      <h2 class="dashbord-title"><?php echo $titulo; ?></h2>
-							<a class="btn btn-common log-btn float-right" href="<?php echo base_url($this->router->fetch_class().'/core/'); ?>">Novo Anúncio</a>
-
+							
                   </div>
                   <div class="dashboard-wrapper">
                      
                      <table class="table table-responsive dashboardtable table-anuncios">
                         <thead>
                            <tr>
-                              <th>Imagem</th>
-                              <th>Título</th>
-                              <th>Categorias</th>
-                              <th>Preço</th>
-                              <th>Publicado</th>
+                              <th>Pergunta</th>
+                              <th>Data da pergunta</th>
+                              <th>Respondida</th>
                               <th class="nosort">Ações</th>
                            </tr>
                         </thead>
                         <tbody>
 
-												<?php foreach($anuncios as $anuncio){ ?>
+												<?php foreach($perguntas as $pergunta){ ?>
                            <tr data-category="active">
 
-                              <td class="photo"><img class="img-fluid" src="<?php echo base_url('uploads/anuncios/small/' . $anuncio->foto_nome); ?>" alt="<?php echo $anuncio->anuncio_titulo; ?>"></td>
 
                               <td data-title="Title">
-                                 <h3><?php echo word_limiter($anuncio->anuncio_titulo, 5); ?></h3>
+                                 <h3><?php echo word_limiter($pergunta->pergunta, 5); ?></h3>
                                  
                               </td>
 															<td data-title="Category">
-																<span class="adcategories"><?php echo $anuncio->categoria_pai_nome. ' & '. $anuncio->categoria_nome; ?></span>
+																<span class="adcategories"><?php echo formata_data_banco_com_hora($pergunta->data_pergunta); ?></span>
 															</td>
-															<td data-title="Price">
-                                 <h3>R$&nbsp;<?php echo number_format($anuncio->anuncio_preco,2); ?></h3>
-                              </td>
-                              <td data-title="Ad Status"><?php echo ($anuncio->anuncio_publicado ==1 ? '<span class="adstatus adstatusactive">Sim</span>' : '<span class="adstatus adstatusexpired">Não</span>'); ?></td>
+                              <td data-title="Ad Status"><?php echo ($pergunta->pergunta_respondida == 1 ? '<span class="adstatus adstatusactive">Sim</span>' : '<span class="adstatus adstatusexpired">Não</span>'); ?></td>
 
                               <td data-title="Action">
                                  <div class="btns-actions">
-                                    <a class="btn-action btn-view" target="_blank" href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><i class="lni-eye"></i></a>
-                                    <a class="btn-action btn-edit" href="<?php echo base_url($this->router->fetch_class().'/core/'.$anuncio->anuncio_id); ?>"><i class="lni-pencil"></i></a>
-                                    <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$anuncio->anuncio_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
+                                    <a class="btn-action <?php echo ($pergunta->pergunta_respondida == 1 ? 'btn-view' : 'btn-edit') ?>" href="<?php echo base_url($this->router->fetch_class().'/reponder/'.$pergunta->pergunta_id); ?>"><i class="<?php echo ($pergunta->pergunta_respondida == 1) ? 'lni-eye' : 'lni-pencil' ?>"></i></a>
+                                    <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$pergunta->pergunta_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -94,22 +86,13 @@
 					
 					<div class="container text-center">
 
-										<h1 class="mb-5">Você não tem anúncios cadastrados</h1>
+										<h1 class="mb-5">Você não tem perguntas para os seus anúncios</h1>
 
-										<img width="300" src="<?php echo base_url('public/web/assets/img/sem_anuncios.svg'); ?>"/>
+										<img width="300" src="<?php echo base_url('public/web/assets/img/sem_perguntas.svg'); ?>"/>
 
 
 
 					</div>
-
-					<div class="container text-center mt-5">
-
-						
-					<a class="btn btn-common log-btn" href="<?php echo base_url($this->router->fetch_class().'/core/'); ?>">Novo Anúncio</a>
-
-
-						</div>
-					
 
 						
 					</div>
