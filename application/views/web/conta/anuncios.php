@@ -70,7 +70,7 @@
 
                               <td data-title="Action">
                                  <div class="btns-actions">
-                                    <a class="btn-action btn-view" href="#"><i class="lni-eye"></i></a>
+                                    <a class="btn-action btn-view" target="_blank" href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><i class="lni-eye"></i></a>
                                     <a class="btn-action btn-edit" href="<?php echo base_url($this->router->fetch_class().'/core/'.$anuncio->anuncio_id); ?>"><i class="lni-pencil"></i></a>
                                     <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$anuncio->anuncio_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
                                  </div>

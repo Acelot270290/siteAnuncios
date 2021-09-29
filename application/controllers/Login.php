@@ -49,6 +49,7 @@ class Login extends CI_Controller{
 					redirect($this->session->userdata('url_anterior').'#pergunta');
 
 				}
+				
 				redirect('/');
 
 
