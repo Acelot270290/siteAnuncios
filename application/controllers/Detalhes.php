@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Detalhes extends CI_Controller {
 
 
-	public function index($anuncio_codigo = NULL)
-	{
+	public function index($anuncio_codigo = NULL){
 
 		if(!$anuncio_codigo || !$anuncio = $this->anuncios_model->get_by_id(array('anuncio_codigo'=>$anuncio_codigo))){
 			redirect('/');

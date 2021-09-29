@@ -11,7 +11,7 @@
             <li><a href="<?php echo base_url('busca/bairro/'.$anuncio->anuncio_bairro_metalink); ?>">&nbsp;<?php echo $anuncio->anuncio_bairro; ?>&nbsp;/&nbsp; </a></li>
             <li><a href="<?php echo base_url('busca/master/'.$anuncio->categoria_pai_meta_link); ?>">&nbsp;<?php echo $anuncio->categoria_pai_nome; ?>&nbsp;/&nbsp; </a></li>
             <li class="current"><a href="<?php echo base_url('busca/categoria/'.$anuncio->categoria_meta_link); ?>">&nbsp;<?php echo $anuncio->categoria_nome; ?>&nbsp;/&nbsp; </a></li>
-            <li class="current">Details</li>
+            <li class="current">Detalhes</li>
           </ol>
         </div>
       </div>
@@ -128,8 +128,9 @@
                   <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="form-group" >
                       <textarea id="comment" style="resize: none;" class="form-control" name="pergunta" rows="4" placeholder="Digite sua pergunta..."required=""><?php echo ($this->session->has_userdata('pergunta') ? $this->session->userdata('pergunta') : set_value('pergunta')); ?></textarea>
-							 <?php echo form_error('pergunta', '<div class="text-danger">','</div>'); ?>
                     </div>
+							 			<?php echo form_error('pergunta', '<div class="text-danger">','</div>'); ?>
+
                     <button type="submit" id="submit" class="btn btn-common">Perguntar</button>
                   </div>
                 </div>
