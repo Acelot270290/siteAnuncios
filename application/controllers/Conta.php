@@ -712,8 +712,8 @@ class Conta extends CI_Controller {
 
 			if($this->form_validation->run()){
 
-				print($this->input->post());
-				exit();
+				/*print($this->input->post());
+				exit();*/
 
 			}else{
 
@@ -723,6 +723,9 @@ class Conta extends CI_Controller {
 					'pergunta'=> $pergunta
 
 				);
+
+				print_r($data);
+				exit();
 			
 				
 				$this->load->view('web/layout/header',$data);

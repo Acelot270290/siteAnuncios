@@ -63,7 +63,7 @@
 
                               <td data-title="Action">
                                  <div class="btns-actions">
-                                    <a class="btn-action <?php echo ($pergunta->pergunta_respondida == 1 ? 'btn-view' : 'btn-edit') ?>" href="<?php echo base_url($this->router->fetch_class().'/reponder/'.$pergunta->pergunta_id); ?>"><i class="<?php echo ($pergunta->pergunta_respondida == 1) ? 'lni-eye' : 'lni-pencil' ?>"></i></a>
+                                    <a class="btn-action <?php echo ($pergunta->pergunta_respondida == 1 ? 'btn-view' : 'btn-edit') ?>" href="<?php echo base_url($this->router->fetch_class().'/responder/'.$pergunta->pergunta_id); ?>"><i class="<?php echo ($pergunta->pergunta_respondida == 1) ? 'lni-eye' : 'lni-pencil' ?>"></i></a>
                                     <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$pergunta->pergunta_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
                                  </div>
                               </td>
