@@ -80,11 +80,12 @@ class Detalhes extends CI_Controller {
 
 			//validando o form
 
-			$this->form_validation->set_rules('pergunta','Pergunta');
+			
+			$this->form_validation->set_rules('pergunta', 'Pergunta', 'trim|required|min_length[4]|max_length[200]');
 
 			if($this->form_validation->run()){
 
-				echo '<prev';
+				echo '<prev>';
 				print_r($this->input->post());
 				exit();
 
