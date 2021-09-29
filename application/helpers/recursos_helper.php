@@ -100,9 +100,22 @@ function get_info_anunciante(){
 function categorias_pai_sidebar(){
 
 
-	$CI = &get_instance();
+	$CI = & get_instance();
 
 	$categorias_pai = $CI->anuncios_model->get_all_categorias_pai_home();
 
 	return $categorias_pai;
+}
+
+// recuperamos as perguntas feitas para exibir na area do anunciante e que esteja sem resposta
+function get_perguntas_sem_respostas(){
+
+
+	$CI = & get_instance();
+
+	$user_id = $CI->session->userdata('user_id');
+
+	$perguntas_sem_resposta = $CI->core_model->count_all_results('anuncios_perguntas',array('pergunta_respondida' => 0, 'anuncio_user_id'=> $user_id));
+
+	return $perguntas_sem_resposta;
 }

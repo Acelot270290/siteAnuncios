@@ -32,9 +32,15 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+								<a <?php echo  ($this->router->fetch_method() == 'perguntas' ? 'active' : ''); ?> href="<?php echo base_url('conta/perguntas') ?>">
                   <i class="lni-envelope"></i>
-                  <span>Offers/Messages</span>
+                  <span>Perguntas</span>
+
+									<?php $perguntas_sem_respostas = get_perguntas_sem_respostas(); ?>
+
+									<?php if($perguntas_sem_respostas > 0){ ?>
+                  <span c class="badge badge-danger float-right blink_me" style="margin-top: 1.5em; margin-right: 2em;"><?php echo $perguntas_sem_respostas; ?></span>
+									<?php } ?>
                   </a>
                 </li>
                 <li>
