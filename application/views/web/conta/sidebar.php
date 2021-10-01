@@ -19,12 +19,7 @@
                   <span>Início</span>
                   </a>
                 </li>
-                <li>
-                  <a <?php echo  ($this->router->fetch_method() == 'perfil' ? 'active' : ''); ?> href="<?php echo base_url('conta/perfil/'); ?>">
-                  <i class="lni-cog"></i>
-                  <span>Gerenciar meus dados</span>
-                  </a>
-                </li>
+
                 <li>
                   <a <?php echo  ($this->router->fetch_method() == 'anuncios' ? 'active' : ''); ?> href="<?php echo base_url('conta/anuncios') ?>">
                   <i class="lni-layers"></i>
@@ -43,25 +38,23 @@
 									<?php } ?>
                   </a>
                 </li>
-                <li>
-                  <a href="payments.html">
-                  <i class="lni-wallet"></i>
-                  <span>Payments</span>
+
+
+								<li>
+                  <a <?php echo  ($this->router->fetch_method() == 'duvidas' ? 'active' : ''); ?> href="<?php echo base_url('conta/duvidas') ?>">
+                  <i class="lni-question-circle"></i>
+                  <span>Minhas perguntas</span>
                   </a>
                 </li>
-                <li>
-                  <a href="account-favourite-ads.html">
-                  <i class="lni-heart"></i>
-                  <span>My Favourites</span>
+
+								<li>
+                  <a <?php echo  ($this->router->fetch_method() == 'perfil' ? 'active' : ''); ?> href="<?php echo base_url('conta/perfil/'); ?>">
+                  <i class="lni-cog"></i>
+                  <span>Gerenciar meus dados</span>
                   </a>
                 </li>
-                <li>
-                  <a href="account-profile-setting.html">
-                  <i class="lni-star"></i>
-                  <span>Privacy Settings</span>
-                  </a>
-                </li>
-                <li>
+
+								<li>
                   <a href="<?php echo base_url('login/logout'); ?>">
                   <i class="lni-enter"></i>
                   <span>Logout</span>

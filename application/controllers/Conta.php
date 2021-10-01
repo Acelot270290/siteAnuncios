@@ -708,12 +708,85 @@ class Conta extends CI_Controller {
 			* Perguntada encontrada e passamos para a validação do formulario
 			*/
 
-			$this->form_validation->set_rules('resposta', 'Sua reposta', 'trim|min_length[4]|max_length[200]');
+			$this->form_validation->set_rules('resposta', 'Sua reposta', 'required|trim|min_length[4]|max_length[200]');
 
 			if($this->form_validation->run()){
 
-				/*print($this->input->post());
+				/*print_r($this->input->post());
 				exit();*/
+
+				$data = elements(
+
+					array(
+
+						'resposta'
+
+					),$this->input->post()
+
+				);
+
+				$data['data_resposta'] = date('Y-m-d H:s:i');
+
+				$data['pergunta_respondida'] = 1;
+
+				$data = html_escape($data);
+
+				/*
+				*Atualizamos de perguntas principal e historico
+				*/
+
+				$this->core_model->update('anuncios_perguntas', $data, array('pergunta_id'=> $pergunta_id));
+				$this->core_model->update('anuncios_perguntas_historico', $data, array('pergunta_id'=> $pergunta_id));
+
+				// motando um objeto com os dados do site
+				$sistema = info_header_footer();
+
+				/*
+				* Inicio do envio do e-mail para quem perguntou
+				*/
+				
+				// motando um objeto do anunciante que fez a pergunta
+				$anunciante_pergunta = $this->ion_auth->user($pergunta->anunciante_pergunta_id)->row();
+
+				//objeto do anuncio
+
+				$anuncio = $this->core_model->get_by_id('anuncios', array('anuncio_id'=>$pergunta->anuncio_id));
+
+				$this->email->set_mailtype("html");
+							$this->email->set_newline("\r\n");
+							$from_email = $sistema->sistema_email;
+							$to_email = $anunciante_pergunta->email;
+
+							$this->email->from($from_email, $sistema->sistema_nome_fantasia);
+							$this->email->to($to_email);
+							$this->email->subject('Sua Pergunta foi Respondida');
+							$this->email->message('Olá ' . $anunciante_pergunta->first_name . ' ' . $anunciante_pergunta->last_name . ' Sua pergunta  referente ao anúncio ' . $anuncio->anuncio_titulo . ' foi respondida! <br><br>'. '<strong>Resposta:</strong>&nbsp;' . $this->input->post('resposta'). '<br>'
+							.'<strong>Data: </strong>'. date('d/m/Y H:s:i'));
+
+							$this->load->library('encryption'); //evita o envio de span
+
+							if($this->email->send(FALSE)){
+
+								/*
+								* O email foi enviado
+								*/
+
+								$this->session->set_flashdata('sucesso', 'A sua resposta foi enviada ao anunciante com sucesso!');
+
+
+							}else{
+
+								/*
+								* erro de enviar o email e jogamos no flashdata para verificar os erros
+								*/
+
+								$this->session->set_flashdata("erro", $this->email->print_debugger('header'));
+
+
+							}
+
+							redirect($this->router->fetch_class().'/perguntas');
+
 
 			}else{
 
@@ -724,8 +797,8 @@ class Conta extends CI_Controller {
 
 				);
 
-				print_r($data);
-				exit();
+				/*print_r($data);
+				exit();*/
 			
 				
 				$this->load->view('web/layout/header',$data);
@@ -1053,6 +1126,30 @@ class Conta extends CI_Controller {
 		}
 
 		redirect($this->router->fetch_class().'/anuncios');
+
+	}
+
+	public function remove($pergunta_id = null){
+
+		$pergunta_id = (int) $pergunta_id;
+
+		if(!$pergunta_id || !$pergunta = $this->core_model->get_by_id('anuncios_perguntas', array('pergunta_id'=>$pergunta_id, 'anuncio_user_id'=>$this->session->userdata('user_id')))){
+
+			$this->session->set_flashdata('erro', 'Não encontramos a pergunta ou ela não está associada ao seu anúncio');
+			redirect($this->router->fetch_class().'/perguntas');
+
+		}	
+
+		if($pergunta->pergunta_respondida == 0){
+
+			$this->session->set_flashdata('erro', 'Você não pode excluir uma pergunta que ainda não foi respondida');
+			redirect($this->router->fetch_class().'/perguntas');
+
+		}	
+
+		$this->core_model->delete('anuncios_perguntas', array('pergunta_id'=>$pergunta->pergunta_id));
+		$this->session->set_flashdata('sucesso', 'A pergunta foi excluída da sua área do anunciante. No entando, ela continuará sendo exbida no anúncio.');
+		redirect($this->router->fetch_class().'/perguntas');
 
 	}
 

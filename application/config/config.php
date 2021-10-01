@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+// Definindo o horario de brasilia
+date_default_timezone_set('America/Sao_paulo');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

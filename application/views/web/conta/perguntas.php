@@ -5,6 +5,7 @@
          <div class="col-sm-12 col-md-4 col-lg-3 page-sidebar">
             <?php $this->load->view('web/conta/sidebar'); ?>
          </div>
+			
 
 				 <?php if(isset($perguntas)){ ?>
 
@@ -15,7 +16,7 @@
                           <button class="close" data-dismiss="alert">
                           <span>&times;</span>
                           </button>
-                          <?php echo $mensagem ?>
+                          <?php echo $mensagem; ?>
                         </div>
                       </div>
                       <?php } ?>
@@ -25,7 +26,7 @@
                           <button class="close" data-dismiss="alert">
                           <span>&times;</span>
                           </button>
-                          <?php echo $mensagem ?>
+                          <?php echo $mensagem; ?>
                         </div>
                       </div>
                       <?php } ?>
@@ -61,10 +62,14 @@
 															</td>
                               <td data-title="Ad Status"><?php echo ($pergunta->pergunta_respondida == 1 ? '<span class="adstatus adstatusactive">Sim</span>' : '<span class="adstatus adstatusexpired">Não</span>'); ?></td>
 
+
                               <td data-title="Action">
                                  <div class="btns-actions">
                                     <a class="btn-action <?php echo ($pergunta->pergunta_respondida == 1 ? 'btn-view' : 'btn-edit') ?>" href="<?php echo base_url($this->router->fetch_class().'/responder/'.$pergunta->pergunta_id); ?>"><i class="<?php echo ($pergunta->pergunta_respondida == 1) ? 'lni-eye' : 'lni-pencil' ?>"></i></a>
-                                    <a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/delete/'.$pergunta->pergunta_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
+                                    <?php if($pergunta->pergunta_respondida == 1){ ?>
+												<a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/remove/'.$pergunta->pergunta_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
+
+												<?php } ?>
                                  </div>
                               </td>
                            </tr>
