@@ -204,12 +204,11 @@ public function master($categoria_pai_meta_link = null){
 		redirect('/');
 	}else{
 
-		//recuperamos da sessao o anuncio detalhado do controller
-		$anuncio = $this->session->userdata('anuncio_detalhado');
+
 
 		$data = array(
 
-			'titulo'=> 'Busca pela categoria Principal'.$anuncio->categoria_pai_nome,
+			
 			'anuncios'=> $this->anuncios_model->get_all_by(array('categoria_pai_meta_link'=> $categoria_pai_meta_link)),
 			
 
@@ -217,12 +216,8 @@ public function master($categoria_pai_meta_link = null){
 
 		foreach($data['anuncios'] as $anuncio){
 
-			$data['categoria_pai_nome'] = $anuncio->categoria_pai_nome;
-			$data['categoria_pai_meta_link'] = $anuncio->categoria_pai_meta_link;
-			$data['categoria_nome'] = $anuncio->categoria_nome;
-			$data['categoria_meta_link'] = $anuncio->categoria_meta_link;
-			$data['anuncio_estado'] = $anuncio->anuncio_estado;
-			$data['anuncio_cidade'] = $anuncio->anuncio_cidade;
+			$data['titulo']= 'Busca pela categoria Principal'.$anuncio->categoria_pai_nome;
+
 			$data['informacao_busca'] = 'Exibindo todos os anúncios  da categoria principal: '. $anuncio->categoria_pai_nome;
 
 			
@@ -251,12 +246,10 @@ public function categoria($categoria_meta_link = null){
 		redirect('/');
 	}else{
 
-		//recuperamos da sessao o anuncio detalhado do controller
-		$anuncio = $this->session->userdata('anuncio_detalhado');
+
 
 		$data = array(
 
-			'titulo'=> 'Busca pela categoria secundária'.$anuncio->categoria_nome,
 			'anuncios'=> $this->anuncios_model->get_all_by(array('categoria_meta_link'=> $categoria_meta_link)),
 			
 
@@ -264,6 +257,7 @@ public function categoria($categoria_meta_link = null){
 
 		foreach($data['anuncios'] as $anuncio){
 
+			$data['titulo']= 'Busca pela categoria secundária'.$anuncio->categoria_pai_nome;
 			$data['categoria_pai_nome'] = $anuncio->categoria_pai_nome;
 			$data['categoria_pai_meta_link'] = $anuncio->categoria_pai_meta_link;
 	
@@ -293,6 +287,7 @@ public function busca_ajax(){
 	exit('Ação não permitida');
 	}
 	$busca = $this->input->post('busca');
+	
 
 			if(!$busca){
 				redirect('/');

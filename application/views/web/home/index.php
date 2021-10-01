@@ -66,13 +66,25 @@
                               <td>
                                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="featured-box">
+												<?php if($this->router->fetch_class() == 'busca'){ ?>
                                        <figure>
+                                          <span class="<?php echo ($anuncio->anuncio_situacao == 1 ? 'price-save' : ' price-save bg-primary'); ?>">
+                                          <?php echo ($anuncio->anuncio_situacao == 1 ? 'Novo' : 'Usado'); ?>
+                                          </span>
+                                          <a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><img style="max-width: 300px; max-height: 300px;" class="img-fluid" src="<?php echo base_url('uploads/anuncios/'.$anuncio->foto_nome); ?>" alt="<?php echo $anuncio->anuncio_titulo; ?>"></a>
+                                       </figure>
+													<?php }else{ ?>
+
+														<figure>
                                           <span class="<?php echo ($anuncio->anuncio_situacao == 1 ? 'price-save' : ' price-save bg-primary'); ?>">
                                           <?php echo ($anuncio->anuncio_situacao == 1 ? 'Novo' : 'Usado'); ?>
                                           </span>
                                           <a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>"><img style="max-width: 360px; max-height: 300px;" class="img-fluid" src="<?php echo base_url('uploads/anuncios/'.$anuncio->foto_nome); ?>" alt="<?php echo $anuncio->anuncio_titulo; ?>"></a>
                                        </figure>
+
+														<?php } ?>
                                        <div class="feature-content">
+
                                           <div class="product">
                                              <a href="<?php echo base_url('busca/master/'.$anuncio->categoria_pai_meta_link); ?>"><?php echo $anuncio->categoria_pai_nome; ?> > </a>
                                              <a href="<?php echo base_url('busca/categoria/'.$anuncio->categoria_meta_link); ?>"><?php echo $anuncio->categoria_nome; ?></a>
@@ -91,6 +103,7 @@
                                              <h3 class="price float-left"> <?php echo ($anuncio->anuncio_preco> 0 ? 'R$ ' .  number_format($anuncio->anuncio_preco, 2) : ''); ?></h3>
                                              <a href="<?php echo base_url('detalhes/'.$anuncio->anuncio_codigo); ?>" class="btn btn-common float-right">Ver mais</a>
                                           </div>
+
                                        </div>
                                     </div>
                                  </div>
@@ -105,4 +118,5 @@
          </div>
       </div>
    </div>
+</div>
 </div>

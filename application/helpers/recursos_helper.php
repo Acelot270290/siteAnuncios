@@ -119,3 +119,14 @@ function get_perguntas_sem_respostas(){
 
 	return $perguntas_sem_resposta;
 }
+
+// Categorias filhas exibidas na navbar
+function categorias_filhas_navbar(){
+
+
+	$CI = & get_instance();
+
+	$categorias = $CI->anuncios_model->get_categorias_filhas_navbar();
+
+	return $categorias;
+}

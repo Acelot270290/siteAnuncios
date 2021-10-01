@@ -59,6 +59,12 @@
 				top: 5px;
 			}
 
+			@media screen and (max-width: 360px){
+				.featured-box img{
+					width: 100% !important;
+				}
+			}
+
 		</style>
 
 

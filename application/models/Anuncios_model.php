@@ -65,6 +65,7 @@ class Anuncios_model extends CI_Model{
 
 
 		$this->db->order_by('anuncios.anuncio_id','RANDOM');
+		$this->db->group_by('anuncios.anuncio_id');
 		return $this->db->get('anuncios')->result();
 	}
 
@@ -142,6 +143,29 @@ class Anuncios_model extends CI_Model{
 		$this->db->group_by('categoria_pai_nome', 'ASC');
 
 		return $this->db->get('categorias_pai')->result();
+
+
+	}
+
+	public function get_categorias_filhas_navbar(){
+
+		$this->db->select([
+			'categorias.*',
+
+
+		]);
+
+		$this->db->where('categoria_ativa',1);
+		$this->db->where('anuncios.anuncio_publicado',1);
+
+		$this->db->limit(4);
+
+		$this->db->join('anuncios', 'anuncios.anuncio_categoria_id = categorias.categoria_id');
+
+		$this->db->order_by('categoria_id', 'RANDOM');
+		$this->db->group_by('categoria_id');
+
+		return $this->db->get('categorias')->result();
 
 
 	}
