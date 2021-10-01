@@ -1082,6 +1082,9 @@ class Conta extends CI_Controller {
 
 	public function uploud_file(){
 
+		$mensagem_upload = 'Imagen com no maximo 500 x 500 pixels de altura<br>no minimo 350x340 pixel de altura';
+		$this->session->set_userdata('mensagem_upload',$mensagem_upload);
+
 		$config['upload_path'] = './uploads/usuarios/';
 		$config['allowed_types'] = 'jpg|png|JPG|PNG|jpeg|JPEG';
 		$config['encrypt_name'] = true;

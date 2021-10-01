@@ -164,6 +164,9 @@ class Anuncios extends CI_Controller {
 
 	public function upload(){
 
+		$mensagem_upload = 'Imagens no maximo 1000 x 1000 pixels';
+		$this->session->set_userdata('mensagem_upload',$mensagem_upload);
+
 		$config['upload_path'] = './uploads/anuncios/';
 		$config['allowed_types'] = 'jpg|png|JPG|PNG|jpeg|JPEG';
 		$config['encrypt_name'] = true;
