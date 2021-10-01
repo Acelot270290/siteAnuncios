@@ -219,7 +219,6 @@ class Conta extends CI_Controller {
 
 		//motando os dados do anunciante e mostrando o total de anuncios cadastrado por ele
 
-		$anunciante = get_info_anunciante();
 
 		$data = array(
 			'titulo' => 'Perguntas Realizadas',
@@ -253,6 +252,44 @@ class Conta extends CI_Controller {
 		
 		$this->load->view('web/layout/header',$data);
 		$this->load->view('web/conta/perguntas');
+		$this->load->view('web/layout/footer');
+	}
+
+	//função criada para exibir minhas perguntas
+	public function duvidas(){
+
+		$data = array(
+			'titulo' => 'Minhas Perguntas',
+
+			'styles'=>array(
+				'assets/bundles/datatables/datatables.min.css',
+				'assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css',
+			),
+
+			'scripts'=>array(
+				'assets/bundles/datatables/datatables.min.js',
+				'assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js',
+				'assets/bundles/jquery-ui/jquery-ui.min.js',
+				'assets/js/page/datatables.js',
+
+			),
+		);
+
+		//só enviamos para a view se existir pelo menos uma pergunta realizada
+		if($duvidas = $this->core_model->get_all('anuncios_perguntas_historico', array('anunciante_pergunta_id' =>$this->session->userdata('user_id')))){
+			$data['duvidas'] = $duvidas;
+		}
+
+		/*print_r($duvidas);
+		exit();*/
+		
+
+
+		
+
+		
+		$this->load->view('web/layout/header',$data);
+		$this->load->view('web/conta/duvidas');
 		$this->load->view('web/layout/footer');
 	}
 
@@ -806,6 +843,41 @@ class Conta extends CI_Controller {
 				$this->load->view('web/layout/footer');
 
 			}
+		}
+
+	}
+
+	public function visualizar($pergunta_id = null){
+
+		$pergunta_id = (int) $pergunta_id;
+
+		if(!$pergunta_id || !$pergunta = $this->core_model->get_by_id('anuncios_perguntas_historico', array('pergunta_id'=>$pergunta_id, 'anunciante_pergunta_id'=>$this->session->userdata('user_id')))){
+
+			$this->session->set_flashdata('erro', 'Não encontramos a pergunta ou ela não está associada ao seu anúncio');
+			redirect($this->router->fetch_class().'/duvidas');
+
+		}else{
+
+			/*
+			* Perguntada encontrada e exibimos a view
+			*/
+
+
+			$data = array(
+				'titulo' => 'Visualizar a pergunta',
+				'pergunta'=> $pergunta
+
+			);
+
+			/*print_r($pergunta);
+			exit();*/
+		
+			
+			$this->load->view('web/layout/header',$data);
+			$this->load->view('web/conta/visualizar');
+			$this->load->view('web/layout/footer');
+
+
 		}
 
 	}

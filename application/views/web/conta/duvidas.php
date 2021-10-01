@@ -7,7 +7,7 @@
          </div>
 			
 
-				 <?php if(isset($perguntas)){ ?>
+				 <?php if(isset($duvidas)){ ?>
 
 					<div class="col-sm-12 col-md-8 col-lg-9">
 					<?php if($mensagem = $this->session->flashdata('sucesso')){ ?>
@@ -44,32 +44,29 @@
                               <th>Pergunta</th>
                               <th>Data da pergunta</th>
                               <th>Respondida</th>
-                              <th class="nosort">Ações</th>
+                              <th class="nosort">Visualizar</th>
                            </tr>
                         </thead>
                         <tbody>
 
-												<?php foreach($perguntas as $pergunta){ ?>
+												<?php foreach($duvidas as $duvida){ ?>
                            <tr data-category="active">
 
 
                               <td data-title="Title">
-                                 <h3><?php echo word_limiter($pergunta->pergunta, 5); ?></h3>
+                                 <h3><?php echo word_limiter($duvida->pergunta, 5); ?></h3>
                                  
                               </td>
 															<td data-title="Category">
-																<span class="adcategories"><?php echo formata_data_banco_com_hora($pergunta->data_pergunta); ?></span>
+																<span class="adcategories"><?php echo formata_data_banco_com_hora($duvida->data_pergunta); ?></span>
 															</td>
-                              <td data-title="Ad Status"><?php echo ($pergunta->pergunta_respondida == 1 ? '<span class="adstatus adstatusactive">Sim</span>' : '<span class="adstatus adstatusexpired">Não</span>'); ?></td>
+                              <td data-title="Ad Status"><?php echo ($duvida->pergunta_respondida == 1 ? '<span class="adstatus adstatusactive">Sim</span>' : '<span class="adstatus adstatusexpired">Não</span>'); ?></td>
 
 
                               <td data-title="Action">
                                  <div class="btns-actions">
-                                    <a class="btn-action <?php echo ($pergunta->pergunta_respondida == 1 ? 'btn-view' : 'btn-edit') ?>" href="<?php echo base_url($this->router->fetch_class().'/responder/'.$pergunta->pergunta_id); ?>"><i class="<?php echo ($pergunta->pergunta_respondida == 1) ? 'lni-eye' : 'lni-pencil' ?>"></i></a>
-                                    <?php if($pergunta->pergunta_respondida == 1){ ?>
-												<a class="btn-action btn-delete delete" href="<?php echo base_url($this->router->fetch_class().'/remove/'.$pergunta->pergunta_id); ?>"data-confirm="Tem certeza que deseja excluir?" ><i class="lni-trash"></i></a>
-
-												<?php } ?>
+                                    <a class="btn-action btn-view" href="<?php echo base_url($this->router->fetch_class().'/visualizar/'.$duvida->pergunta_id); ?>"><i class="lni-eye"></i></a>
+												
                                  </div>
                               </td>
                            </tr>
@@ -91,7 +88,7 @@
 					
 					<div class="container text-center">
 
-										<h1 class="mb-5">Você não tem perguntas para os seus anúncios</h1>
+										<h1 class="mb-5">Você ainda não realizou perguntas ainda</h1>
 
 										<img width="300" src="<?php echo base_url('public/web/assets/img/sem_anuncios.svg'); ?>"/>
 
