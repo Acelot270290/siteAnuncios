@@ -1,15 +1,17 @@
 
 
 			<?php if($this->router->fetch_class() != 'login') { ?>
+			<?php if(class_exists($this->router->fetch_class())) { ?>
 
 				<footer class="main-footer">
         <div class="footer-left">
-          <a href="adsites.org">Adsites.org</a></a>
+          <a href="http://alandiniz.com.br/">Alan Diniz</a></a>
         </div>
         <div class="footer-right">
         </div>
       </footer>
 
+			<?php } ?>
 			<?php } ?>
     </div>
   </div>

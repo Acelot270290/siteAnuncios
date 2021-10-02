@@ -45,7 +45,7 @@ class Usuarios extends CI_Controller {
 		);
 
 		/*echo '<prev>';
-		print_r($data);
+		print_r($usuarios);
 		echo "</pre>";
 		exit();*/
 

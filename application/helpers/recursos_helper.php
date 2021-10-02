@@ -128,5 +128,30 @@ function categorias_filhas_navbar(){
 
 	$categorias = $CI->anuncios_model->get_categorias_filhas_navbar();
 
+	
 	return $categorias;
+}
+
+// recuperamos os anuncios que precisa ser editados na navbar da area restrita
+function get_anuncios_nao_editados(){
+
+
+	$CI = & get_instance();
+
+$anuncios_nao_editados = $CI->core_model->count_all_results('anuncios', array('anuncio_publicado'=>0));
+
+
+	return $anuncios_nao_editados;
+}
+
+// mostra na navbar contas bloqueadas
+function get_contas_bloqueadas(){
+
+
+	$CI = & get_instance();
+
+$contas_bloqueadas = $CI->core_model->count_all_results('users', array('active'=>0));
+
+
+	return $contas_bloqueadas;
 }
