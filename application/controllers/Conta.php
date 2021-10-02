@@ -323,6 +323,9 @@ class Conta extends CI_Controller {
 
 			if($this->form_validation->run()){
 
+				/*print_r($this->input->post());
+				exit();*/
+
 		
 				
 						
@@ -400,7 +403,7 @@ class Conta extends CI_Controller {
 
 						}
 
-						$anunciante = $this->ion_auth->user($anuncio->anuncio_user_id)->row();
+						$anunciante = $this->ion_auth->user()->row();
 
 							/*
 							*montamos um objeto com todos os dados site
